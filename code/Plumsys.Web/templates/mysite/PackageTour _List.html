@@ -33,6 +33,39 @@
 <body>
     <div class="wrap">
         <%template src="header.html"%>
+		
+   <!--C#代码-->
+    <%csharp%>
+      string orderby="add_time desc,id asc";
+      string strBy=PLRequest.GetQueryString("orderby");
+      if(strBy=="click"){
+        orderby="click desc";
+      }else if(strBy=="min"){
+        orderby="sell_price asc";
+      }else if(strBy=="max"){
+        orderby="sell_price desc";
+      }
+      string strwhere="status=0";
+      int minPrice=PLRequest.GetQueryInt("min_price",0);
+      if(minPrice>0){
+        strwhere+="and sell_price>="+minPrice;
+      }
+      int maxPrice=PLRequest.GetQueryInt("max_price",0);
+      if(maxPrice>0){
+        strwhere+="and sell_price<="+maxPrice;
+      }
+      Dictionary<string,string> dicSpecIds=new Dictionary<string,string>();
+      for (int i = 0; i < Request.QueryString.AllKeys.Length; i++)
+      {
+        string paramKey=Request.QueryString.GetKey(i).ToString();
+        int paramValue=Utils.StrToInt(Request.QueryString[i].ToString(),0);
+        if(paramKey.StartsWith("s_") && paramValue>0)
+        {
+          dicSpecIds.Add(paramKey,paramValue.ToString());
+        }
+      }
+    <%/csharp%>
+    <!--/C#代码-->
         <div class="content">
             <div class="c-wrapper">
                 <!-- 筛选项 begin -->
@@ -161,227 +194,50 @@
                                 </dd>
                             </dl>
                         </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <div class="clear"></div>
+                         <ul>
+        <%set DataTable goodsList=get_article_list(channel,category_id,dicSpecIds,pagesize,page,strwhere,orderby,out totalcount)%><!--数据-->
+        <%set pagelist = Utils.OutPageList(pagesize, page, totalcount, linkurl("gsearch", "?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&orderby="+strBy+"&page=__id__"+get_article_spec_param(dicSpecIds,"")), 8)%><!--分页-->
+        <%foreach(DataRow dr in goodsList.Rows)%>
+        <li>
+          <div class="wrap-box">
+            <div class="img-box">
+              <a title="{dr[title]}" href="<%linkurl("goods_show",{dr[id]})%>">
+                <%if({dr[is_red]}=="1")%>
+                <div class="abs-txt">推荐</div>
+                <%/if%>
+                <img src="{dr[img_url]}" />
+              </a>
+            </div>
+            <div class="info">
+              <h3><a title="{dr[title]}" href="<%linkurl("goods_show",{dr[id]})%>">{dr[title]}</a></h3>
+              <div class="col">
+                <b>￥{dr[sell_price]}</b>元
+              </div>
+              <div class="col">
+                <i>库存：{dr[stock_quantity]}件</i>
+                市场价：<s>{dr[market_price]}</s>
+              </div>
+            </div>
+          </div>
+        </li>
+        <%/foreach%>
+        <%if(goodsList.Rows.Count==0)%>
+        <div class="nodata">暂时无法找到您想要的商品！</div>
+        <%/if%>
+      </ul>
                     </div><!-- 筛选结果 end -->                 <!-- 分页开始 -->
 
-                    <div class="page">
-                        <a href="javascript:void();">上一页</a>	 <!-- 当总页数小于每页需要显示标签数量 --> <!-- 当总页数大于每页需要显示标签数量 -->
-                        <a class="hover" href="javascript:void();">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
-                        ...   <a href="#">下一页</a>
-                    </div>
+                   
+					 <!--页码列表-->
+    <div class="page">
+      <div class="digg">{pagelist}</div>
+    </div>
+    <!--/页码列表-->
                 </div><!-- 筛选列表 end -->
             </div>
         </div>
         <%template src="footer.html"%>
-            <div class="FootHead">
-                <div class="MainPage">
-                    <div class="FootListGroup">
-                        <ul>
-                            <li><i></i>关于我们</li>
-                            <li>
-                                <a href="#" target="_blank">优行简介</a>
-                            </li>
-                            <li><a href="#" target="_blank">联系我们</a></li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    职位招聘
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    加盟合作
-                                </a>
-                            </li>
-
-                        </ul>
-                        <ul>
-                            <li><i></i>网站条款</li>
-                            <li>
-                                <a href="#"
-                                   target="_blank">用户协议</a>
-                            </li>
-                            <li><a href="#" target="_blank">隐私保护</a></li>
-                            <li>
-                                <a href="#"
-                                   target="_blank">版权声明</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><i></i>友情链接</li>
-                            <li>
-                                <a href="#"
-                                   target="_blank">友情链接1</a>
-                            </li>
-                            <li><a href="#" target="_blank">友情链接2</a></li>
-                            <li>
-                                <a href="#"
-                                   target="_blank">友情链接3</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   target="_blank">友情链接4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="QrCodeBox">
-                        <div class="QrCode">
-                            <img src="images/wechatcode.jpg" />
-                            <span>官方微信</span>
-                        </div>
-                        <div class="telephone">
-                            <img src="images/telephone.png" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="FootLast">
-                <div class="MainPage">
-                    <p>Copyright © 2013-2016, youxing.com.All Rights Reserved.</p><span>
-                        苏州优行网络有限公司. |
-                        京ICP证 140491号 | 京ICP备14002764号-1 | 旅行社业务经营许可证 L-BJ-CJ00104
-                    </span>
-                    <div style="clear: both;"></div>
-                </div>
-            </div>
-        </div>
+           
         <div id="load_img" style="display: none;">
             <img src="<%templateskin%>/images/xubox_loading2.gif" />&nbsp;搜索中...&nbsp;
         </div>
