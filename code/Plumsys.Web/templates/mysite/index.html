@@ -2,13 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{site.seo_title}</title>
+<title>优行旅游</title>
 <meta name="keywords" content="{site.seo_keyword}" />
 <meta name="description" content="{site.seo_description}" />
 <link href="<%templateskin%>/css/index.css" rel="stylesheet" type="text/css" />
 <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
+
 </head>
 <body>
 <div class="wrap">
@@ -378,9 +380,9 @@
 <div class="SliderBox">
   <div class="Slider">
     <ul class="rslides">
-      <%set DataTable focusNews=get_article_list("Carousel", 0, 8, "status=0 and is_slide=1 and img_url<>''")%>
+      <%set DataTable focusNews=get_article_list("carousel", 0, 8, "status=0 and is_slide=1 and img_url<>''")%>
       <%foreach(DataRow dr in focusNews.Rows)%>
-      <li> <a title="{dr[title]}" href="<%linkurl("Carousel_Detail",{dr[id]})%>"> <img src="{dr[img_url]}" /> </a> </li>
+      <li> <a title="{dr[title]}" href="<%linkurl("carousel_detail",{dr[id]})%>"> <img src="{dr[img_url]}" /> </a> </li>
       <%/foreach%>
     </ul>
   </div>
@@ -404,9 +406,9 @@
     <div class="ContentHead"><a href="#"><span>跟团游</span> </a></div>
     <div class="ContentGroup">
       <ul class="img-list ilist">
-        <%set DataTable PackageTour=get_article_list("PackageTour", 0, 4, "")%>
+        <%set DataTable PackageTour=get_article_list("package_tour", 0, 4, "")%>
         <%foreach(DataRow dr in PackageTour.Rows)%>
-        <li> <a title="{dr[title]}" href="<%linkurl("PackageTour_Detail",{dr[id]})%>">
+        <li> <a title="{dr[title]}" href="<%linkurl("package_tour_detail",{dr[id]})%>">
           <%if({dr[is_top]}=="1")%>
           <span class="abs-txt">特价</span>
           <%/if%>
@@ -421,9 +423,9 @@
     <div class="ContentHead"><a href="#"><span>自由行</span> </a></div>
     <div class="ContentGroup">
       <ul class="img-list ilist">
-        <%set DataTable Walker=get_article_list("Walker", 0, 4, "")%>
+        <%set DataTable Walker=get_article_list("walker", 0, 4, "")%>
         <%foreach(DataRow dr in Walker.Rows)%>
-        <li> <a title="{dr[title]}" href="<%linkurl("Walker_Detail",{dr[id]})%>">
+        <li> <a title="{dr[title]}" href="<%linkurl("walker_detail",{dr[id]})%>">
           <%if({dr[is_top]}=="1")%>
           <span class="abs-txt">特价</span>
           <%/if%>
@@ -438,9 +440,9 @@
     <div class="ContentHead"><a href="#"><span>酒店</span> </a></div>
     <div class="ContentGroup">
       <ul class="img-list ilist">
-        <%set DataTable Grogshop=get_article_list("Grogshop", 0, 4, "")%>
+        <%set DataTable Grogshop=get_article_list("grog_shop", 0, 4, "")%>
         <%foreach(DataRow dr in Grogshop.Rows)%>
-        <li> <a title="{dr[title]}" href="<%linkurl("Grogshop_Detail",{dr[id]})%>">
+        <li> <a title="{dr[title]}" href="<%linkurl("grog_shop_detail",{dr[id]})%>">
           <%if({dr[is_top]}=="1")%>
           <span class="abs-txt">特价</span>
           <%/if%>
@@ -455,9 +457,9 @@
     <div class="ContentHead"><a href="#"><span>门票</span> </a></div>
     <div class="ContentGroup">
       <ul class="img-list ilist">
-        <%set DataTable Ticket=get_article_list("Ticket", 0, 4, "")%>
+        <%set DataTable Ticket=get_article_list("ticket", 0, 4, "")%>
         <%foreach(DataRow dr in Ticket.Rows)%>
-        <li> <a title="{dr[title]}" href="<%linkurl("Ticket_Detail",{dr[id]})%>">
+        <li> <a title="{dr[title]}" href="<%linkurl("ticket_detail",{dr[id]})%>">
           <%if({dr[is_top]}=="1")%>
           <span class="abs-txt">特价</span>
           <%/if%>
@@ -472,9 +474,9 @@
     <div class="ContentHead"><a href="#"><span>玩乐</span> </a></div>
     <div class="ContentGroup">
       <ul class="img-list ilist">
-        <%set DataTable Ploy=get_article_list("Ploy", 0, 4, "")%>
+        <%set DataTable Ploy=get_article_list("ploy", 0, 4, "")%>
         <%foreach(DataRow dr in Ploy.Rows)%>
-        <li> <a title="{dr[title]}" href="<%linkurl("Ploy_Detail",{dr[id]})%>">
+        <li> <a title="{dr[title]}" href="<%linkurl("ploy_detail",{dr[id]})%>">
           <%if({dr[is_top]}=="1")%>
           <span class="abs-txt">特价</span>
           <%/if%>
@@ -488,9 +490,9 @@
       <div class="ContentHead"><a href="#"><span>通讯</span> </a></div>
       <div class="ContentGroup">
         <ul class="img-list ilist">
-          <%set DataTable Communicate=get_article_list("Communicate", 0, 4, "")%>
+          <%set DataTable Communicate=get_article_list("communicate", 0, 4, "")%>
           <%foreach(DataRow dr in Communicate.Rows)%>
-          <li> <a title="{dr[title]}" href="<%linkurl("Communicate_Detail",{dr[id]})%>">
+          <li> <a title="{dr[title]}" href="<%linkurl("communicate_detail",{dr[id]})%>">
             <%if({dr[is_top]}=="1")%>
             <span class="abs-txt">特价</span>
             <%/if%>
@@ -518,6 +520,7 @@
     <div class="kefurenyuan2"><a href="#"><img src="<%templateskin%>/images/QQPic.png" />客服3</a></div>
   </div>
 </div>
+<script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/index.js"></script> 
 <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/tabview.js"></script> 
 <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/indextab.js"></script> 
