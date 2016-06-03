@@ -31,6 +31,7 @@ namespace Plumsys.Web.UI
         /// </summary>
         /// <param name="channel_name">频道名称</param>
         /// <param name="category_id">分类ID</param>
+        /// <param name="area_id">地区ID</param>
         /// <param name="top">显示条数</param>
         /// <param name="strwhere">查询条件</param>
         /// <returns>DataTable</returns>
