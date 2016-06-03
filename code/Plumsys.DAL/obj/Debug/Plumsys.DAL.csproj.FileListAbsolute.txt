@@ -31,3 +31,14 @@ E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plum
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.DAL\obj\Debug\Plumsys.DAL.csprojResolveAssemblyReference.cache
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.DAL\obj\Debug\Plumsys.DAL.dll
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.DAL\obj\Debug\Plumsys.DAL.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.DAL.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.DAL.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.Common.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.DBUtility.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.Model.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.Common.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.DBUtility.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\bin\Debug\Plumsys.Model.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\obj\Debug\Plumsys.DAL.csprojResolveAssemblyReference.cache
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\obj\Debug\Plumsys.DAL.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DAL\obj\Debug\Plumsys.DAL.pdb

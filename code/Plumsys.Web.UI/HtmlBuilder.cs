@@ -137,7 +137,7 @@ namespace Plumsys.Web.UI
             if (!string.IsNullOrEmpty(querystring))
                 strLength = querystring.Split('&').Length;
 
-            int totalCount = objarticle.GetCount(channelname, 0, "");
+            int totalCount = objarticle.GetCount(channelname, 0,0, "");
             int pageindex = GetPageSize(totalCount, pagesize);
             if (strLength == 1)
                 pageindex = 1;
@@ -173,7 +173,7 @@ namespace Plumsys.Web.UI
                     if (!string.IsNullOrEmpty(querystring))
                         strLength = querystring.Split('&').Length;
 
-                    int totalCount = objarticle.GetCount(channelname, Convert.ToInt32(dt.Rows[i]["id"].ToString()), "");
+                    int totalCount = objarticle.GetCount(channelname, Convert.ToInt32(dt.Rows[i]["id"].ToString()),0, "");
                     int pageindex = GetPageSize(totalCount, pagesize);
                     if (strLength == 1)
                         pageindex = 1;

@@ -62,6 +62,7 @@ namespace Plumsys.Web.admin.article
                 ChkAdminLevel("channel_" + this.channel_name + "_list", PLEnums.ActionEnum.View.ToString()); //检查权限
                 ShowSysField(this.channel_id); //显示相应的默认控件
                 TreeBind(this.channel_id); //绑定类别
+                TreeBindArea();//绑定地区
                 if (action == PLEnums.ActionEnum.Edit.ToString() || action == PLEnums.ActionEnum.Copy.ToString()) //修改
                 {
                     ShowInfo(this.id);
@@ -365,6 +366,34 @@ namespace Plumsys.Web.admin.article
         }
         #endregion
 
+        #region 绑定地区=================================
+        private void TreeBindArea()
+        {
+            BLL.area_category bll = new BLL.area_category();
+            DataTable dt = bll.GetList(0);
+
+            this.ddlAreaId.Items.Clear();
+            this.ddlAreaId.Items.Add(new ListItem("请选择地区...", ""));
+            foreach (DataRow dr in dt.Rows)
+            {
+                string Id = dr["id"].ToString();
+                int ClassLayer = int.Parse(dr["class_layer"].ToString());
+                string Title = dr["title"].ToString().Trim();
+
+                if (ClassLayer == 1)
+                {
+                    this.ddlAreaId.Items.Add(new ListItem(Title, Id));
+                }
+                else
+                {
+                    Title = "├ " + Title;
+                    Title = Utils.StringOfChar(ClassLayer - 1, "　") + Title;
+                    this.ddlAreaId.Items.Add(new ListItem(Title, Id));
+                }
+            }
+        }
+        #endregion
+
         #region 赋值操作=================================
         private void ShowInfo(int _id)
         {
@@ -372,6 +401,7 @@ namespace Plumsys.Web.admin.article
             Model.article model = bll.GetModel(_id);
 
             ddlCategoryId.SelectedValue = model.category_id.ToString();
+            ddlAreaId.SelectedValue = model.area_id.ToString();
             txtCallIndex.Text = model.call_index;
             txtTitle.Text = model.title;
             txtTags.Text = model.tags;
@@ -622,6 +652,7 @@ namespace Plumsys.Web.admin.article
 
             model.channel_id = this.channel_id;
             model.category_id = Utils.StrToInt(ddlCategoryId.SelectedValue, 0);
+            model.area_id = Utils.StrToInt(ddlAreaId.SelectedValue, 0);
             model.call_index = txtCallIndex.Text.Trim();
             model.title = txtTitle.Text.Trim();
             model.tags = txtTags.Text.Trim();
@@ -796,6 +827,7 @@ namespace Plumsys.Web.admin.article
 
             model.channel_id = this.channel_id;
             model.category_id = Utils.StrToInt(ddlCategoryId.SelectedValue, 0);
+            model.area_id = Utils.StrToInt(ddlAreaId.SelectedValue, 0);
             model.call_index = txtCallIndex.Text.Trim();
             model.title = txtTitle.Text.Trim();
             model.tags = txtTags.Text.Trim();

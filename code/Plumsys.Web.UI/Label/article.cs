@@ -34,12 +34,12 @@ namespace Plumsys.Web.UI
         /// <param name="top">显示条数</param>
         /// <param name="strwhere">查询条件</param>
         /// <returns>DataTable</returns>
-        protected DataTable get_article_list(string channel_name, int category_id, int top, string strwhere)
+        protected DataTable get_article_list(string channel_name, int category_id,int area_id, int top, string strwhere)
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(channel_name))
             {
-                dt = new BLL.article().GetList(channel_name, category_id, top, strwhere, "sort_id asc,add_time desc").Tables[0];
+                dt = new BLL.article().GetList(channel_name, category_id,area_id, top, strwhere, "sort_id asc,add_time desc").Tables[0];
             }
             return dt;
         }
@@ -49,16 +49,17 @@ namespace Plumsys.Web.UI
         /// </summary>
         /// <param name="channel_name">频道名称</param>
         /// <param name="category_id">分类ID</param>
+        /// <param name="area_id">地区ID</param>
         /// <param name="top">显示条数</param>
         /// <param name="strwhere">查询条件</param>
         /// <param name="orderby">排序</param>
         /// <returns>DataTable</returns>
-        protected DataTable get_article_list(string channel_name, int category_id, int top, string strwhere, string orderby)
+        protected DataTable get_article_list(string channel_name, int category_id,int area_id, int top, string strwhere, string orderby)
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(channel_name))
             {
-                dt = new BLL.article().GetList(channel_name, category_id, top, strwhere, orderby).Tables[0];
+                dt = new BLL.article().GetList(channel_name, category_id,area_id, top, strwhere, orderby).Tables[0];
             }
             return dt;
         }
@@ -68,18 +69,19 @@ namespace Plumsys.Web.UI
         /// </summary>
         /// <param name="channel_name">频道名称</param>
         /// <param name="category_id">分类ID</param>
+        /// <param name="area_id">地区ID</param>
         /// <param name="page_size">页面大小</param>
         /// <param name="page_index">当前页码</param>
         /// <param name="strwhere">查询条件</param>
         /// <param name="orderby">排序</param>
         /// <param name="totalcount">总记录数</param>
         /// <returns>DateTable</returns>
-        protected DataTable get_article_list(string channel_name, int category_id, int page_size, int page_index, string strwhere, string orderby, out int totalcount)
+        protected DataTable get_article_list(string channel_name, int category_id,int area_id, int page_size, int page_index, string strwhere, string orderby, out int totalcount)
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(channel_name))
             {
-                dt = new BLL.article().GetList(channel_name, category_id, page_size, page_index, strwhere, orderby, out totalcount).Tables[0];
+                dt = new BLL.article().GetList(channel_name, category_id,area_id, page_size, page_index, strwhere, orderby, out totalcount).Tables[0];
             }
             else
             {
@@ -93,6 +95,7 @@ namespace Plumsys.Web.UI
         /// </summary>
         /// <param name="channel_name">频道名称</param>
         /// <param name="category_id">分类ID</param>
+        /// <param name="area_id">地区ID</param>
         /// <param name="page_size">分页大小</param>
         /// <param name="page_index">当前页码</param>
         /// <param name="strwhere">查询条件</param>
@@ -100,12 +103,12 @@ namespace Plumsys.Web.UI
         /// <param name="_key">URL配置名称</param>
         /// <param name="_params">传输参数</param>
         /// <returns>DataTable</returns>
-        protected DataTable get_article_list(string channel_name, int category_id, int page_size, int page_index, string strwhere, out int totalcount, out string pagelist, string _key, params object[] _params)
+        protected DataTable get_article_list(string channel_name, int category_id,int area_id, int page_size, int page_index, string strwhere, out int totalcount, out string pagelist, string _key, params object[] _params)
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(channel_name))
             {
-                dt = new BLL.article().GetList(channel_name, category_id, page_size, page_index, strwhere, "sort_id asc,add_time desc", out totalcount).Tables[0];
+                dt = new BLL.article().GetList(channel_name, category_id,area_id, page_size, page_index, strwhere, "sort_id asc,add_time desc", out totalcount).Tables[0];
                 pagelist = Utils.OutPageList(page_size, page_index, totalcount, linkurl(_key, _params), 8);
             }
             else
@@ -129,12 +132,12 @@ namespace Plumsys.Web.UI
         /// <param name="_key">URL配置名称</param>
         /// <param name="_params">传输参数</param>
         /// <returns>DataTable</returns>
-        protected DataTable get_article_list(string channel_name, int category_id, int page_size, int page_index, string strwhere, string orderby, out int totalcount, out string pagelist, string _key, params object[] _params)
+        protected DataTable get_article_list(string channel_name, int category_id,int area_id, int page_size, int page_index, string strwhere, string orderby, out int totalcount, out string pagelist, string _key, params object[] _params)
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(channel_name))
             {
-                dt = new BLL.article().GetList(channel_name, category_id, page_size, page_index, strwhere, orderby, out totalcount).Tables[0];
+                dt = new BLL.article().GetList(channel_name, category_id,area_id, page_size, page_index, strwhere, orderby, out totalcount).Tables[0];
                 pagelist = Utils.OutPageList(page_size, page_index, totalcount, linkurl(_key, _params), 8);
             }
             else
@@ -150,6 +153,7 @@ namespace Plumsys.Web.UI
         /// </summary>
         /// <param name="channel_name">频道名称</param>
         /// <param name="category_id">分类ID</param>
+        /// <param name="area_id">地区ID</param>
         /// <param name="spec_ids">规格列表</param>
         /// <param name="page_size">分页大小</param>
         /// <param name="page_index">当前页码</param>
@@ -157,12 +161,12 @@ namespace Plumsys.Web.UI
         /// <param name="orderby">排序</param>
         /// <param name="totalcount">总记录数</param>
         /// <returns>DataTable</returns>
-        protected DataTable get_article_list(string channel_name, int category_id, Dictionary<string, string> spec_ids, int page_size, int page_index, string strwhere, string orderby, out int totalcount)
+        protected DataTable get_article_list(string channel_name, int category_id,int area_id, Dictionary<string, string> spec_ids, int page_size, int page_index, string strwhere, string orderby, out int totalcount)
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(channel_name))
             {
-                dt = new BLL.article().GetList(channel_name, category_id, spec_ids, page_size, page_index, strwhere, orderby, out totalcount).Tables[0];
+                dt = new BLL.article().GetList(channel_name, category_id,area_id, spec_ids, page_size, page_index, strwhere, orderby, out totalcount).Tables[0];
             }
             else
             {

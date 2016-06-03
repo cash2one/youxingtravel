@@ -52,6 +52,7 @@
     <Compile Include="article.cs" />
     <Compile Include="article_attach.cs" />
     <Compile Include="article_attribute_field.cs" />
+    <Compile Include="area_category.cs" />
     <Compile Include="article_category.cs" />
     <Compile Include="article_comment.cs" />
     <Compile Include="article_goods.cs" />

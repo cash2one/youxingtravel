@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016/6/1 22:48:04.
-		本页面代码由Plumsys模板引擎生成于 2016/6/1 22:48:04. 
+		This page was created by Plumsys Template Engine at 2016-06-02 21:42:06.
+		本页面代码由Plumsys模板引擎生成于 2016-06-02 21:42:06. 
 	*/
 
 	base.OnInit(e);
@@ -143,7 +143,7 @@ override protected void OnInit(EventArgs e)
 	}	//end for if
 
 	templateBuilder.Append("\r\n      </ul>\r\n    </div>\r\n  </div>\r\n  <div class=\"ContentGrey\">\r\n    <div class=\"MainPage\">\r\n      <div class=\"ContentHead\"><a href=\"#\"><span>通讯</span> </a></div>\r\n      <div class=\"ContentGroup\">\r\n        <ul class=\"img-list ilist\">\r\n          ");
-	DataTable Communicate = get_article_list("Communicate", 0, 4, "");
+	DataTable Communicate = get_article_list("Communicate", 0,0, 4, "");
 
 	foreach(DataRow dr in Communicate.Rows)
 	{

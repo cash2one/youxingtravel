@@ -19,3 +19,10 @@ E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plum
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.csprojResolveAssemblyReference.cache
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.dll
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.DBUtility.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.DBUtility.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.Common.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.Common.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.csprojResolveAssemblyReference.cache
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.pdb

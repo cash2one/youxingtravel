@@ -14,6 +14,7 @@ namespace Plumsys.Model
         #region Model
         private int _id;
         private int _channel_id = 0;
+        private int _area_id = 0;
         private int _category_id = 0;
         private string _call_index = string.Empty;
         private string _title;
@@ -53,6 +54,14 @@ namespace Plumsys.Model
         {
             set { _channel_id = value; }
             get { return _channel_id; }
+        }
+        /// <summary>
+        /// 地区ID
+        /// </summary>
+        public int area_id
+        {
+            set { _area_id = value; }
+            get { return _area_id; }
         }
         /// <summary>
         /// 类别ID

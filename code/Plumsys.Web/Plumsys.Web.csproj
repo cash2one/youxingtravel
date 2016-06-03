@@ -124,6 +124,8 @@
     <Content Include="admin\order\payment_edit.aspx" />
     <Content Include="admin\order\payment_list.aspx" />
     <Content Include="admin\settings\builder_html.aspx" />
+    <Content Include="admin\settings\area_edit.aspx" />
+    <Content Include="admin\settings\area_list.aspx" />
     <Content Include="admin\settings\nav_edit.aspx" />
     <Content Include="admin\settings\nav_list.aspx" />
     <Content Include="admin\settings\plugin_list.aspx" />
@@ -276,6 +278,7 @@
     <Content Include="aspx\mobile\video.aspx" />
     <Content Include="aspx\mobile\video_list.aspx" />
     <Content Include="aspx\mobile\video_show.aspx" />
+    <Content Include="aspx\mysite\index.aspx" />
     <Content Include="aspx\plugin\feedback.aspx" />
     <Content Include="aspx\plugin\link.aspx" />
     <Content Include="aspx\plugin\mfeedback.aspx" />
@@ -727,6 +730,178 @@
     <Content Include="templates\mobile\_footer.html" />
     <Content Include="templates\mobile\_header.html" />
     <Content Include="templates\mobile\_nav.html" />
+    <Content Include="templates\mysite\about.png" />
+    <Content Include="templates\mysite\about.xml" />
+    <Content Include="templates\mysite\aboutus.html" />
+    <Content Include="templates\mysite\css\AboutUS.css" />
+    <Content Include="templates\mysite\css\CategoryInfo.css" />
+    <Content Include="templates\mysite\css\huiyuan.css" />
+    <Content Include="templates\mysite\css\index.css" />
+    <Content Include="templates\mysite\css\infoDetail.css" />
+    <Content Include="templates\mysite\css\style.css" />
+    <Content Include="templates\mysite\footer.html" />
+    <Content Include="templates\mysite\package_tour.html" />
+    <Content Include="templates\mysite\header.html" />
+    <Content Include="templates\mysite\user.html" />
+    <Content Include="templates\mysite\images\138864af-0b99-16bf-78c8-163a256b872e.jpg" />
+    <Content Include="templates\mysite\images\24715eda-7b78-4e9d-75ab-156c249a3942.jpg" />
+    <Content Include="templates\mysite\images\657ea528-6c65-3ef6-b161-fa103c16dc0f.jpg" />
+    <Content Include="templates\mysite\images\89e9e7f8-d9fb-56b4-95e4-a72d941ae119.jpg" />
+    <Content Include="templates\mysite\images\8a2dae714fdfa8db014ff91865bb5764.jpg" />
+    <Content Include="templates\mysite\images\8a2dae71534043270153601a2ff151a5.jpg" />
+    <Content Include="templates\mysite\images\8a2dae715340432701536064299c5aed.jpg" />
+    <Content Include="templates\mysite\images\aboutus-icon.png" />
+    <Content Include="templates\mysite\images\adviseboxbg_v2.png" />
+    <Content Include="templates\mysite\images\adviseicon.png" />
+    <Content Include="templates\mysite\images\advisetextbg.png" />
+    <Content Include="templates\mysite\images\app-bg.png" />
+    <Content Include="templates\mysite\images\app-download-all.png" />
+    <Content Include="templates\mysite\images\back-to-top.png" />
+    <Content Include="templates\mysite\images\backtotopicon.png" />
+    <Content Include="templates\mysite\images\beauty3.jpg" />
+    <Content Include="templates\mysite\images\cbe27111-260b-6202-7b96-72d8715ad85b.jpg" />
+    <Content Include="templates\mysite\images\child_tip.png" />
+    <Content Include="templates\mysite\images\closebtnbg_v2.png" />
+    <Content Include="templates\mysite\images\Cover.png" />
+    <Content Include="templates\mysite\images\c_comment-tips.gif" />
+    <Content Include="templates\mysite\images\c_comment_bg.png" />
+    <Content Include="templates\mysite\images\c_comment_icon.png" />
+    <Content Include="templates\mysite\images\c_comment_icon_bg2.png" />
+    <Content Include="templates\mysite\images\date_select.gif" />
+    <Content Include="templates\mysite\images\DayBg.png" />
+    <Content Include="templates\mysite\images\DayBgHover.png" />
+    <Content Include="templates\mysite\images\douban.png" />
+    <Content Include="templates\mysite\images\doubanact.png" />
+    <Content Include="templates\mysite\images\d_flash-hover.png" />
+    <Content Include="templates\mysite\images\d_flash.png" />
+    <Content Include="templates\mysite\images\d_flash_hover.png" />
+    <Content Include="templates\mysite\images\d_flash_hover11.png" />
+    <Content Include="templates\mysite\images\eb52e8d6-570e-8a2d-f27e-ad34e8b13bad.jpg" />
+    <Content Include="templates\mysite\images\erweima2015.gif" />
+    <Content Include="templates\mysite\images\erweima2015top.gif" />
+    <Content Include="templates\mysite\images\HandLeftRight.png" />
+    <Content Include="templates\mysite\images\headnavibg.png" />
+    <Content Include="templates\mysite\images\Head_PhoneQRBg.png" />
+    <Content Include="templates\mysite\images\homenew-plist-icon.jpg" />
+    <Content Include="templates\mysite\images\icon-arrows-down.png" />
+    <Content Include="templates\mysite\images\icon-arrows-up.png" />
+    <Content Include="templates\mysite\images\icon-error.png" />
+    <Content Include="templates\mysite\images\icon-left.png" />
+    <Content Include="templates\mysite\images\icon-right.png" />
+    <Content Include="templates\mysite\images\icon.png" />
+    <Content Include="templates\mysite\images\icon1.png" />
+    <Content Include="templates\mysite\images\icon2.png" />
+    <Content Include="templates\mysite\images\icon3.png" />
+    <Content Include="templates\mysite\images\icon4.png" />
+    <Content Include="templates\mysite\images\icon5.png" />
+    <Content Include="templates\mysite\images\icon6.png" />
+    <Content Include="templates\mysite\images\kefuicon.png" />
+    <Content Include="templates\mysite\images\langmenuicon.png" />
+    <Content Include="templates\mysite\images\LeftRight.png" />
+    <Content Include="templates\mysite\images\LeftRightCover.png" />
+    <Content Include="templates\mysite\images\list-btn-new.png" />
+    <Content Include="templates\mysite\images\list-btn-new2.png" />
+    <Content Include="templates\mysite\images\list-icon-new.png" />
+    <Content Include="templates\mysite\images\logo.png" />
+    <Content Include="templates\mysite\images\logoadd.png" />
+    <Content Include="templates\mysite\images\logonormal_v3.png" />
+    <Content Include="templates\mysite\images\logo_v2.png" />
+    <Content Include="templates\mysite\images\loveact.png" />
+    <Content Include="templates\mysite\images\lovehover .png" />
+    <Content Include="templates\mysite\images\lovehover.png" />
+    <Content Include="templates\mysite\images\lovenormal.png" />
+    <Content Include="templates\mysite\images\more.png" />
+    <Content Include="templates\mysite\images\moreact.png" />
+    <Content Include="templates\mysite\images\nav-icon-hot02.gif" />
+    <Content Include="templates\mysite\images\nav-icon-sales.gif" />
+    <Content Include="templates\mysite\images\navbg.jpg" />
+    <Content Include="templates\mysite\images\navbg.png" />
+    <Content Include="templates\mysite\images\navbghover.png" />
+    <Content Include="templates\mysite\images\navitag.png" />
+    <Content Include="templates\mysite\images\NEW.png" />
+    <Content Include="templates\mysite\images\Pointer.png" />
+    <Content Include="templates\mysite\images\QQPic.png" />
+    <Content Include="templates\mysite\images\qzone.png" />
+    <Content Include="templates\mysite\images\qzoneact.png" />
+    <Content Include="templates\mysite\images\righticon.png" />
+    <Content Include="templates\mysite\images\rili-bg01.png" />
+    <Content Include="templates\mysite\images\rili-bg02.png" />
+    <Content Include="templates\mysite\images\rubbishicon.png" />
+    <Content Include="templates\mysite\images\search-icon-new.png" />
+    <Content Include="templates\mysite\images\search-icon-star.png" />
+    <Content Include="templates\mysite\images\search-icon.png" />
+    <Content Include="templates\mysite\images\search-listbg.png" />
+    <Content Include="templates\mysite\images\searchbtnbg1.png" />
+    <Content Include="templates\mysite\images\searchbtnbg_b.png" />
+    <Content Include="templates\mysite\images\security_six2.png" />
+    <Content Include="templates\mysite\images\select_down.png" />
+    <Content Include="templates\mysite\images\sentboxbg.png" />
+    <Content Include="templates\mysite\images\share.png" />
+    <Content Include="templates\mysite\images\slide1.jpg" />
+    <Content Include="templates\mysite\images\soldout.png" />
+    <Content Include="templates\mysite\images\star.png" />
+    <Content Include="templates\mysite\images\starempty.png" />
+    <Content Include="templates\mysite\images\starhalf.png" />
+    <Content Include="templates\mysite\images\tag1.png" />
+    <Content Include="templates\mysite\images\tag2.png" />
+    <Content Include="templates\mysite\images\tagicon.png" />
+    <Content Include="templates\mysite\images\telephone.png" />
+    <Content Include="templates\mysite\images\telephone1.png" />
+    <Content Include="templates\mysite\images\tianya.png" />
+    <Content Include="templates\mysite\images\tianyaact.png" />
+    <Content Include="templates\mysite\images\tour-qa-a.png" />
+    <Content Include="templates\mysite\images\tour-qa-q.png" />
+    <Content Include="templates\mysite\images\tourbate-icon-jd.png" />
+    <Content Include="templates\mysite\images\tourbate-icon-smaill.png" />
+    <Content Include="templates\mysite\images\tourbate-icon-xm.png" />
+    <Content Include="templates\mysite\images\tourbeta-sku-icon.png" />
+    <Content Include="templates\mysite\images\tourbeta_box_close.png" />
+    <Content Include="templates\mysite\images\tourbeta_box_rgtbg01.png" />
+    <Content Include="templates\mysite\images\tourbeta_box_rgtbg02.jpg" />
+    <Content Include="templates\mysite\images\tourbeta_box_wenhao.png" />
+    <Content Include="templates\mysite\images\tourbeta_full.png" />
+    <Content Include="templates\mysite\images\tourbeta_icon.png" />
+    <Content Include="templates\mysite\images\tour_icon.png" />
+    <Content Include="templates\mysite\images\tweibo.png" />
+    <Content Include="templates\mysite\images\tweiboact.png" />
+    <Content Include="templates\mysite\images\user_banner.jpg" />
+    <Content Include="templates\mysite\images\user_navBg.png" />
+    <Content Include="templates\mysite\images\wechat.png" />
+    <Content Include="templates\mysite\images\wechatact.png" />
+    <Content Include="templates\mysite\images\wechatcode.jpg" />
+    <Content Include="templates\mysite\images\weibo.png" />
+    <Content Include="templates\mysite\images\weiboact.png" />
+    <Content Include="templates\mysite\images\wishbtnicon.png" />
+    <Content Include="templates\mysite\images\wishbtniconact.png" />
+    <Content Include="templates\mysite\images\wishbtnicon删除.png" />
+    <Content Include="templates\mysite\images\wishlisticon.png" />
+    <Content Include="templates\mysite\images\wishlisticonact.png" />
+    <Content Include="templates\mysite\images\wrongicon.png" />
+    <Content Include="templates\mysite\images\xubox_loading2.gif" />
+    <Content Include="templates\mysite\images\YesNo.png" />
+    <Content Include="templates\mysite\images\yhq-bg.png" />
+    <Content Include="templates\mysite\images\yhq-btn.png" />
+    <Content Include="templates\mysite\images\yj_banner.jpg" />
+    <Content Include="templates\mysite\images\yj_banner_shade.png" />
+    <Content Include="templates\mysite\images\yj_icon-01.png" />
+    <Content Include="templates\mysite\images\yj_icon-02.png" />
+    <Content Include="templates\mysite\images\yj_icon-03.png" />
+    <Content Include="templates\mysite\images\yj_menuBg.png" />
+    <Content Include="templates\mysite\images\yj_menuHover.png" />
+    <Content Include="templates\mysite\index.html" />
+    <Content Include="templates\mysite\js\aboutus.js" />
+    <Content Include="templates\mysite\js\CategoryInfo.js" />
+    <Content Include="templates\mysite\js\huiyuan.js" />
+    <Content Include="templates\mysite\js\index.js" />
+    <Content Include="templates\mysite\js\indextab.js" />
+    <Content Include="templates\mysite\js\infoDetail.js" />
+    <Content Include="templates\mysite\js\jquery-1.9.1.js" />
+    <Content Include="templates\mysite\js\js.js" />
+    <Content Include="templates\mysite\js\JTimer_1.3.js" />
+    <Content Include="templates\mysite\js\position.js" />
+    <Content Include="templates\mysite\js\tabview.js" />
+    <Content Include="templates\mysite\package_tour_detail.html" />
+    <Content Include="templates\mysite\package_tour_list.html" />
     <Content Include="watermark.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1030,6 +1205,20 @@
     </Compile>
     <Compile Include="admin\settings\builder_html.aspx.designer.cs">
       <DependentUpon>builder_html.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\settings\area_edit.aspx.cs">
+      <DependentUpon>area_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\settings\area_edit.aspx.designer.cs">
+      <DependentUpon>area_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\settings\area_list.aspx.cs">
+      <DependentUpon>area_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\settings\area_list.aspx.designer.cs">
+      <DependentUpon>area_list.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\settings\nav_edit.aspx.cs">
       <DependentUpon>nav_edit.aspx</DependentUpon>
@@ -1521,6 +1710,9 @@
     <None Include="templates\mobile\jqmobi\css\src\afui.less" />
     <None Include="templates\mobile\jqmobi\plugins\README.md" />
     <None Include="templates\mobile\jqmobi\ui\README.md" />
+    <Content Include="templates\mysite\images\headnavibg.psd" />
+    <Content Include="templates\mysite\images\lovenormal.psd" />
+    <Content Include="templates\mysite\images\QQ图片20160515163843.psd" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

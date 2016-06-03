@@ -203,6 +203,14 @@
       </div>
     </dd>
   </dl>
+      <dl>
+    <dt>所属地区</dt>
+    <dd>
+      <div class="rule-single-select">
+        <asp:DropDownList id="ddlAreaId" runat="server" datatype="*" sucmsg=" "></asp:DropDownList>
+      </div>
+    </dd>
+  </dl>
   <dl>
     <dt>显示状态</dt>
     <dd>

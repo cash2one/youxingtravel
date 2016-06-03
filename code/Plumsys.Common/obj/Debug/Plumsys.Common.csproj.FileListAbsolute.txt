@@ -12,3 +12,7 @@ E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plum
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.Common\obj\Debug\Plumsys.Common.csprojResolveAssemblyReference.cache
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.Common\obj\Debug\Plumsys.Common.dll
 E:\我的项目\优行网络\dtcms4.0.1旗舰版\DTcms_4.0_sql_src_Ultimate\Plumsys.Common\obj\Debug\Plumsys.Common.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\bin\Debug\Plumsys.Common.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\bin\Debug\Plumsys.Common.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.pdb

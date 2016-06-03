@@ -92,9 +92,9 @@ namespace Plumsys.BLL
         /// <summary>
         /// 获得查询分页数据
         /// </summary>
-        public DataSet GetList(int channel_id, int category_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+        public DataSet GetList(int channel_id, int category_id,int area_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
-            return dal.GetList(channel_id, category_id, pageSize, pageIndex, strWhere, filedOrder, out recordCount);
+            return dal.GetList(channel_id, category_id,area_id, pageSize, pageIndex, strWhere, filedOrder, out recordCount);
         }
 
         #endregion
@@ -114,7 +114,13 @@ namespace Plumsys.BLL
         {
             return dal.ExistsTitle(title, category_id);
         }
-
+        /// <summary>
+        /// 是否存在标题
+        /// </summary>
+        public bool ExistsTitle(string title, int category_id,int area_id)
+        {
+            return dal.ExistsTitle(title, category_id,area_id);
+        }
         /// <summary>
         /// 返回信息标题
         /// </summary>
@@ -160,32 +166,32 @@ namespace Plumsys.BLL
         /// <summary>
         /// 根据视图显示前几条数据
         /// </summary>
-        public DataSet GetList(string channel_name, int category_id, int Top, string strWhere, string filedOrder)
+        public DataSet GetList(string channel_name, int category_id,int area_id, int Top, string strWhere, string filedOrder)
         {
-            return dal.GetList(channel_name, category_id, Top, strWhere, filedOrder);
+            return dal.GetList(channel_name, category_id,area_id, Top, strWhere, filedOrder);
         }
 
         /// <summary>
         /// 根据视图获得查询分页数据
         /// </summary>
-        public DataSet GetList(string channel_name, int category_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+        public DataSet GetList(string channel_name, int category_id,int area_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
-            return dal.GetList(channel_name, category_id, pageSize, pageIndex, strWhere, filedOrder, out recordCount);
+            return dal.GetList(channel_name, category_id,area_id, pageSize, pageIndex, strWhere, filedOrder, out recordCount);
         }
           /// <summary>
         /// 根据视图获取总记录数
         /// </summary>
-        public int GetCount(string channel_name, int category_id, string strWhere)
+        public int GetCount(string channel_name, int category_id,int area_id, string strWhere)
         {
-            return dal.GetCount(channel_name, category_id,strWhere);
+            return dal.GetCount(channel_name, category_id,area_id,strWhere);
         }
 
         /// <summary>
         /// 根据视图及规格查询分页数据
         /// </summary>
-        public DataSet GetList(string channel_name, int category_id, Dictionary<string, string> dicSpecIds, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+        public DataSet GetList(string channel_name, int category_id,int area_id, Dictionary<string, string> dicSpecIds, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
-            return dal.GetList(channel_name, category_id, dicSpecIds, pageSize, pageIndex, strWhere, filedOrder, out recordCount);
+            return dal.GetList(channel_name, category_id,area_id, dicSpecIds, pageSize, pageIndex, strWhere, filedOrder, out recordCount);
         }
 
         /// <summary>

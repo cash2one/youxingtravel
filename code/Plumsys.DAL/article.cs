@@ -68,12 +68,13 @@ namespace Plumsys.DAL
                         #region 添加主表数据====================
                         StringBuilder strSql = new StringBuilder();
                         strSql.Append("insert into " + databaseprefix + "article(");
-                        strSql.Append("channel_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time)");
+                        strSql.Append("channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time)");
                         strSql.Append(" values (");
-                        strSql.Append("@channel_id,@category_id,@call_index,@title,@link_url,@img_url,@seo_title,@seo_keywords,@seo_description,@tags,@zhaiyao,@content,@sort_id,@click,@status,@is_msg,@is_top,@is_red,@is_hot,@is_slide,@is_sys,@user_name,@user_id,@add_time,@update_time)");
+                        strSql.Append("@channel_id,@area_id,@category_id,@call_index,@title,@link_url,@img_url,@seo_title,@seo_keywords,@seo_description,@tags,@zhaiyao,@content,@sort_id,@click,@status,@is_msg,@is_top,@is_red,@is_hot,@is_slide,@is_sys,@user_name,@user_id,@add_time,@update_time)");
                         strSql.Append(";select @@IDENTITY");
                         SqlParameter[] parameters = {
 					            new SqlParameter("@channel_id", SqlDbType.Int,4),
+                                new SqlParameter("@area_id", SqlDbType.Int,4),
 					            new SqlParameter("@category_id", SqlDbType.Int,4),
 					            new SqlParameter("@call_index", SqlDbType.NVarChar,50),
 					            new SqlParameter("@title", SqlDbType.NVarChar,100),
@@ -99,30 +100,31 @@ namespace Plumsys.DAL
 					            new SqlParameter("@add_time", SqlDbType.DateTime),
 					            new SqlParameter("@update_time", SqlDbType.DateTime)};
                         parameters[0].Value = model.channel_id;
-                        parameters[1].Value = model.category_id;
-                        parameters[2].Value = model.call_index;
-                        parameters[3].Value = model.title;
-                        parameters[4].Value = model.link_url;
-                        parameters[5].Value = model.img_url;
-                        parameters[6].Value = model.seo_title;
-                        parameters[7].Value = model.seo_keywords;
-                        parameters[8].Value = model.seo_description;
-                        parameters[9].Value = model.tags;
-                        parameters[10].Value = model.zhaiyao;
-                        parameters[11].Value = model.content;
-                        parameters[12].Value = model.sort_id;
-                        parameters[13].Value = model.click;
-                        parameters[14].Value = model.status;
-                        parameters[15].Value = model.is_msg;
-                        parameters[16].Value = model.is_top;
-                        parameters[17].Value = model.is_red;
-                        parameters[18].Value = model.is_hot;
-                        parameters[19].Value = model.is_slide;
-                        parameters[20].Value = model.is_sys;
-                        parameters[21].Value = model.user_name;
-                        parameters[22].Value = model.user_id;
-                        parameters[23].Value = model.add_time;
-                        parameters[24].Value = model.update_time;
+                        parameters[1].Value = model.area_id;
+                        parameters[2].Value = model.category_id;
+                        parameters[3].Value = model.call_index;
+                        parameters[4].Value = model.title;
+                        parameters[5].Value = model.link_url;
+                        parameters[6].Value = model.img_url;
+                        parameters[7].Value = model.seo_title;
+                        parameters[8].Value = model.seo_keywords;
+                        parameters[9].Value = model.seo_description;
+                        parameters[10].Value = model.tags;
+                        parameters[11].Value = model.zhaiyao;
+                        parameters[12].Value = model.content;
+                        parameters[13].Value = model.sort_id;
+                        parameters[14].Value = model.click;
+                        parameters[15].Value = model.status;
+                        parameters[16].Value = model.is_msg;
+                        parameters[17].Value = model.is_top;
+                        parameters[18].Value = model.is_red;
+                        parameters[19].Value = model.is_hot;
+                        parameters[20].Value = model.is_slide;
+                        parameters[21].Value = model.is_sys;
+                        parameters[22].Value = model.user_name;
+                        parameters[23].Value = model.user_id;
+                        parameters[24].Value = model.add_time;
+                        parameters[25].Value = model.update_time;
                         //添加主表数据
                         object obj = DbHelperSQL.GetSingle(conn, trans, strSql.ToString(), parameters); //带事务
                         model.id = Convert.ToInt32(obj);
@@ -319,7 +321,8 @@ namespace Plumsys.DAL
 			            strSql.Append("user_name=@user_name,");
                         strSql.Append("user_id=@user_id,");
 			            strSql.Append("add_time=@add_time,");
-			            strSql.Append("update_time=@update_time");
+			            strSql.Append("update_time=@update_time,");
+                        strSql.Append("area_id=@area_id");
 			            strSql.Append(" where id=@id");
 			            SqlParameter[] parameters = {
 					            new SqlParameter("@channel_id", SqlDbType.Int,4),
@@ -346,7 +349,8 @@ namespace Plumsys.DAL
 					            new SqlParameter("@user_name", SqlDbType.NVarChar,100),
                                 new SqlParameter("@user_id", SqlDbType.TinyInt,1),
 					            new SqlParameter("@add_time", SqlDbType.DateTime),
-					            new SqlParameter("@update_time", SqlDbType.DateTime),
+                                new SqlParameter("@update_time", SqlDbType.DateTime),
+					            new SqlParameter("@area_id", SqlDbType.Int,4),
 					            new SqlParameter("@id", SqlDbType.Int,4)};
 			            parameters[0].Value = model.channel_id;
 			            parameters[1].Value = model.category_id;
@@ -373,7 +377,8 @@ namespace Plumsys.DAL
                         parameters[22].Value = model.id;
 			            parameters[23].Value = model.add_time;
 			            parameters[24].Value = model.update_time;
-			            parameters[25].Value = model.id;
+                        parameters[25].Value = model.area_id;
+			            parameters[26].Value = model.id;
                         DbHelperSQL.ExecuteSql(conn, trans, strSql.ToString(), parameters);
                         #endregion
 
@@ -714,7 +719,7 @@ namespace Plumsys.DAL
         public Model.article GetModel(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 id,channel_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time");
+            strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time");
             strSql.Append(" from " + databaseprefix + "article");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
@@ -764,7 +769,7 @@ namespace Plumsys.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" id,channel_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,add_time,update_time ");
+            strSql.Append(" id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,add_time,update_time ");
             strSql.Append(" FROM " + databaseprefix + "article ");
             if (strWhere.Trim() != "")
             {
@@ -777,7 +782,7 @@ namespace Plumsys.DAL
         /// <summary>
         /// 获得查询分页数据
         /// </summary>
-        public DataSet GetList(int channel_id, int category_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+        public DataSet GetList(int channel_id, int category_id, int area_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * FROM " + databaseprefix + "article");
@@ -794,6 +799,17 @@ namespace Plumsys.DAL
                 else
                 {
                     strSql.Append(" where category_id in(select id from " + databaseprefix + "article_category where class_list like '%," + category_id + ",%')");
+                }
+            }
+            if (area_id > 0)
+            {
+                if (channel_id > 0)
+                {
+                    strSql.Append(" and area_id in(select id from " + databaseprefix + "area_category where class_list like '%," + area_id + ",%')");
+                }
+                else
+                {
+                    strSql.Append(" where area_id in(select id from " + databaseprefix + "area_category where class_list like '%," + area_id + ",%')");
                 }
             }
             if (strWhere.Trim() != "")
@@ -839,6 +855,24 @@ namespace Plumsys.DAL
             SqlParameter[] parameters = {
 					new SqlParameter("@title", SqlDbType.VarChar,200),
                     new SqlParameter("@category_id", SqlDbType.Int,4)  }
+                                        ;
+            parameters[0].Value = title;
+            parameters[1].Value = category_id;
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
+        /// <summary>
+        /// 是否存在标题
+        /// </summary>
+        public bool ExistsTitle(string title, int category_id,int area_id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from " + databaseprefix + "article");
+            strSql.Append(" where title=@title and category_id=@category_id and area_id=@area_id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@title", SqlDbType.VarChar,200),
+                    new SqlParameter("@category_id", SqlDbType.Int,4),
+                    new SqlParameter("@area_id", SqlDbType.Int,4)  }
                                         ;
             parameters[0].Value = title;
             parameters[1].Value = category_id;
@@ -937,6 +971,10 @@ namespace Plumsys.DAL
                 if (row["channel_id"] != null && row["channel_id"].ToString() != "")
                 {
                     model.channel_id = int.Parse(row["channel_id"].ToString());
+                }
+                if (row["area_id"] != null && row["area_id"].ToString() != "")
+                {
+                    model.area_id = int.Parse(row["area_id"].ToString());
                 }
                 if (row["category_id"] != null && row["category_id"].ToString() != "")
                 {
@@ -1070,11 +1108,10 @@ namespace Plumsys.DAL
             strSql.Append(" order by " + filedOrder);
             return DbHelperSQL.Query(strSql.ToString());
         }
-
         /// <summary>
         /// 根据视图获取总记录数
         /// </summary>
-        public int GetCount(string channel_name, int category_id, string strWhere)
+        public int GetCount(string channel_name, int category_id,int area_id, string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ");
@@ -1083,6 +1120,10 @@ namespace Plumsys.DAL
             if (category_id > 0)
             {
                 strSql.Append(" and category_id in(select id from " + databaseprefix + "article_category where class_list like '%," + category_id + ",%')");
+            }
+            if (area_id > 0)
+            {
+                strSql.Append(" and area_id in(select id from " + databaseprefix + "area_category where class_list like '%," + area_id + ",%')");
             }
             if (strWhere.Trim() != "")
             {
@@ -1094,7 +1135,7 @@ namespace Plumsys.DAL
         /// <summary>
         /// 根据视图显示前几条数据
         /// </summary>
-        public DataSet GetList(string channel_name, int category_id, int Top, string strWhere, string filedOrder)
+        public DataSet GetList(string channel_name, int category_id, int area_id,int Top, string strWhere, string filedOrder)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ");
@@ -1108,6 +1149,10 @@ namespace Plumsys.DAL
             {
                 strSql.Append(" and category_id in(select id from " + databaseprefix + "article_category where class_list like '%," + category_id + ",%')");
             }
+            if (area_id > 0)
+            {
+                strSql.Append(" and area_id in(select id from " + databaseprefix + "area_category where class_list like '%," + area_id + ",%')");
+            }
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" and " + strWhere);
@@ -1115,11 +1160,10 @@ namespace Plumsys.DAL
             strSql.Append(" order by " + filedOrder);
             return DbHelperSQL.Query(strSql.ToString());
         }
-
         /// <summary>
         /// 根据视图获得查询分页数据
         /// </summary>
-        public DataSet GetList(string channel_name, int category_id, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+        public DataSet GetList(string channel_name, int category_id, int area_id,int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * FROM view_channel_" + channel_name);
@@ -1128,6 +1172,10 @@ namespace Plumsys.DAL
             {
                 strSql.Append(" and category_id in(select id from " + databaseprefix + "article_category where class_list like '%," + category_id + ",%')");
             }
+            if (area_id > 0)
+            {
+                strSql.Append(" and area_id in(select id from " + databaseprefix + "area_category where class_list like '%," + area_id + ",%')");
+            }
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" and " + strWhere);
@@ -1135,11 +1183,10 @@ namespace Plumsys.DAL
             recordCount = Convert.ToInt32(DbHelperSQL.GetSingle(PagingHelper.CreateCountingSql(strSql.ToString())));
             return DbHelperSQL.Query(PagingHelper.CreatePagingSql(recordCount, pageSize, pageIndex, strSql.ToString(), filedOrder));
         }
-
         /// <summary>
         /// 根据视图及规格查询分页数据
         /// </summary>
-        public DataSet GetList(string channel_name, int category_id, Dictionary<string,string> dicSpecIds, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+        public DataSet GetList(string channel_name, int category_id,int area_id, Dictionary<string, string> dicSpecIds, int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             string specWhere = string.Empty;
             foreach (KeyValuePair<string, string> kv in dicSpecIds)
@@ -1164,6 +1211,10 @@ namespace Plumsys.DAL
             {
                 strSql.Append(" and category_id in(select id from " + databaseprefix + "article_category where class_list like '%," + category_id + ",%')");
             }
+            if (area_id > 0)
+            {
+                strSql.Append(" and area_id in(select id from " + databaseprefix + "area_category where class_list like '%," + area_id + ",%')");
+            }
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" and " + strWhere);
@@ -1178,7 +1229,6 @@ namespace Plumsys.DAL
             recordCount = Convert.ToInt32(DbHelperSQL.GetSingle(PagingHelper.CreateCountingSql(strSql.ToString())));
             return DbHelperSQL.Query(PagingHelper.CreatePagingSql(recordCount, pageSize, pageIndex, strSql.ToString(), filedOrder));
         }
-
         /// <summary>
         /// 获得关健字查询分页数据(搜索用到)
         /// </summary>
