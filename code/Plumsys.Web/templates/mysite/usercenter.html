@@ -46,8 +46,9 @@
           </div>
           <div class="inner">
             <h3>尊敬的会员 {userModel.user_name}，欢迎您！</h3>
-            <p>您的会员等级：{groupModel.title}</p>
-            <p>个人成长值：{userModel.exp}点</p>
+            <!--<p>您的会员等级：{groupModel.title}</p>
+            <p>个人成长值：{userModel.exp}点</p>-->
+              <p></p>
             <p>
               <a href="<%linkurl("usercenter","avatar")%>">设置头像</a>
               &nbsp;&nbsp;&nbsp;&nbsp;<a href="<%linkurl("usercenter","password")%>">修改密码</a>
@@ -58,18 +59,18 @@
         
         <div class="head-inner clearfix">
           <h3>账户统计</h3>
-          <dl>
+          <!--<dl>
             <dt>账户余额：</dt>
             <dd>
               <b class="red">￥{userModel.amount}</b> 元
             </dd>
-          </dl>
-          <dl>
+          </dl>-->
+          <!--<dl>
             <dt>账户积分：</dt>
             <dd>
               <b class="red">{userModel.point}</b> 分
             </dd>
-          </dl>
+          </dl>-->
           <dl>
             <dt>未完成订单：</dt>
             <dd>
@@ -78,14 +79,14 @@
               </b> 个
             </dd>
           </dl>
-          <dl>
+          <!--<dl>
             <dt>未读消息：</dt>
             <dd>
               <b class="red">
                 <%=get_user_message_count("type<3 and is_read=0 and accept_user_name='"+userModel.user_name+"'")%>
               </b>条
             </dd>
-          </dl>
+          </dl>-->
         </div>
         
         <div class="head-inner clearfix">
