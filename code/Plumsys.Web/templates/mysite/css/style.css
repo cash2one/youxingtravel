@@ -575,7 +575,7 @@ body{ text-align:center; background:#fff; *position:relative; }
 	.login-right li input:focus{ border-color:#999; }
 	.login-right li span{ line-height:24px; }
 	.login-right .btn-box .col{ clear:both; margin-bottom:10px; padding-bottom:10px; color:#555; font-size:14px; line-height:20px; }
-	.login-right .btn-box .col .submit{ display:block; padding:10px 20px; width:100%; color:#fff; font-size:14px; line-height:20px; border:0; background:#1e7bb3; text-align:center; border-radius:3px; cursor:pointer; }
+	.login-right .btn-box .col .submit{ display:block; padding:10px 20px; width:100%; color:#fff; font-size:14px; line-height:20px; border:0; background:rgba(133, 177, 36, 1); text-align:center; border-radius:3px; cursor:pointer; }
 	.login-right .btn-box .tips{ display:none; margin:0; padding:0; text-align:center; font-size:12px; color:#f00; }
 	.login-right .oauth-box { clear:both; padding-top:20px; }
 	.login-right .oauth-box h3{ display:block; margin-bottom:10px; color:#555; font-size:14px; line-height:30px; height:30px; font-weight:normal; }
