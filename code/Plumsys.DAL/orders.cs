@@ -57,15 +57,17 @@ namespace Plumsys.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into " + databaseprefix + "orders(");
-            strSql.Append("order_no,trade_no,user_id,user_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time)");
+            strSql.Append("order_no,trade_no,user_id,user_name,seller_id,seller_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time)");
             strSql.Append(" values (");
-            strSql.Append("@order_no,@trade_no,@user_id,@user_name,@payment_id,@payment_fee,@payment_status,@payment_time,@express_id,@express_no,@express_fee,@express_status,@express_time,@accept_name,@post_code,@telphone,@mobile,@email,@area,@address,@message,@remark,@is_invoice,@invoice_title,@invoice_taxes,@payable_amount,@real_amount,@order_amount,@point,@status,@add_time,@confirm_time,@complete_time)");
+            strSql.Append("@order_no,@trade_no,@user_id,@user_name,@seller_id,@seller_name,@payment_id,@payment_fee,@payment_status,@payment_time,@express_id,@express_no,@express_fee,@express_status,@express_time,@accept_name,@post_code,@telphone,@mobile,@email,@area,@address,@message,@remark,@is_invoice,@invoice_title,@invoice_taxes,@payable_amount,@real_amount,@order_amount,@point,@status,@add_time,@confirm_time,@complete_time)");
             strSql.Append(";set @ReturnValue= @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@order_no", SqlDbType.NVarChar,100),
 					new SqlParameter("@trade_no", SqlDbType.NVarChar,100),
 					new SqlParameter("@user_id", SqlDbType.Int,4),
 					new SqlParameter("@user_name", SqlDbType.NVarChar,100),
+                    new SqlParameter("@seller_id", SqlDbType.Int,4),
+					new SqlParameter("@seller_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@payment_id", SqlDbType.Int,4),
 					new SqlParameter("@payment_fee", SqlDbType.Decimal,5),
 					new SqlParameter("@payment_status", SqlDbType.TinyInt,1),
@@ -100,36 +102,38 @@ namespace Plumsys.DAL
             parameters[1].Value = model.trade_no;
             parameters[2].Value = model.user_id;
             parameters[3].Value = model.user_name;
-            parameters[4].Value = model.payment_id;
-            parameters[5].Value = model.payment_fee;
-            parameters[6].Value = model.payment_status;
-            parameters[7].Value = model.payment_time;
-            parameters[8].Value = model.express_id;
-            parameters[9].Value = model.express_no;
-            parameters[10].Value = model.express_fee;
-            parameters[11].Value = model.express_status;
-            parameters[12].Value = model.express_time;
-            parameters[13].Value = model.accept_name;
-            parameters[14].Value = model.post_code;
-            parameters[15].Value = model.telphone;
-            parameters[16].Value = model.mobile;
-            parameters[17].Value = model.email;
-            parameters[18].Value = model.area;
-            parameters[19].Value = model.address;
-            parameters[20].Value = model.message;
-            parameters[21].Value = model.remark;
-            parameters[22].Value = model.is_invoice;
-            parameters[23].Value = model.invoice_title;
-            parameters[24].Value = model.invoice_taxes;
-            parameters[25].Value = model.payable_amount;
-            parameters[26].Value = model.real_amount;
-            parameters[27].Value = model.order_amount;
-            parameters[28].Value = model.point;
-            parameters[29].Value = model.status;
-            parameters[30].Value = model.add_time;
-            parameters[31].Value = model.confirm_time;
-            parameters[32].Value = model.complete_time;
-            parameters[33].Direction = ParameterDirection.Output;
+            parameters[4].Value = model.seller_id;
+            parameters[5].Value = model.seller_name;
+            parameters[6].Value = model.payment_id;
+            parameters[7].Value = model.payment_fee;
+            parameters[8].Value = model.payment_status;
+            parameters[9].Value = model.payment_time;
+            parameters[10].Value = model.express_id;
+            parameters[11].Value = model.express_no;
+            parameters[12].Value = model.express_fee;
+            parameters[13].Value = model.express_status;
+            parameters[14].Value = model.express_time;
+            parameters[15].Value = model.accept_name;
+            parameters[16].Value = model.post_code;
+            parameters[17].Value = model.telphone;
+            parameters[18].Value = model.mobile;
+            parameters[19].Value = model.email;
+            parameters[20].Value = model.area;
+            parameters[21].Value = model.address;
+            parameters[22].Value = model.message;
+            parameters[23].Value = model.remark;
+            parameters[24].Value = model.is_invoice;
+            parameters[25].Value = model.invoice_title;
+            parameters[26].Value = model.invoice_taxes;
+            parameters[27].Value = model.payable_amount;
+            parameters[28].Value = model.real_amount;
+            parameters[29].Value = model.order_amount;
+            parameters[30].Value = model.point;
+            parameters[31].Value = model.status;
+            parameters[32].Value = model.add_time;
+            parameters[33].Value = model.confirm_time;
+            parameters[34].Value = model.complete_time;
+            parameters[35].Direction = ParameterDirection.Output;
             List<CommandInfo> sqllist = new List<CommandInfo>();
             CommandInfo cmd = new CommandInfo(strSql.ToString(), parameters);
             sqllist.Add(cmd);
@@ -187,6 +191,8 @@ namespace Plumsys.DAL
             strSql.Append("trade_no=@trade_no,");
             strSql.Append("user_id=@user_id,");
             strSql.Append("user_name=@user_name,");
+            strSql.Append("seller_id=@seller_id,");
+            strSql.Append("seller_name=@seller_name,");
             strSql.Append("payment_id=@payment_id,");
             strSql.Append("payment_fee=@payment_fee,");
             strSql.Append("payment_status=@payment_status,");
@@ -222,6 +228,8 @@ namespace Plumsys.DAL
 					new SqlParameter("@trade_no", SqlDbType.NVarChar,100),
 					new SqlParameter("@user_id", SqlDbType.Int,4),
 					new SqlParameter("@user_name", SqlDbType.NVarChar,100),
+                    new SqlParameter("@seller_id", SqlDbType.Int,4),
+					new SqlParameter("@seller_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@payment_id", SqlDbType.Int,4),
 					new SqlParameter("@payment_fee", SqlDbType.Decimal,5),
 					new SqlParameter("@payment_status", SqlDbType.TinyInt,1),
@@ -256,36 +264,38 @@ namespace Plumsys.DAL
             parameters[1].Value = model.trade_no;
             parameters[2].Value = model.user_id;
             parameters[3].Value = model.user_name;
-            parameters[4].Value = model.payment_id;
-            parameters[5].Value = model.payment_fee;
-            parameters[6].Value = model.payment_status;
-            parameters[7].Value = model.payment_time;
-            parameters[8].Value = model.express_id;
-            parameters[9].Value = model.express_no;
-            parameters[10].Value = model.express_fee;
-            parameters[11].Value = model.express_status;
-            parameters[12].Value = model.express_time;
-            parameters[13].Value = model.accept_name;
-            parameters[14].Value = model.post_code;
-            parameters[15].Value = model.telphone;
-            parameters[16].Value = model.mobile;
-            parameters[17].Value = model.email;
-            parameters[18].Value = model.area;
-            parameters[19].Value = model.address;
-            parameters[20].Value = model.message;
-            parameters[21].Value = model.remark;
-            parameters[22].Value = model.is_invoice;
-            parameters[23].Value = model.invoice_title;
-            parameters[24].Value = model.invoice_taxes;
-            parameters[25].Value = model.payable_amount;
-            parameters[26].Value = model.real_amount;
-            parameters[27].Value = model.order_amount;
-            parameters[28].Value = model.point;
-            parameters[29].Value = model.status;
-            parameters[30].Value = model.add_time;
-            parameters[31].Value = model.confirm_time;
-            parameters[32].Value = model.complete_time;
-            parameters[33].Value = model.id;
+            parameters[4].Value = model.seller_id;
+            parameters[5].Value = model.seller_name;
+            parameters[6].Value = model.payment_id;
+            parameters[7].Value = model.payment_fee;
+            parameters[8].Value = model.payment_status;
+            parameters[9].Value = model.payment_time;
+            parameters[10].Value = model.express_id;
+            parameters[11].Value = model.express_no;
+            parameters[12].Value = model.express_fee;
+            parameters[13].Value = model.express_status;
+            parameters[14].Value = model.express_time;
+            parameters[15].Value = model.accept_name;
+            parameters[16].Value = model.post_code;
+            parameters[17].Value = model.telphone;
+            parameters[18].Value = model.mobile;
+            parameters[19].Value = model.email;
+            parameters[20].Value = model.area;
+            parameters[21].Value = model.address;
+            parameters[22].Value = model.message;
+            parameters[23].Value = model.remark;
+            parameters[24].Value = model.is_invoice;
+            parameters[25].Value = model.invoice_title;
+            parameters[26].Value = model.invoice_taxes;
+            parameters[27].Value = model.payable_amount;
+            parameters[28].Value = model.real_amount;
+            parameters[29].Value = model.order_amount;
+            parameters[30].Value = model.point;
+            parameters[31].Value = model.status;
+            parameters[32].Value = model.add_time;
+            parameters[33].Value = model.confirm_time;
+            parameters[34].Value = model.complete_time;
+            parameters[35].Value = model.id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -339,7 +349,7 @@ namespace Plumsys.DAL
         public Model.orders GetModel(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 id,order_no,trade_no,user_id,user_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time");
+            strSql.Append("select top 1 id,order_no,trade_no,user_id,user_name,seller_id,seller_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time");
             strSql.Append(" from " + databaseprefix + "orders");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
@@ -363,7 +373,7 @@ namespace Plumsys.DAL
         public Model.orders GetModel(string order_no)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 id,order_no,trade_no,user_id,user_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time");
+            strSql.Append("select top 1 id,order_no,trade_no,user_id,user_name,seller_id,seller_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time");
             strSql.Append(" from " + databaseprefix + "orders");
             strSql.Append(" where order_no=@order_no");
             SqlParameter[] parameters = {
@@ -392,7 +402,7 @@ namespace Plumsys.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" id,order_no,trade_no,user_id,user_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time ");
+            strSql.Append(" id,order_no,trade_no,user_id,user_name,seller_id,seller_name,payment_id,payment_fee,payment_status,payment_time,express_id,express_no,express_fee,express_status,express_time,accept_name,post_code,telphone,mobile,email,area,address,message,remark,is_invoice,invoice_title,invoice_taxes,payable_amount,real_amount,order_amount,point,status,add_time,confirm_time,complete_time ");
             strSql.Append(" FROM " + databaseprefix + "orders ");
             if (strWhere.Trim() != "")
             {
@@ -493,6 +503,7 @@ namespace Plumsys.DAL
                 {
                     model.user_name = row["user_name"].ToString();
                 }
+              
                 if (row["payment_id"] != null && row["payment_id"].ToString() != "")
                 {
                     model.payment_id = int.Parse(row["payment_id"].ToString());
