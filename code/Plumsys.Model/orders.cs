@@ -17,6 +17,8 @@ namespace Plumsys.Model
         private string _trade_no = string.Empty;
         private int _user_id = 0;
         private string _user_name = string.Empty;
+        private int _seller_id = 0;
+        private string _seller_name = string.Empty;
         private int _payment_id = 0;
         private decimal _payment_fee = 0M;
         private int _payment_status = 0;
@@ -85,6 +87,22 @@ namespace Plumsys.Model
         {
             set { _user_name = value; }
             get { return _user_name; }
+        }
+        /// <summary>
+        ///卖家ID
+        /// </summary>
+        public int seller_id
+        {
+            set { _seller_id = value; }
+            get { return _seller_id; }
+        }
+        /// <summary>
+        /// 卖家名
+        /// </summary>
+        public string seller_name
+        {
+            set { _seller_name = value; }
+            get { return _seller_name; }
         }
         /// <summary>
         /// 支付方式
