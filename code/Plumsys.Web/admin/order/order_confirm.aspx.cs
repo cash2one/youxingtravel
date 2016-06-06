@@ -25,7 +25,7 @@ namespace Plumsys.Web.admin.order
             if (!Page.IsPostBack)
             {
                 ChkAdminLevel("order_list", PLEnums.ActionEnum.View.ToString()); //检查权限
-                RptBind("status=1" + CombSqlTxt(this.keywords), "add_time desc,id desc");
+                RptBind("status=1 and seller_id=" + GetAdminInfo().id + CombSqlTxt(this.keywords), "add_time desc,id desc");
             }
         }
 
