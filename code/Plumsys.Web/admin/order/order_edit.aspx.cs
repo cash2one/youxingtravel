@@ -25,7 +25,7 @@ namespace Plumsys.Web.admin.order
                 JscriptMsg("记录不存在或已被删除！", "back");
                 return;
             }
-            if (GetAdminInfo().role_type != 1 && new BLL.orders().GetModel(this.id).user_id != GetAdminInfo().id)
+            if (GetAdminInfo().role_type != 1 && new BLL.orders().GetModel(this.id).seller_id != GetAdminInfo().id)
             {
                 JscriptMsg("无权修改该信息！", "back");
                 return;
