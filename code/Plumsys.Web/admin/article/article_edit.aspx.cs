@@ -51,6 +51,7 @@ namespace Plumsys.Web.admin.article
                     JscriptMsg("信息不存在或已被删除！", "back");
                     return;
                 }
+                //如果roletype==1即是超级管理组
                 if (GetAdminInfo().role_type != 1 && new BLL.article().GetModel(this.id).user_id != GetAdminInfo().id)
                 {
                     JscriptMsg("无权修改该信息！", "back");

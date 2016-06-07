@@ -1,0 +1,160 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{site.seo_title}</title>
+    <meta name="keywords" content=" {site.seo_keyword}" />
+    <meta name="description" content="{site.seo_description}" />
+    <link href="<%templateskin%>/css/index.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/juqery.responsiveslides.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery.lazyload.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/index.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="Head">
+            <div class="Navi">
+                <div class="MainPage">
+                    <div class="Logo">
+                        <a title="logo" href="{site.domain}"
+                           target="_self">
+                            <img alt="{site.name}" src="{site.logo}" />
+                        </a>
+                    </div>
+                    <div class="LeftNavi">
+                        <div class="nav">
+                            <div class="c-wrapper">
+                                <div></div>
+                                <div class="navitems floatL">
+                                    <ul class="header_themlist">
+                                        <!--类别-->
+                                        <%set DataTable GoodsCList=get_category_child_list("tourist_mall",0)%>
+                                        <%loop ncdr GoodsCList%>
+                                        <li>
+                                            <a class="title" href="<%linkurl("tourist_mall_list",{ncdr[id]})%>" target="_self">
+                                                {ncdr[title]}
+                                                <div class="navitag" style="display: none;"></div>
+                                            </a>
+                                        </li>
+                                        <%/loop%>
+                                        <!--/类别-->
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="RightNavi">
+                        <span id="un_login">
+                            <a class="singin" href="#" target="_self">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="singup" href="#" target="_self">注册</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="SliderBox">
+            <div class="Slider">
+                <ul class="rslides">
+                    <%set DataTable focusNews=get_article_list("tourist_mall", 0,0, 8, "status=0 and is_slide=1 and img_url<>''")%>
+                    <%foreach(DataRow dr in focusNews.Rows)%>
+                    <li>
+                        <a title="{dr[title]}" href="<%linkurl("tourist_mall_show",{dr[id]})%>" target="_blank">
+                            <img src="{dr[img_url]}" />
+                        </a>
+                    </li>
+                    <%/foreach%>
+                </ul>
+            </div>
+        </div>
+        <div class="HeadMainPage">
+            <div class="search-new">
+                <div id="header_search_box">
+                    <div class="s-lft">
+                        <input id="defaultSearch" type="hidden" />
+                        <input name="home_city" class="typeahead city" id="header_search_city_input" type="text" placeholder="跟团游/自由行/酒店/门票" value="" />
+                    </div>
+                    <div class="s-rgt">
+                        <input class="btn" id="header_search_button" type="button" value="" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <!--类别-->
+        <%set DataTable categoryList=get_category_child_list("tourist_mall",0)%>
+        <%loop cdr categoryList%>
+        <%if(cdr__loop__id%2==1)%>
+        <div class="MainPage">
+            <div class="ContentHead"><a href="<%linkurl("tourist_mall_list",{cdr[id]})%>" target="_blank"><span>{cdr[title]}</span> </a></div>
+            <div class="ContentGroup">
+                <%set DataTable dt=get_article_list("tourist_mall", {strtoint({cdr[id]})},0, 4, "status=0")%>
+                <%foreach(DataRow dr in dt.Rows)%>
+                <div class="Content2">
+                    <a title="{dr[title]}" href="<%linkurl("tourist_mall_show",{dr[id]})%>" target="_blank">
+                        <img class="lazy_img" src="{dr[img_url]}" />
+                        <span class="ContentWordBox">
+                            <span class="Word">
+                                <span>{dr[title]}</span>
+                            </span><span class="Price">
+                                <span>￥{dr[sell_price]}</span>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <%/foreach%>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+        <%else%>
+        <div class="ContentGrey">
+            <div class="MainPage">
+                <div class="ContentHead"><a href="<%linkurl("tourist_mall_list",{cdr[id]})%>" target="_blank"><span>{cdr[title]}</span> </a></div>
+                <div class="ContentGroup">
+                    <%set DataTable dt=get_article_list("tourist_mall", {strtoint({cdr[id]})},0, 4, "status=0")%>
+                    <%foreach(DataRow dr in dt.Rows)%>
+                    <div class="Content2">
+                        <a title="{dr[title]}" href="<%linkurl("tourist_mall_show",{dr[id]})%>" target="_blank">
+                            <img class="lazy_img" src="{dr[img_url]}" />
+                            <span class="ContentWordBox">
+                                <span class="Word">
+                                    <span>{dr[title]}</span>
+                                </span><span class="Price">
+                                    <span>￥{dr[sell_price]}</span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <%/foreach%>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+        <%/if%>
+        <%/loop%>
+        <!--/类别-->
+        <!--Footer-->
+        <%template src="_footer.html"%>
+        <!--/Footer-->
+        <div class="RightBox" style="display: none;">
+            <div class="KeFuBox" id="KeFuBtn">
+                <span id="zixun">在线咨询</span>
+                <div class="KeFu"></div>
+            </div>
+            <!--<div class="Line"></div>
+            <div class="AdviseBtn">
+                <span>意见反馈</span>
+                <div class="Advise"></div>
+            </div>-->
+        </div>
+        <div class="KeFuGroup" style="display: none; width: 120px; height: 200px; position: fixed; bottom: 152px; right: 52px; z-index: 99999; background-color: rgba(136, 180, 34, 1); ">
+            <div class="ACloseBtn"></div>
+            <div class="kefurenyuan1"><a href="#"><img src="images/QQPic.png" />客服1</a></div>
+            <div class="kefurenyuan2"><a href="#"><img src="images/QQPic.png" />客服2</a></div>
+            <div class="kefurenyuan2"><a href="#"><img src="images/QQPic.png" />客服3</a></div>
+        </div>
+    </div>
+</body>
+</html>

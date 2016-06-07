@@ -58,10 +58,13 @@
     <Compile Include="Label\article.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Label\category.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Label\comment.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Label\category.cs">
+    <Compile Include="Label\area.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Label\express.cs">
