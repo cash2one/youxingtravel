@@ -157,6 +157,8 @@ namespace Plumsys.Web.UI
                     }
                     modelt.title = articleModel.title;
                     modelt.img_url = articleModel.img_url;
+                    modelt.seller_id = articleModel.user_id;//供应商id
+                    modelt.seller_name = articleModel.user_name;//供应商name
                     modelt.sell_price = Utils.StrToDecimal(articleModel.fields["sell_price"], 0);
                     modelt.user_price = Utils.StrToDecimal(articleModel.fields["sell_price"], 0);
                     if (articleModel.fields.ContainsKey("point"))
@@ -197,6 +199,7 @@ namespace Plumsys.Web.UI
                         }
                     }
                     modelt.quantity = item.quantity;
+                    
                     //添加入列表
                     iList.Add(modelt);
                 }
@@ -234,6 +237,74 @@ namespace Plumsys.Web.UI
             return model;
         }
 
+        /// <summary>
+        /// 统计购物车供应商数量by赵成龙 add 20160607
+        /// </summary>
+        public static DataTable GetTotalgys(List<Model.cart_items> ls)
+        {
+            DataTable dt = new DataTable();
+            if (ls != null)
+            {
+               
+                dt.Columns.Add("seller_id");
+                //dt.Columns.Add("seller_name");
+                dt.Columns.Add("total_quantity");
+                dt.Columns.Add("payable_amount");
+                dt.Columns.Add("real_amount");
+                dt.Columns.Add("total_point");
+                foreach (Model.cart_items modelt in ls)
+                {//遍历每个物品
+                    DataRow dr = dt.NewRow();
+                    dr["seller_id"] = modelt.seller_id;
+                   // dr["seller_name"] = modelt.seller_name;
+                    dr["total_quantity"] = modelt.quantity;
+                    dr["payable_amount"] = modelt.sell_price * modelt.quantity;
+                    dr["real_amount"] = modelt.user_price * modelt.quantity;
+                    dr["total_point"] =modelt.point * modelt.quantity;
+                    dt.Rows.Add(dr);
+                }
+           // http://zhidao.baidu.com/link?url=D3vSSJuTzytmBNW0IMnZtzgD7XE4Uh4DPJyd9MrvA_vFGB_j39npiNBQMDP-RbhWraowth8w7V7urhYOS996xKsUTQWQSulLXmg2jDPFr0i
+                //model.total_num = dt.Rows.Count;
+                //model.total_gysnum = 3;
+                //model.total_quantity += modelt.quantity;
+                //model.payable_amount += modelt.sell_price * modelt.quantity;
+                //model.real_amount += modelt.user_price * modelt.quantity;
+                //model.total_point += modelt.point * modelt.quantity;
+                dt = GetGroupedBy(dt, "seller_id,total_quantity,real_amount,total_point", "seller_id", "Sum"); 
+            }
+            return dt;
+        }
+        private static DataTable GetGroupedBy(DataTable dt, string columnNamesInDt, string groupByColumnNames, string typeOfCalculation)
+        {
+            //Return its own if the column names are empty            
+            if (columnNamesInDt == string.Empty || groupByColumnNames == string.Empty)           
+            {               
+                return dt;          
+            }           
+            //Once the columns are added find the distinct rows and group it bu the numbet           
+            DataTable _dt = dt.DefaultView.ToTable(true, groupByColumnNames);          
+            //The column names in data table            
+            string[] _columnNamesInDt = columnNamesInDt.Split(',');           
+            for (int i = 0; i < _columnNamesInDt.Length; i = i + 1)           
+            {               
+                if (_columnNamesInDt[i] != groupByColumnNames)          
+                {                  
+                    _dt.Columns.Add(_columnNamesInDt[i]);              
+                }        
+            }            
+            //Gets the collection and send it back           
+            for (int i = 0; i < _dt.Rows.Count; i = i + 1)         
+            {              
+                for (int j = 0; j < _columnNamesInDt.Length; j = j + 1)         
+                {                  
+                    if (_columnNamesInDt[j] != groupByColumnNames)     
+                    {                       
+                        _dt.Rows[i][j] = dt.Compute(typeOfCalculation + "(" + _columnNamesInDt[j] + ")", groupByColumnNames + " = '" + _dt.Rows[i][groupByColumnNames].ToString() + "'");           
+                    }             
+                }       
+            }          
+            return _dt;
+        }
         /// <summary>
         /// 只统计购物车数量
         /// </summary>
