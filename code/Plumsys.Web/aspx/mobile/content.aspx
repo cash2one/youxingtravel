@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-08 2:42:08.
-		本页面代码由Plumsys模板引擎生成于 2016-06-08 2:42:08. 
+		This page was created by Plumsys Template Engine at 2016-06-08 3:08:55.
+		本页面代码由Plumsys模板引擎生成于 2016-06-08 3:08:55. 
 	*/
 
 	base.OnInit(e);
@@ -34,9 +34,6 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
 	templateBuilder.Append("/templates/ux_default");
 	templateBuilder.Append("/js/common.js\"></");
-	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
-	templateBuilder.Append("/templates/ux_default");
-	templateBuilder.Append("/js/about_us.js\"></");
 	templateBuilder.Append("script>\r\n</head>\r\n<body>\r\n    <div class=\"wrap\">\r\n        <!--nav begin-->\r\n        ");
 
 	templateBuilder.Append("        <!--nav begin-->\r\n<div class=\"Navi\">\r\n    <div class=\"HeadMainPage\">\r\n        <div class=\"LogoNormal\">\r\n            <a title=\"");
@@ -87,7 +84,7 @@ override protected void OnInit(EventArgs e)
 
 
 	templateBuilder.Append("\r\n        <!--nav end-->\r\n        <!--content begin-->\r\n         <div class=\"content us\">\r\n            <div class=\"lft\">\r\n                <ul>\r\n                    <!--类别-->\r\n                    ");
-	DataTable categoryList = get_category_child_list("tourist_mall",0);
+	DataTable categoryList = get_category_child_list("content",0);
 
 	int cdr__loop__id=0;
 	foreach(DataRow cdr in categoryList.Rows)
@@ -101,7 +98,7 @@ override protected void OnInit(EventArgs e)
 	{
 
 	templateBuilder.Append("\r\n                    <li>\r\n                        <a href=\"");
-	templateBuilder.Append(linkurl("content",Utils.ObjectToStr(dr["id"])));
+	templateBuilder.Append(linkurl("content",Utils.ObjectToStr(dr["call_index"])));
 
 	templateBuilder.Append("\" target=\"_self\">\r\n                            " + Utils.ObjectToStr(dr["title"]) + "\r\n                        </a>\r\n                    </li>\r\n                    ");
 	}	//end for if

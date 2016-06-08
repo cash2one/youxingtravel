@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-08 2:51:51.
-		本页面代码由Plumsys模板引擎生成于 2016-06-08 2:51:51. 
+		This page was created by Plumsys Template Engine at 2016-06-08 9:42:51.
+		本页面代码由Plumsys模板引擎生成于 2016-06-08 9:42:51. 
 	*/
 
 	base.OnInit(e);
@@ -34,20 +34,17 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
 	templateBuilder.Append("/templates/ux_default");
 	templateBuilder.Append("/js/common.js\"></");
-	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
-	templateBuilder.Append("/templates/ux_default");
-	templateBuilder.Append("/js/about_us.js\"></");
 	templateBuilder.Append("script>\r\n</head>\r\n<body>\r\n    <div class=\"wrap\">\r\n        <!--nav begin-->\r\n        ");
 
-	templateBuilder.Append("        <!--nav begin-->\r\n<div class=\"Navi\">\r\n    <div class=\"HeadMainPage\">\r\n        <div class=\"LogoNormal\">\r\n            <a title=\"");
+	templateBuilder.Append("        <!--nav begin-->\r\n<div class=\"HeadNormal\">\r\n    <div class=\"Navi\">\r\n        <div class=\"HeadMainPage\">\r\n            <div class=\"LogoNormal\">\r\n                <a title=\"");
 	templateBuilder.Append(Utils.ObjectToStr(site.name));
 	templateBuilder.Append("\" href=\"");
 	templateBuilder.Append(Utils.ObjectToStr(site.domain));
-	templateBuilder.Append("\">\r\n                <img alt=\"");
+	templateBuilder.Append("\">\r\n                    <img alt=\"");
 	templateBuilder.Append(Utils.ObjectToStr(site.name));
-	templateBuilder.Append("\"\r\n                     src=\"");
+	templateBuilder.Append("\"\r\n                         src=\"");
 	templateBuilder.Append("/templates/ux_default");
-	templateBuilder.Append("/images/logonormal_v3.png\" />\r\n            </a>\r\n        </div>\r\n        <div class=\"Head_LeftNavi\">\r\n            <div class=\"nav\">\r\n                <div class=\"c-wrapper\">\r\n                    <div></div>\r\n                    <div class=\"navitems floatL\">\r\n                        <ul class=\"header_themlist\">\r\n                            <!--类别-->\r\n                            ");
+	templateBuilder.Append("/images/logonormal_v3.png\" />\r\n                </a>\r\n            </div>\r\n            <div class=\"Head_LeftNavi\">\r\n                <div class=\"nav\">\r\n                    <div class=\"c-wrapper\">\r\n                        <div></div>\r\n                        <div class=\"navitems floatL\">\r\n                            <ul class=\"header_themlist\">\r\n                                <!--类别-->\r\n                                ");
 	DataTable GoodsCList = get_category_child_list("tourist_mall",0);
 
 	int ncdr__loop__id=0;
@@ -56,34 +53,34 @@ override protected void OnInit(EventArgs e)
 		ncdr__loop__id++;
 
 
-	templateBuilder.Append("\r\n                            <li>\r\n                                <a class=\"title\" href=\"");
+	templateBuilder.Append("\r\n                                <li>\r\n                                    <a class=\"title\" href=\"");
 	templateBuilder.Append(linkurl("tourist_mall_list",Utils.ObjectToStr(ncdr["id"])));
 
-	templateBuilder.Append("\" target=\"_self\">\r\n                                    " + Utils.ObjectToStr(ncdr["title"]) + "\r\n                                    <div class=\"navitag\" style=\"display: none;\"></div>\r\n                                </a>\r\n                            </li>\r\n                            ");
+	templateBuilder.Append("\r\n                                        \" target=\"_self\">\r\n                                        " + Utils.ObjectToStr(ncdr["title"]) + "\r\n                                        <div class=\"navitag\" style=\"display: none;\"></div>\r\n                                    </a>\r\n                                </li>\r\n                                ");
 	}	//end for if
 
-	templateBuilder.Append("\r\n                            <!--/类别-->\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"clear\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"search_box\">\r\n            <div id=\"header_search_box\">\r\n                <div class=\"s-lft\">\r\n                    <input id=\"keywords\" name=\"keywords\" type=\"text\" onkeydown=\"if(event.keyCode==13){SiteSearch('");
+	templateBuilder.Append("\r\n                                <!--/类别-->\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"clear\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"search_box\">\r\n                <div id=\"header_search_box\">\r\n                    <div class=\"s-lft\">\r\n                        <input id=\"keywords\" name=\"keywords\" type=\"text\" onkeydown=\"if(event.keyCode==13){SiteSearch('");
 	templateBuilder.Append(linkurl("search"));
 
-	templateBuilder.Append("', '#keywords');return false};\" placeholder=\"输入回车搜索\" x-webkit-speech=\"\"/>\r\n                </div>\r\n                <div class=\"s-rgt\">\r\n                    <input class=\"btn\" type=\"submit\" onclick=\"SiteSearch('");
+	templateBuilder.Append("', '#keywords');return false};\" placeholder=\"输入回车搜索\" x-webkit-speech=\"\"/>\r\n                    </div>\r\n                    <div class=\"s-rgt\">\r\n                        <input class=\"btn\" type=\"submit\" onclick=\"SiteSearch('");
 	templateBuilder.Append(linkurl("search"));
 
-	templateBuilder.Append("', '#keywords');\" value=\" \" />\r\n                </div>\r\n                <div class=\"clear\"></div>\r\n            </div>\r\n        </div>\r\n        <script type=\"text/javascript\">\r\n            $.ajax({\r\n                type: \"POST\",\r\n                url: \"");
+	templateBuilder.Append("', '#keywords');\" value=\" \" />\r\n                    </div>\r\n                    <div class=\"clear\"></div>\r\n                </div>\r\n            </div>\r\n            <script type=\"text/javascript\">\r\n                $.ajax({\r\n                    type: \"POST\",\r\n                    url: \"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
-	templateBuilder.Append("tools/submit_ajax.ashx?action=user_check_login\",\r\n                dataType: \"json\",\r\n                timeout: 20000,\r\n                success: function (data, textStatus) {\r\n                    if (data.status == 1) {\r\n                        $(\"#menu\").prepend('<span id=\"au_login\">');\r\n                        $(\"#menu\").prepend('<li class=\"line\"><a href=\"");
+	templateBuilder.Append("tools/submit_ajax.ashx?action=user_check_login\",\r\n                    dataType: \"json\",\r\n                    timeout: 20000,\r\n                    success: function (data, textStatus) {\r\n                        if (data.status == 1) {\r\n                            $(\"#menu\").prepend('<span id=\"au_login\">');\r\n                            $(\"#menu\").prepend('<li class=\"line\"><a href=\"");
 	templateBuilder.Append(linkurl("usercenter","exit"));
 
-	templateBuilder.Append("\">退出</a></li>');\r\n                        $(\"#menu\").prepend('<li class=\"login\"><em></em><a href=\"");
+	templateBuilder.Append("\">退出</a></li>');\r\n                            $(\"#menu\").prepend('<li class=\"login\"><em></em><a href=\"");
 	templateBuilder.Append(linkurl("usercenter","index"));
 
-	templateBuilder.Append("\">我的优行</a></li>');\r\n                        $(\"#menu\").prepend('</span>');\r\n                    } else {\r\n                        $(\"#menu\").prepend('<span id=\"un_login\">');\r\n                        $(\"#menu\").prepend('<li class=\"line\"><a href=\"");
+	templateBuilder.Append("\">我的优行</a></li>');\r\n                            $(\"#menu\").prepend('</span>');\r\n                        } else {\r\n                            $(\"#menu\").prepend('<span id=\"un_login\">');\r\n                            $(\"#menu\").prepend('<li class=\"line\"><a href=\"");
 	templateBuilder.Append(linkurl("register"));
 
-	templateBuilder.Append("\">注册</a></li>');\r\n                        $(\"#menu\").prepend('<li class=\"login\"><em></em><a href=\"");
+	templateBuilder.Append("\">注册</a></li>');\r\n                            $(\"#menu\").prepend('<li class=\"login\"><em></em><a href=\"");
 	templateBuilder.Append(linkurl("login"));
 
-	templateBuilder.Append("\">登录</a></li>');\r\n                        $(\"#menu\").prepend('</span>');\r\n                    }\r\n                }\r\n            });\r\n        </");
-	templateBuilder.Append("script>\r\n        <div id=\"menu\" class=\"RightNavi\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--nav end-->\r\n\r\n       ");
+	templateBuilder.Append("\">登录</a></li>');\r\n                            $(\"#menu\").prepend('</span>');\r\n                        }\r\n                    }\r\n                });\r\n            </");
+	templateBuilder.Append("script>\r\n            <div id=\"menu\" class=\"RightNavi\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--nav end-->\r\n");
 
 
 	templateBuilder.Append("\r\n        <!--nav end-->\r\n        <!--content begin-->\r\n         <div class=\"content us\">\r\n            <div class=\"lft\">\r\n                <ul>\r\n                    <!--类别-->\r\n                    ");
