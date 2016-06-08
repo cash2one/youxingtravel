@@ -162,7 +162,7 @@ ul {
 
 body {
     color: rgb(60, 60, 60);
-    line-height: 180%;
+    /*line-height: 180%;*/
     font-family: arial,Verdana,Geneva,Helvetica,"Microsoft YaHei",Simsun;
     font-size: 12px;
 }
