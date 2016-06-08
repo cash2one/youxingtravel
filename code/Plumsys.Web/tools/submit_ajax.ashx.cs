@@ -2031,84 +2031,200 @@ namespace Plumsys.Web.tools
                 context.Response.Write("{\"status\":0, \"msg\":\"对不起，商品为空，无法结算！\"}");
                 return;
             }
-            //保存订单=======================================
-            Model.orders model = new Model.orders();
-            model.order_no = "B" + Utils.GetOrderNumber(); //订单号B开头为商品订单
-            model.user_id = user_id;
-            model.user_name = user_name;
-            model.payment_id = payment_id;
-            model.express_id = express_id;
-            model.accept_name = accept_name;
-            model.area = province + "," + city + "," + area; //省市区以逗号相隔
-            model.address = address;
-            model.telphone = telphone;
-            model.mobile = mobile;
-            model.message = message;
-            model.email = email;
-            model.post_code = post_code;
-            model.is_invoice = is_invoice;
-            model.payable_amount = goodsTotal.payable_amount;
-            model.real_amount = goodsTotal.real_amount;
-            model.express_status = 1;
-            model.express_fee = expModel.express_fee; //物流费用
-            //是否先款后货
-            if (payModel.type == 1)
+            #region
+            //保存订单by赵成龙20160607  开始
+            //获取商品类表的供应商个数
+            DataTable  gysmanageerTotal = ShopCart.GetTotalgys(goodsList); ; //供应商统计
+            if (gysmanageerTotal.Rows.Count!=0)
             {
-                model.payment_status = 1; //标记未付款
-                if (payModel.poundage_type == 1 && payModel.poundage_amount > 0) //百分比
+                //说明有供应商分类
+                for (int i = 0; i < gysmanageerTotal.Rows.Count; i++)
                 {
-                    model.payment_fee = model.real_amount * payModel.poundage_amount / 100;
+                    Model.orders model = new Model.orders();
+                    model.order_no = "B" + Utils.GetOrderNumber(); //订单号B开头为商品订单
+                    model.user_id = user_id;
+                    model.user_name = user_name;
+                    model.payment_id = payment_id;
+                    model.express_id = express_id;
+                    model.accept_name = accept_name;
+                    model.area = province + "," + city + "," + area; //省市区以逗号相隔
+                    model.address = address;
+                    model.telphone = telphone;
+                    model.mobile = mobile;
+                    model.seller_id = Convert.ToInt32(gysmanageerTotal.Rows[i]["seller_id"].ToString());//供应商id
+                    model.message = message;
+                    model.email = email;
+                    model.post_code = post_code;
+                    model.is_invoice = is_invoice;
+                    //model.payable_amount = goodsTotal.payable_amount;
+                    model.payable_amount = Convert.ToInt32(gysmanageerTotal.Rows[i]["payable_amount"].ToString());
+                    //model.real_amount = goodsTotal.real_amount;
+                    model.payable_amount = Convert.ToInt32(gysmanageerTotal.Rows[i]["real_amount"].ToString());
+                    model.express_status = 1;
+                    model.express_fee = expModel.express_fee; //物流费用
+                    //是否先款后货
+                    if (payModel.type == 1)
+                    {
+                        model.payment_status = 1; //标记未付款
+                        if (payModel.poundage_type == 1 && payModel.poundage_amount > 0) //百分比
+                        {
+                            model.payment_fee = model.real_amount * payModel.poundage_amount / 100;
+                        }
+                        else //固定金额
+                        {
+                            model.payment_fee = payModel.poundage_amount;
+                        }
+                    }
+                    //是否开具发票
+                    if (model.is_invoice == 1)
+                    {
+                        model.invoice_title = invoice_title;
+                        if (orderConfig.taxtype == 1 && orderConfig.taxamount > 0) //百分比
+                        {
+                            model.invoice_taxes = model.real_amount * orderConfig.taxamount / 100;
+                        }
+                        else //固定金额
+                        {
+                            model.invoice_taxes = orderConfig.taxamount;
+                        }
+                    }
+                    //订单总金额=实付商品金额+运费+支付手续费+税金
+                    model.order_amount = model.real_amount + model.express_fee + model.payment_fee + model.invoice_taxes;
+                    //购物积分,可为负数
+                    //model.point = goodsTotal.total_point;
+                    model.point =Convert.ToInt32(gysmanageerTotal.Rows[i]["total_point"].ToString());
+                    model.add_time = DateTime.Now;
+                    //商品详细列表
+                    List<Model.order_goods> gls = new List<Model.order_goods>();
+                    foreach (Model.cart_items item in goodsList)
+                    {
+                        //需要过滤供应商 add by 赵成龙20160608
+                        if (item.seller_id==Convert.ToInt32(gysmanageerTotal.Rows[i]["seller_id"].ToString()))
+                        {
+                            gls.Add(new Model.order_goods
+                            {
+                                article_id = item.article_id,
+                                goods_id = item.goods_id,
+                                goods_no = item.goods_no,
+                                goods_title = item.title,
+                                img_url = item.img_url,
+                                spec_text = item.spec_text,
+                                goods_price = item.sell_price,
+                                real_price = item.user_price,
+                                quantity = item.quantity,
+                                point = item.point
+                            });
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                       
+                    }
+                    model.order_goods = gls;
+                    int result = new BLL.orders().Add(model);
+                    if (result < 1)
+                    {
+                        context.Response.Write("{\"status\":0, \"msg\":\"订单保存发生错误，请联系管理员！\"}");
+                        return;
+                    }
+                    //扣除积分
+                    if (model.point < 0)
+                    {
+                        new BLL.user_point_log().Add(model.user_id, model.user_name, model.point, "积分换购，订单号：" + model.order_no, false);
+                    }
+                    //删除购物车对应的商品
+                    Web.UI.ShopCart.Clear(iList);
+                    //清空结账清单
+                    Utils.WriteCookie(PLKeys.COOKIE_SHOPPING_BUY, "");
                 }
-                else //固定金额
-                {
-                    model.payment_fee = payModel.poundage_amount;
-                }
             }
-            //是否开具发票
-            if (model.is_invoice == 1)
-            {
-                model.invoice_title = invoice_title;
-                if (orderConfig.taxtype == 1 && orderConfig.taxamount > 0) //百分比
-                {
-                    model.invoice_taxes = model.real_amount * orderConfig.taxamount / 100;
-                }
-                else //固定金额
-                {
-                    model.invoice_taxes = orderConfig.taxamount;
-                }
-            }
-            //订单总金额=实付商品金额+运费+支付手续费+税金
-            model.order_amount = model.real_amount + model.express_fee + model.payment_fee + model.invoice_taxes;
-            //购物积分,可为负数
-            model.point = goodsTotal.total_point;
-            model.add_time = DateTime.Now;
-            //商品详细列表
-            List<Model.order_goods> gls = new List<Model.order_goods>();
-            foreach (Model.cart_items item in goodsList)
-            {
-                gls.Add(new Model.order_goods { article_id = item.article_id, goods_id = item.goods_id, goods_no = item.goods_no, goods_title = item.title, 
-                    img_url = item.img_url, spec_text = item.spec_text, goods_price = item.sell_price, real_price = item.user_price, quantity = item.quantity, point = item.point });
-            }
-            model.order_goods = gls;
-            int result = new BLL.orders().Add(model);
-            if (result < 1)
-            {
-                context.Response.Write("{\"status\":0, \"msg\":\"订单保存发生错误，请联系管理员！\"}");
-                return;
-            }
-            //扣除积分
-            if (model.point < 0)
-            {
-                new BLL.user_point_log().Add(model.user_id, model.user_name, model.point, "积分换购，订单号：" + model.order_no, false);
-            }
-            //删除购物车对应的商品
-            Web.UI.ShopCart.Clear(iList);
-            //清空结账清单
-            Utils.WriteCookie(PLKeys.COOKIE_SHOPPING_BUY, "");
+          
             //提交成功，返回URL
             context.Response.Write("{\"status\":1, \"url\":\""
-                + new Web.UI.BasePage().getlink(sitepath, new Web.UI.BasePage().linkurl("payment", "?action=confirm&order_no=" + model.order_no)) + "\", \"msg\":\"恭喜您，订单已成功提交！\"}");
+                + new Web.UI.BasePage().getlink(sitepath, new Web.UI.BasePage().linkurl("payment", "?action=confirm")) + "\", \"msg\":\"恭喜您，订单已成功提交！\"}");
             return;
+            //保存订单by赵成龙20160607  结束
+            #endregion
+            //保存订单=======================================
+            //Model.orders model = new Model.orders();
+            //model.order_no = "B" + Utils.GetOrderNumber(); //订单号B开头为商品订单
+            //model.user_id = user_id;
+            //model.user_name = user_name;
+            //model.payment_id = payment_id;
+            //model.express_id = express_id;
+            //model.accept_name = accept_name;
+            //model.area = province + "," + city + "," + area; //省市区以逗号相隔
+            //model.address = address;
+            //model.telphone = telphone;
+            //model.mobile = mobile;
+           
+            //model.message = message;
+            //model.email = email;
+            //model.post_code = post_code;
+            //model.is_invoice = is_invoice;
+            //model.payable_amount = goodsTotal.payable_amount;
+            //model.real_amount = goodsTotal.real_amount;
+            //model.express_status = 1;
+            //model.express_fee = expModel.express_fee; //物流费用
+            ////是否先款后货
+            //if (payModel.type == 1)
+            //{
+            //    model.payment_status = 1; //标记未付款
+            //    if (payModel.poundage_type == 1 && payModel.poundage_amount > 0) //百分比
+            //    {
+            //        model.payment_fee = model.real_amount * payModel.poundage_amount / 100;
+            //    }
+            //    else //固定金额
+            //    {
+            //        model.payment_fee = payModel.poundage_amount;
+            //    }
+            //}
+            ////是否开具发票
+            //if (model.is_invoice == 1)
+            //{
+            //    model.invoice_title = invoice_title;
+            //    if (orderConfig.taxtype == 1 && orderConfig.taxamount > 0) //百分比
+            //    {
+            //        model.invoice_taxes = model.real_amount * orderConfig.taxamount / 100;
+            //    }
+            //    else //固定金额
+            //    {
+            //        model.invoice_taxes = orderConfig.taxamount;
+            //    }
+            //}
+            ////订单总金额=实付商品金额+运费+支付手续费+税金
+            //model.order_amount = model.real_amount + model.express_fee + model.payment_fee + model.invoice_taxes;
+            ////购物积分,可为负数
+            //model.point = goodsTotal.total_point;
+            //model.add_time = DateTime.Now;
+            ////商品详细列表
+            //List<Model.order_goods> gls = new List<Model.order_goods>();
+            //foreach (Model.cart_items item in goodsList)
+            //{
+            //    gls.Add(new Model.order_goods { article_id = item.article_id, goods_id = item.goods_id, goods_no = item.goods_no, goods_title = item.title, 
+            //        img_url = item.img_url, spec_text = item.spec_text, goods_price = item.sell_price, real_price = item.user_price, quantity = item.quantity, point = item.point });
+            //}
+            //model.order_goods = gls;
+            //int result = new BLL.orders().Add(model);
+            //if (result < 1)
+            //{
+            //    context.Response.Write("{\"status\":0, \"msg\":\"订单保存发生错误，请联系管理员！\"}");
+            //    return;
+            //}
+            ////扣除积分
+            //if (model.point < 0)
+            //{
+            //    new BLL.user_point_log().Add(model.user_id, model.user_name, model.point, "积分换购，订单号：" + model.order_no, false);
+            //}
+            ////删除购物车对应的商品
+            //Web.UI.ShopCart.Clear(iList);
+            ////清空结账清单
+            //Utils.WriteCookie(PLKeys.COOKIE_SHOPPING_BUY, "");
+            ////提交成功，返回URL
+            //context.Response.Write("{\"status\":1, \"url\":\""
+            //    + new Web.UI.BasePage().getlink(sitepath, new Web.UI.BasePage().linkurl("payment", "?action=confirm&order_no=" + model.order_no)) + "\", \"msg\":\"恭喜您，订单已成功提交！\"}");
+            //return;
         }
         #endregion
 
