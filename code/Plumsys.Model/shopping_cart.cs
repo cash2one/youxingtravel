@@ -57,6 +57,8 @@ namespace Plumsys.Model
         private string _title = string.Empty;
         private string _spec_text = string.Empty;
         private string _img_url = string.Empty;
+        private int _seller_id ;
+        private string _seller_name = string.Empty; 
         private decimal _sell_price = 0M;
         private decimal _user_price = 0M;
         private int _point = 0;
@@ -102,6 +104,22 @@ namespace Plumsys.Model
         {
             set { _spec_text = value; }
             get { return _spec_text; }
+        }
+        /// <summary>
+        /// 供应商id add by 赵成龙20160607
+        /// </summary>
+        public int seller_id
+        {
+            set { _seller_id = value; }
+            get { return _seller_id; }
+        }
+        /// <summary>
+        /// 供应商名称 add by 赵成龙20160607
+        /// </summary>
+        public string seller_name
+        {
+            set { _seller_name = value; }
+            get { return _seller_name; }
         }
         /// <summary>
         /// 图片路径
@@ -164,6 +182,7 @@ namespace Plumsys.Model
         { }
         #region Model
         private int _total_num = 0;
+        private int _total_gysnum = 0;
         private int _total_quantity = 0;
         private decimal _payable_amount = 0M;
         private decimal _real_amount = 0M;
@@ -176,6 +195,15 @@ namespace Plumsys.Model
         {
             set { _total_num = value; }
             get { return _total_num; }
+        }
+
+        /// <summary>
+        /// 供应商种数by赵成龙20160607
+        /// </summary>
+        public int total_gysnum
+        {
+            set { _total_gysnum = value; }
+            get { return _total_gysnum; }
         }
         /// <summary>
         /// 商品总数量
