@@ -35,7 +35,8 @@
             <div class="search_box">
                 <div id="header_search_box">
                     <div class="s-lft">
-                        <input id="keywords" name="keywords" type="text" onkeydown="if(event.keyCode==13){SiteSearch('<%linkurl("search")%>', '#keywords');return false};" placeholder="输入回车搜索" x-webkit-speech=""/>
+                        <input id="defaultSearch" type="hidden" />
+                        <input id="keywords" name="keywords" class="typeahead city" type="text" onkeydown="if(event.keyCode==13){SiteSearch('<%linkurl("search")%>', '#keywords');return false};" placeholder="输入回车搜索" x-webkit-speech=""/>
                     </div>
                     <div class="s-rgt">
                         <input class="btn" type="submit" onclick="SiteSearch('<%linkurl("search")%>', '#keywords');" value=" " />
@@ -51,15 +52,15 @@
                     timeout: 20000,
                     success: function (data, textStatus) {
                         if (data.status == 1) {
-                            $("#menu").prepend('<span id="au_login">');
-                            $("#menu").prepend('<li class="line"><a href="<%linkurl("usercenter","exit")%>">退出</a></li>');
-                            $("#menu").prepend('<li class="login"><em></em><a href="<%linkurl("usercenter","index")%>">我的优行</a></li>');
-                            $("#menu").prepend('</span>');
+                            $("#menu").append('<span id="au_login">');
+                            $("#menu").append('<a class="user" href="<%linkurl("usercenter","index")%>">我的优行</a>&nbsp;&nbsp;|&nbsp;&nbsp;');
+                            $("#menu").append('<a id="uloginout" href="<%linkurl("usercenter","exit")%>">退出</a>');
+                            $("#menu").append('</span>');
                         } else {
-                            $("#menu").prepend('<span id="un_login">');
-                            $("#menu").prepend('<li class="line"><a href="<%linkurl("register")%>">注册</a></li>');
-                            $("#menu").prepend('<li class="login"><em></em><a href="<%linkurl("login")%>">登录</a></li>');
-                            $("#menu").prepend('</span>');
+                            $("#menu").append('<span id="un_login">');
+                            $("#menu").append('<a class="singin" href="<%linkurl("login")%>">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;');
+                            $("#menu").append('<a class="singup" href="<%linkurl("register")%>">注册</a>');
+                            $("#menu").append('</span>');
                         }
                     }
                 });

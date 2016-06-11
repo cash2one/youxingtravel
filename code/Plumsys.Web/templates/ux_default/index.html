@@ -48,8 +48,25 @@
                         </div>
                     </div>
                     <div class="RightNavi">
+                        <script type="text/javascript">
+                            $.ajax({
+                                type: "POST",
+                                url: "{config.webpath}tools/submit_ajax.ashx?action=user_check_login",
+                                dataType: "json",
+                                timeout: 20000,
+                                success: function (data, textStatus) {
+                                    if (data.status == 1) {
+                                        $("#un_login").append('<a class="singin" href="<%linkurl("usercenter","index")%>">我的优行</a>&nbsp;&nbsp;|&nbsp;&nbsp;');
+                                        $("#un_login").append('<a class="singup" href="<%linkurl("usercenter","exit")%>">退出</a>');
+                                    } else {
+                                        $("#un_login").append('<a class="singin" href="<%linkurl("login")%>" target="_self">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;');
+                                        $("#un_login").append('<a class="singup" href="<%linkurl("register")%>" target="_self">注册</a>');
+                                    }
+                                }
+                            });
+                        </script>
                         <span id="un_login">
-                            <a class="singin" href="#" target="_self">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="singup" href="#" target="_self">注册</a>
+                           
                         </span>
                     </div>
                 </div>
