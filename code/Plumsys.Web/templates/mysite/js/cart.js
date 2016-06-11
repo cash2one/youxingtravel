@@ -21,65 +21,6 @@ function addCartNum(num){
 	}
 	numObj.val(selectNum);
 }
-//初始化商品规格事件
-function initGoodsSpec(sendUrl){
-	//检查是否有规格
-	if($("#goodsSpecBox dl").length == 0){
-		$("#buyButton button").prop("disabled",false).removeClass("over");
-	}
-	//遍历规格属性
-	$("#goodsSpecBox dl dd ul li a").each(function(){
-		$(this).click(function(){
-			if(!$(this).hasClass("selected")){
-				//标签选中状态
-				$(this).parent().siblings("li").children("a").removeClass("selected");
-				$(this).addClass("selected");
-				//获取商品价格
-				if($("#goodsSpecBox dl dd ul li a.selected").length == $("#goodsSpecBox dl").length){
-					var specIds = '';
-					$("#goodsSpecBox dl dd ul li a.selected").each(function(i) {
-						if(i == 0){
-							specIds = ",";
-						}
-                        specIds += $(this).attr("specid") + ',';
-                    });
-					//发送异步请求
-					$.ajax({
-						type: "POST",
-						url: sendUrl,
-						dataType: "json",
-						data: {
-							"article_id": $("#commodityArticleId").val(),
-							"ids": specIds
-						},
-						timeout: 20000,
-						success: function(data, textStatus) {
-							if (data.status == 1){
-								$("#commodityGoodsId").val(data.goods_id);
-								$("#commodityGoodsNo").text(data.goods_no);
-								$("#commodityMarketPrice").text('¥' + data.market_price);
-								$("#commoditySellPrice").text('¥' + data.sell_price);
-								$("#commodityStockNum").text(data.stock_quantity);
-								$("#commoditySelectNum").attr("maxValue",data.stock_quantity);
-								//检查是否足够库存
-								if(parseInt(data.stock_quantity) > 0){
-									$("#buyButton button").prop("disabled",false).removeClass("over");
-								}else{
-									$("#buyButton button").prop("disabled",false).removeClass("over");
-								}
-							} else {
-								alert(data.msg);
-							}
-						},
-						error: function (XMLHttpRequest, textStatus, errorThrown) {
-							alert("查询出错：" + textStatus + ",提示：" + errorThrown);
-						}
-					});
-				}
-			}
-		});
-	});
-}
 
 //删除元素
 function hintRemove(obj){
@@ -89,7 +30,6 @@ function hintRemove(obj){
 //添加进购物车
 function cartAdd(obj, webpath, linktype, linkurl){
 	var articleId = parseInt($("#commodityArticleId").val());
-	var goodsId = parseInt($("#commodityGoodsId").val());
 	var selectNum = parseInt($("#commoditySelectNum").val());
 	if($(obj).prop("disabled") == true){
 		return false;
@@ -97,11 +37,6 @@ function cartAdd(obj, webpath, linktype, linkurl){
 	//检查文章ID
 	if(isNaN(articleId)){
 		alert("商品参数不正确！");
-		return false;
-	}
-	//检查商品是否有规格
-	if(goodsId == 0 && $("#goodsSpecBox dl").length > 0){
-		alert("请先选择商品规格！");
 		return false;
 	}
 	//检查购买数量
@@ -118,7 +53,7 @@ function cartAdd(obj, webpath, linktype, linkurl){
 	var buttonText = $(obj).text();
 	//如果是立即购买
 	if(linktype == 1){
-		var jsondata = '[{"article_id":'+articleId+', "goods_id":'+goodsId+', "quantity":'+selectNum+'}]'; //结合商品参数
+		var jsondata = '[{"article_id":'+articleId+', "quantity":'+selectNum+'}]'; //结合商品参数
 		$.ajax({
 			type: "post",
 			url: webpath + "tools/submit_ajax.ashx?action=cart_goods_buy",
@@ -150,7 +85,6 @@ function cartAdd(obj, webpath, linktype, linkurl){
 			url: webpath + "tools/submit_ajax.ashx?action=cart_goods_add",
 			data: {
 				"article_id" : articleId,
-				"goods_id" : goodsId,
 				"quantity" : selectNum
 			},
 			dataType: "json",
@@ -204,7 +138,6 @@ function updateCart(obj, webpath, num){
 	var goodsQuantity; //购买数量
 	var stockQuantity = parseInt($(obj).parents("tr").find("input[name='hideStockQuantity']").val()); //库存数量
 	var articleId = $(obj).parents("tr").find("input[name='hideArticleId']").val(); //文章ID
-	var goodsId = $(obj).parents("tr").find("input[name='hideGoodsId']").val(); //商品ID
 	var goodsPrice = $(obj).parents("tr").find("input[name='hideGoodsPrice']").val(); //商品单价
 	var goodsPoint = $(obj).parents("tr").find("input[name='hidePoint']").val(); //商品积分
 	if(arguments.length == 2){
@@ -234,7 +167,6 @@ function updateCart(obj, webpath, num){
 		url: webpath + "tools/submit_ajax.ashx?action=cart_goods_update",
 		data: {
 			"article_id" : articleId,
-			"goods_id" : goodsId,
 			"quantity" : goodsQuantity
 		},
 		dataType: "json",
@@ -277,8 +209,7 @@ function deleteCart(webpath, obj){
 		datastr = {"clear": 1}
 	}else{
 		var articleId = $(obj).parents("tr").find("input[name='hideArticleId']").val();
-		var goodsId = $(obj).parents("tr").find("input[name='hideGoodsId']").val();
-		datastr = {"article_id": articleId, "goods_id": goodsId}
+		datastr = {"article_id": articleId}
 	}
 	$.ajax({
 		type: "post",
@@ -329,11 +260,10 @@ function cartAmountTotal(){
 	var totalAmount = 0; //商品总计
 	$(".checkall:checked").each(function(i) {
 		var articleId = $(this).parents("tr").find("input[name='hideArticleId']").val(); //文章ID
-		var goodsId = $(this).parents("tr").find("input[name='hideGoodsId']").val(); //商品ID
         var goodsPrice = $(this).parents("tr").find("input[name='hideGoodsPrice']").val(); //商品单价
 		var goodsQuantity = $(this).parents("tr").find("input[name='goodsQuantity']").val(); //购买数量
 		totalAmount += parseFloat(goodsPrice) * parseFloat(goodsQuantity);
-		jsondata += '{"article_id":"'+articleId+'", "goods_id":"'+goodsId+'", "quantity":"'+goodsQuantity+'"}';
+		jsondata += '{"article_id":"'+articleId+'", "quantity":"'+goodsQuantity+'"}';
 		if(i < $(".checkall:checked").length-1){
 			jsondata += ',';
 		}
@@ -386,47 +316,6 @@ function formSubmit(obj, webpath, linkurl){
 function initUserAddress(obj){
 	//初始化省市区
 	var mypcas = new PCAS("province,所属省份","city,所属城市","area,所属地区");
-	//初始化地址
-	$(obj).children("li").each(function() {
-		//初始化值
-		if($(this).hasClass("selected")){
-			$("#book_id").val($(this).find("input[name='user_book_id']").val());
-			$("#accept_name").val($(this).find("input[name='user_accept_name']").val());
-			$("#address").val($(this).find("input[name='user_address']").val());
-			$("#mobile").val($(this).find("input[name='user_mobile']").val());
-			$("#telphone").val($(this).find("input[name='user_telphone']").val());
-			$("#email").val($(this).find("input[name='user_email']").val());
-			$("#post_code").val($(this).find("input[name='user_post_code']").val());
-			$(this).find("input[name='user_book_id']").prop("checked", true); //设置选中
-			//改变省市区
-			var areaArr = $(this).find("input[name='user_area']").val().split(",");
-			if (areaArr.length == 3) {
-				mypcas.SetValue(areaArr[0], areaArr[1], areaArr[2]);
-			} else {
-				mypcas.SetValue();
-			}
-		}
-		//初始化事件
-        $(this).click(function(){
-			$(this).siblings("li").removeClass("selected");
-			$(this).addClass("selected");
-			$("#book_id").val($(this).find("input[name='user_book_id']").val());
-			$("#accept_name").val($(this).find("input[name='user_accept_name']").val());
-			$("#address").val($(this).find("input[name='user_address']").val());
-			$("#mobile").val($(this).find("input[name='user_mobile']").val());
-			$("#telphone").val($(this).find("input[name='user_telphone']").val());
-			$("#email").val($(this).find("input[name='user_email']").val());
-			$("#post_code").val($(this).find("input[name='user_post_code']").val());
-			$(this).find("input[name='user_book_id']").prop("checked", true); //设置选中
-			//改变省市区
-			var areaArr = $(this).find("input[name='user_area']").val().split(",");
-			if (areaArr.length == 3) {
-				mypcas.SetValue(areaArr[0], areaArr[1], areaArr[2]);
-			} else {
-				mypcas.SetValue();
-			}
-		});
-    });
 }
 
 //计算支付手续费总金额

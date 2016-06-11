@@ -2,12 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <title>会员登录 - {site.name}</title>
 <meta name="keywords" content="{site.seo_keyword}" />
 <meta name="description" content="{site.seo_description}" />
 <link href="{config.webpath}scripts/artdialog/ui-dialog.css" rel="stylesheet" type="text/css" />
-<link href="<%templateskin%>/css/infoDetail.css" rel="stylesheet" type="text/css" />
 <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/artdialog/dialog-plus-min.js"></script>
@@ -17,7 +15,7 @@
 
 <body>
 <!--Header-->
-<%template src="header.html"%>
+<%template src="_header.html"%>
 <!--/Header-->
 
 <div class="login-box">
@@ -58,7 +56,7 @@
     <div class="oauth-box">
      <h3>第三方账号登录，还没注册？ <a href="<%linkurl("register")%>">点击注册</a></h3>
      <p>
-       <%set DataTable oauth_list=get_oauth_app_list(0, "is_mobile=0 or is_mobile=1")%> <!--取得一个DataTable-->
+       <%set DataTable oauth_list=get_oauth_app_list(0, "is_lock=0")%> <!--取得一个DataTable-->
        <%foreach(DataRow dr in oauth_list.Rows)%>
        <a title="{dr[title]}" href="{config.webpath}api/oauth/{dr[api_path]}/index.aspx"><img src="{dr[img_url]}"></a>
        <%/foreach%>
@@ -71,7 +69,7 @@
 </div>
 
 <!--Footer-->
-<%template src="footer.html"%>
+<%template src="_footer.html"%>
 <!--/Footer-->
 </body>
 </html>

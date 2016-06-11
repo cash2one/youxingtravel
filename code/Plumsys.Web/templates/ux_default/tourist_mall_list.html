@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>{site.seo_title}</title>
     <meta name="keywords" content=" {site.seo_keyword}" />
     <meta name="description" content="{site.seo_description}" />
@@ -20,282 +21,237 @@
         <!--Header-->
         <%template src="_header.html"%>
         <!--/Header-->
-        <div class="content">
-            <div class="c-wrapper">
-                <!-- 筛选项 begin -->
-                <div class="searched">
-                    <dl class="yxz">
-                        <dt style="background: none;">您已选择 :</dt>
-                        <dd style="margin-left: 15px;">
-                            <!-- <span>主题</span> -->
-                            <span class="cur_content">
-                                <span id="check_theme">跟团游</span>
-                                <a class="search_cancel" id="themeview" href="javascript:void(0)"
-                                   rel="Ticket">×</a>
-                            </span>
+        <!--C#代码-->
+        <%csharp%>
+        string orderby="add_time desc,id asc";
+        string strBy=PLRequest.GetQueryString("orderby");
+        if(strBy=="click"){
+        orderby="click desc";
+        }else if(strBy=="min"){
+        orderby="sell_price asc";
+        }else if(strBy=="max"){
+        orderby="sell_price desc";
+        }
+        string strwhere="status=0";
+        int minPrice=PLRequest.GetQueryInt("min_price",0);
+        if(minPrice>0){
+        strwhere+="and sell_price>="+minPrice;
+        }
+        int maxPrice=PLRequest.GetQueryInt("max_price",0);
+        if(maxPrice>0){
+        strwhere+="and sell_price<="+maxPrice;
+        }
+        Dictionary<string,string>
+            dicSpecIds=new Dictionary<string,string>
+                ();
+                for (int i = 0; i < Request.QueryString.AllKeys.Length; i++)
+                {
+                string paramKey=Request.QueryString.GetKey(i).ToString();
+                int paramValue=Utils.StrToInt(Request.QueryString[i].ToString(),0);
+                if(paramKey.StartsWith("s_") && paramValue>0)
+                {
+                dicSpecIds.Add(paramKey,paramValue.ToString());
+                }
+                }
+                <%/csharp%>
+                <!--/C#代码-->
+                <div class="content">
+                    <div class="c-wrapper">
+                        <!-- 筛选项 begin -->
+                        <div class="searched">
+                            <dl class="yxz">
+                                <dt style="background: none;">您已选择 :</dt>
+                                <dd style="margin-left: 15px;">
+                                    <!-- <span>主题</span> -->
+                                    <span class="cur_content">
+                                        <span id="check_theme">跟团游</span>
+                                        <a class="search_cancel" id="themeview" href="javascript:void(0)"
+                                           rel="Ticket">×</a>
+                                    </span>
 
-                        </dd>
-                    </dl>
-                    <dl class="mdd">
-                        <dt>目 的 地 :</dt>
-                        <dd id="mdd">
-                            <span class="MoreBtn" id="ShowMore" style="display: none;">查看更多∨</span>
-                            <span class="MoreBtn" id="HideMore" style="display: none;">收起∧</span>
-                            <!--<a class="search_continent_click loc" href="#">亚洲</a>
-                            <a class="search_continent_click loc" href="#">亚洲</a>
-                            <a class="search_continent_click loc" href="#">亚洲</a>
-                            <a class="search_continent_click loc" href="#">亚洲</a>
-                            <a class="search_continent_click loc" href="#">亚洲</a>
-                            <a class="search_continent_click loc" href="#">亚洲</a>-->
-                        </dd>
-                        <div class="clear"></div>
-                    </dl>
-                    <dl class="leixing">
-                        <dt>产品类型 :</dt>
-                        <dd id="leixing">
-                            <!--<a class="search_ltheme_click the theme_list" href="#">类别1</a>
-                            <a class="search_ltheme_click the theme_list" href="#">类别1</a>
-                            <a class="search_ltheme_click the theme_list" href="#">类别1</a>
-                            <a class="search_ltheme_click the theme_list" href="#">类别1</a>-->
-                        </dd>
-                        <div class="clear"></div>
-                    </dl>
-                    <dl class="playdate">
-                        <dt>游玩日期 :</dt>
-                        <dd id="daterange">
-                            <span>
-                                <a class="date_range_click" href="javascript:void(0)"
-                                   rel="2016-05-16~2016-05-16">今天</a>
-                            </span>
-                            <span>
-                                <a class="date_range_click" href="javascript:void(0)" rel="2016-05-17~2016-05-17">明天</a>
-                            </span>                         <span>
-                                <a class="date_range_click"
-                                   href="javascript:void(0)" rel="2016-05-16~2016-05-22">本周</a>
-                            </span>                             <span class="DateSelect">
-                                <input id="StartDate" type="text" placeholder="开始时间" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" value="" /><input class="querydate" id="querydate" type="button" value="确定" />
-                            </span>
-                        </dd>
-                        <div class="clear"></div>
-                    </dl>
-                    <div class="clear"></div>
-                </div>
-                <input id="cityName" type="hidden" value="AllCitys" />
-                <input id="countryName" type="hidden" />
-                <input id="continentName" type="hidden" />
-                <input id="themeEname" type="hidden" value="Ticket" />
-                <input id="isFreeSale" type="hidden" value="allIsFreeSale" />
-                <input id="labelName" type="hidden" value="AllLabel" />
-                <input id="timeRange" type="hidden" value="allTimeRange" />
-                <input id="orderType" type="hidden" value="1" />
-                <input id="search_keyword" type="hidden" />
-                <input id="search_applicableCrowd" type="hidden" />
-                <input id="sort_type" type="hidden" />
-                <!-- 筛选项 end -->
-                <!-- 筛选列表 begin -->
-                <input id="orderType" type="hidden" />
-                <div class="searchlist">
-                    <!-- 排序方式 begin -->
-                    <div class="sort">
-                        <ul>
-                            <li><b class="sort_click" id="sort_default">综合</b></li>
-                            <li><b class="sort_click" id="sale_amount">销量优先</b></li>
-                            <li>
-                                <b class="sort_click" id="soldprice_yuan">
-                                    价格<i class="PriceHigh"></i><i class="PriceLow"></i>
-                                </b>
-                            </li>
+                                </dd>
+                            </dl>
+                            <dl class="mdd">
+                                <dt>目 的 地 :</dt>
+                                <dd id="mdd">
+                                    <!--<span class="MoreBtn" id="ShowMore" style="display: none;">查看更多∨</span>
+                                    <span class="MoreBtn" id="HideMore" style="display: none;">收起∧</span>-->
+                                    <%set DataTable categoryList=get_category_child_list(channel,0)%>
+                                    <%foreach(DataRow cdr in categoryList.Rows)%>
+                                    <%if(category_id=={strtoint({cdr[id]})})%>
+                                    <a class="selected" href='<%linkurl(" tourist_mall_list","?category_id="+{cdr[id]})%>'>{cdr[title]}</a>
+                                    <%else%>
+                                    <a href='<%linkurl("tourist_mall_list","?category_id="+{cdr[id]})%>'>{cdr[title]}</a>
+                                    <%/if%>
+                                    <%/foreach%>
+                                </dd>
+                                <div class="clear"></div>
+                            </dl>
+                            <dl class="leixing">
+                                <dt>产品类型 :</dt>
+                                <%set DataTable specList=get_article_spec_parent(channel, model.id)%>
+                                <%foreach(DataRow dr1 in specList.Rows)%>
+                                <dd id="leixing">
 
-                        </ul>
-                        <div class="pagelist">
-                            <span class="prev">
-                                <a href="javascript:void(0);"></a>
-                            </span><span class="next"><a href="#"></a></span>
+                                    <%set DataTable subList=get_article_spec_child({strtoint({dr1[id]})})%>
+                                    <%set string tempKey="s_"+{dr1[id]}%>
+
+                                    <%foreach(DataRow dr2 in subList.Rows)%>
+                                    <%if(dicSpecIds.ContainsValue({dr2[id]}))%>
+                                    <a class="selected" href='<%linkurl(" tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby="+strBy+get_article_spec_param(dicSpecIds," s_"+{dr1[id]}+"="+{dr2[id]}))%>'>{dr2[title]}</a>
+                                    <%else%>
+                                    <a href='<%linkurl(" tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby="+strBy+get_article_spec_param(dicSpecIds," s_"+{dr1[id]}+"="+{dr2[id]}))%>'>{dr2[title]}</a>
+                                    <%/if%>
+                                    <%/foreach%>
+                                </dd>
+                                <%/foreach%>
+                                <div class="clear"></div>
+                            </dl>
+                            <dl class="playdate">
+                                <dt>游玩日期 :</dt>
+                                <dd id="daterange">
+                                    <span>
+                                        <a class="date_range_click" href="javascript:void(0)"
+                                           rel="2016-05-16~2016-05-16">今天</a>
+                                    </span>
+                                    <span>
+                                        <a class="date_range_click" href="javascript:void(0)" rel="2016-05-17~2016-05-17">明天</a>
+                                    </span>                         <span>
+                                        <a class="date_range_click"
+                                           href="javascript:void(0)" rel="2016-05-16~2016-05-22">本周</a>
+                                    </span>                             <span class="DateSelect">
+                                        <input id="StartDate" type="text" placeholder="开始时间" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" value="" /><input class="querydate" id="querydate" type="button" value="确定" />
+                                    </span>
+                                </dd>
+                                <div class="clear"></div>
+                            </dl>
+                            <div class="clear"></div>
                         </div>
+                        <input id="cityName" type="hidden" value="AllCitys" />
+                        <input id="countryName" type="hidden" />
+                        <input id="continentName" type="hidden" />
+                        <input id="themeEname" type="hidden" value="Ticket" />
+                        <input id="isFreeSale" type="hidden" value="allIsFreeSale" />
+                        <input id="labelName" type="hidden" value="AllLabel" />
+                        <input id="timeRange" type="hidden" value="allTimeRange" />
+                        <input id="orderType" type="hidden" value="1" />
+                        <input id="search_keyword" type="hidden" />
+                        <input id="search_applicableCrowd" type="hidden" />
+                        <input id="sort_type" type="hidden" />
+                        <!-- 筛选项 end -->
+                        <!-- 筛选列表 begin -->
+                        <input id="orderType" type="hidden" />
+                        <div class="searchlist">
+                            <!-- 排序方式 begin -->
+                            <div class="sort">
+                                <ul>
+                                    <li>
+                                        <b class="sort_click" id="sort_default">
+                                            <%if(strBy=="click")%>
+                                            <a class="selected" href='<%linkurl(" tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>综合</a>
+                                            <%else%>
+                                            <a href='<%linkurl(" tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>综合</a>
+                                            <%/if%>
+                                        </b>
+                                    </li>
+                                    <li>
+                                        <b class="sort_click" id="sale_amount">
+                                            <%if(strBy==""||strBy=="time")%>
+                                            <a class="first selected" href='<%linkurl(" gsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=time"+get_article_spec_param(dicSpecIds,""))%>'>销量优先</a>
+                                            <%else%>
+                                            <a class="first" href='<%linkurl(" gsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=time"+get_article_spec_param(dicSpecIds,""))%>'>销量优先</a>
+                                            <%/if%>
+                                        </b>
+                                    </li>
+                                    <li>
+                                        <b class="sort_click" id="soldprice_yuan">
+                                            价格
+                                            <%if(strBy=="max")%>
+                                            <a class="selected" href='<%linkurl("tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceHigh"></i></a>
+                                            <%else%>
+                                            <a href='<%linkurl("tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceHigh"></i></a>
+                                            <%/if%>
+
+                                            <%if(strBy=="min")%>
+                                            <a class="selected" href='<%linkurl("tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=min"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceLow"> </i></a>
+                                            <%else%>
+                                            <a href='<%linkurl("tourist_mall_list","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=min"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceLow"> </i></a>
+                                            <%/if%>
+
+                                        </b>
+                                    </li>
+
+                                </ul>
+                                <div class="pagelist">
+                                    <span class="prev">
+                                        <a href="javascript:void(0);"></a>
+                                    </span><span class="next"><a href="#"></a></span>
+                                </div>
+                            </div>
+                            <!-- 筛选结果 begin -->
+                            <div class="lists">
+                                <%set DataTable goodsList=get_article_list(channel,category_id,0,dicSpecIds,pagesize,page,strwhere,orderby,out totalcount)%><!--数据-->
+                                <%set pagelist = Utils.OutPageList(pagesize, page, totalcount, linkurl("tourist_mall_list", "?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&orderby="+strBy+"&page=__id__"+get_article_spec_param(dicSpecIds,"")), 8)%><!--分页-->
+                                <%foreach(DataRow dr in goodsList.Rows)%>
+                                <span class="product">
+                                    <dl class="products">
+                                        <dt class="model1">
+                                            <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
+                                                <a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'> <img width="280" height="146" class="lazy_img" alt="" src="{dr[img_url]}" /></a>
+                                                </a>
+                                            </div>
+
+                                            <!--<div class="add"><b></b> 西班牙 - 马德里</div>
+                                            <div class="Love"><span>加入购物车</span><i></i></div>
+                                            <div class="infos" style="display: none;">
+                                                <a class="SearchLinker" href="#"
+                                                   target="_blank">
+                                                    <p>
+
+                                                        马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
+                                                        ；超长有效期，可在景点开放任意时间进入...
+
+                                                    </p>
+                                                </a>
+                                            </div>-->
+                                        </dt>
+                                        <dd>
+                                            <div class="name"><a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'>{dr[title]}</a></div>
+                                            <div class="price" id="price_7921">
+                                                <div class="vip">
+                                                    <b>¥<em id="7921">{dr[sell_price]}</em></b>起
+
+                                                </div>
+                                                <div class="payment">门市价：{dr[market_price]}</div>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </span>
+                                <%/foreach%>
+                                <%if(goodsList.Rows.Count==0)%>
+                                <div class="nodata">暂时无法找到您想要的商品！</div>
+                                <%/if%>
+                                <div class="clear"></div>
+                            </div><!-- 筛选结果 end -->                 <!-- 分页开始 -->
+
+                            <div class="page">
+                                <!--<a href="javascript:void();">上一页</a>
+                                <a class="hover" href="javascript:void();">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#">4</a>
+                                <a href="#">5</a>
+                                <a href="#">6</a>
+                                <a href="#">7</a>
+                                ...   <a href="#">下一页</a>-->
+                                {pagelist}
+                            </div>
+                        </div><!-- 筛选列表 end -->
                     </div>
-                    <!-- 筛选结果 begin -->
-                    <div class="lists">
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <span class="product">
-                            <dl class="products">
-                                <dt class="model1">
-                                    <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
-                                        <img width="280" height="146" class="lazy_img" alt="" src="" data-original="images/8a2dae714fdfa8db014ff91865bb5764.jpg" />
-                                    </div>
-
-                                    <div class="add"><b></b> 西班牙 - 马德里</div>
-                                    <div class="Love"><span>加入购物车</span><i></i></div>
-                                    <div class="infos" style="display: none;">
-                                        <a class="SearchLinker" href="#"
-                                           target="_blank">
-                                            <p>
-
-                                                马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                ；超长有效期，可在景点开放任意时间进入...
-
-                                            </p>
-                                        </a>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <div class="name">马德里王宫/马德里皇宫Royal Palace (免排队门票)</div>
-                                    <div class="price" id="price_7921">
-                                        <div class="vip">
-                                            <b>¥<em id="7921">72</em></b>起
-
-                                        </div>
-                                        <div class="payment">门市价：¥85.0</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </span>
-                        <div class="clear"></div>
-                    </div><!-- 筛选结果 end -->                 <!-- 分页开始 -->
-
-                    <div class="page">
-                        <a href="javascript:void();">上一页</a>	 <!-- 当总页数小于每页需要显示标签数量 --> <!-- 当总页数大于每页需要显示标签数量 -->
-                        <a class="hover" href="javascript:void();">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
-                        ...   <a href="#">下一页</a>
-                    </div>
-                </div><!-- 筛选列表 end -->
-            </div>
+                </div>
+            </string,string>
+        </string,string>
+    </div>
         </div>
         <div id="load_img" style="display: none;">
             <img src="images/xubox_loading2.gif" />&nbsp;搜索中...&nbsp;
