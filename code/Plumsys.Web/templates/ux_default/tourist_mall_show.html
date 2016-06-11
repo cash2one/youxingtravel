@@ -13,7 +13,16 @@
     <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery.jqzoom.js"></script>
     <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/picture.js"></script>
     <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/cart.js"></script>
-
+    <script type="text/javascript">
+        $(function(){
+            //TAB切换
+            tabs('#goodsTabs','click');
+            //智能浮动层
+            $("#tabHead").smartFloat();
+            //初始化规格事件
+            initGoodsSpec('{config.webpath}tools/submit_ajax.ashx?action=get_article_goods_info');
+        });
+    </script>
 </head>
 <body>
     <div class="wrap">
@@ -112,7 +121,7 @@
                             <dl>
                                 <dd>
                                     <div id="buyButton" class="btn-buy">
-                                        <button class="buy over" onclick="cartAdd(this,'{config.webpath}',1,'<%linkurl("shopping")%>');  disable="disable">立即购买</button>
+                                        <button class="buy over" onclick="cartAdd(this,'{config.webpath}',1,'<%linkurl("shopping")%>');" disable="disable">立即购买</button>
                                         <button class="add over" onclick="cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');" disable="disable">加入购物车</button>
                                     </div>
                                 </dd>
