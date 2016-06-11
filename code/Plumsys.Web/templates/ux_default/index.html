@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="SliderBox">
-            <div class="Slider">
+            <div class="Slider" style="position:relative;">
                 <ul class="rslides">
                     <%set DataTable focusNews=get_article_list("tourist_mall", 0,0, 8, "status=0 and is_slide=1 and img_url<>''")%>
                     <%foreach(DataRow dr in focusNews.Rows)%>
