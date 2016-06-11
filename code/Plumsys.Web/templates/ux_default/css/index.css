@@ -1212,7 +1212,7 @@ var {
 	border: 0px currentColor; border-image: none; width: 1920px; height: auto; float: left; display: block;
 }
 .homewrap_tabs {
-	left: 0px; height: 28px; text-align: center; right: 0px; bottom: 180px; padding-top: 14px; position: absolute; z-index: 4;
+	left: 0px; height: 28px; text-align: center; right: 0px; bottom: 39px; padding-top: 14px; position: absolute; z-index: 4;
 }
 .homewrap_tabs li {
 	background: url(../images/d_flash.png) no-repeat; margin: 0px 5px; width: 20px; height: 20px; display: inline-block; cursor: pointer; -ms-zoom: 1; opacity: 1;
