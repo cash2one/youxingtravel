@@ -30,8 +30,14 @@ namespace Plumsys.Web.admin.order
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {
+                string getAdminInfo = "";
+                //如果roletype==1即是超级管理组
+                if (GetAdminInfo().role_type != 1)
+                {
+                    getAdminInfo = "and seller_id=" + GetAdminInfo().id;
+                }
                 ChkAdminLevel("order_list", PLEnums.ActionEnum.View.ToString()); //检查权限
-                RptBind("id>0 and seller_id=" + GetAdminInfo().id + CombSqlTxt(this.status, this.payment_status, this.express_status, this.keywords), "status asc,add_time desc,id desc");
+                RptBind("id>0 " + getAdminInfo + CombSqlTxt(this.status, this.payment_status, this.express_status, this.keywords), "status asc,add_time desc,id desc");
             }
         }
 
