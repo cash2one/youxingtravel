@@ -105,17 +105,6 @@
                             </dl>
                             <div class="clear"></div>
                         </div>
-                        <input id="cityName" type="hidden" value="AllCitys" />
-                        <input id="countryName" type="hidden" />
-                        <input id="continentName" type="hidden" />
-                        <input id="themeEname" type="hidden" value="Ticket" />
-                        <input id="isFreeSale" type="hidden" value="allIsFreeSale" />
-                        <input id="labelName" type="hidden" value="AllLabel" />
-                        <input id="timeRange" type="hidden" value="allTimeRange" />
-                        <input id="orderType" type="hidden" value="1" />
-                        <input id="search_keyword" type="hidden" />
-                        <input id="search_applicableCrowd" type="hidden" />
-                        <input id="sort_type" type="hidden" />
                         <!-- 筛选项 end -->
                         <!-- 筛选列表 begin -->
                         <input id="orderType" type="hidden" />
@@ -165,10 +154,10 @@
                                             <div class="name"><a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'>{dr[title]}</a></div>
                                             <div class="price" id="price_7921">
                                                 <div class="vip">
-                                                    <b>¥<em id="7921">测试价格</em></b>起
+                                                    <b>¥<em id="7921">{dr[sell_price]}</em></b>起
 
                                                 </div>
-                                                <div class="payment">门市价：测试</div>
+                                                <div class="payment">门市价：{dr[market_price]}</div>
                                             </div>
                                         </dd>
                                     </dl>
