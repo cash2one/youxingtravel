@@ -42,6 +42,8 @@ namespace Plumsys.Web.UI.Page
             dt.Columns.Add("link_url", Type.GetType("System.String"));
             dt.Columns.Add("add_time", Type.GetType("System.String"));
             dt.Columns.Add("img_url", Type.GetType("System.String"));
+            dt.Columns.Add("sell_price", Type.GetType("System.String"));
+            dt.Columns.Add("market_price", Type.GetType("System.String"));
             //创建一个DataSet,判断是使用Tags还是关健字查询
             DataSet ds = new DataSet();
             if (!string.IsNullOrEmpty(tags))
@@ -68,6 +70,8 @@ namespace Plumsys.Web.UI.Page
                         dr["add_time"] = dr1["add_time"]; //发布时间
                         dr["channel_id"] = dr1["channel_id"]; //频道ID
                         dr["img_url"] = dr1["img_url"]; //发布时间
+                        dr["sell_price"] = dr1["sell_price"]; //售价
+                        dr["market_price"] = dr1["market_price"]; //门市价
                         dt.Rows.Add(dr);
                     }
                 }
