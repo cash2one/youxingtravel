@@ -1236,7 +1236,7 @@ namespace Plumsys.DAL
         {
             StringBuilder strSql = new StringBuilder();
             //此次查询需要添加
-            strSql.Append("select id,channel_id,call_index,title,zhaiyao,add_time,img_url from " + databaseprefix + "article a left join " + databaseprefix + "article_attribute_value b on a.id = b.article_id ");
+            strSql.Append("select id,channel_id,call_index,title,zhaiyao,add_time,img_url,sell_price,market_price from " + databaseprefix + "article a left join " + databaseprefix + "article_attribute_value b on a.id = b.article_id ");
             //strSql.Append("select id,channel_id,call_index,title,zhaiyao,add_time,img_url,sell_price,market_price from view_channel_tourist_mall");
             strSql.Append(" where id>0");
             if (!string.IsNullOrEmpty(channel_name))
@@ -1258,7 +1258,7 @@ namespace Plumsys.DAL
         {
             StringBuilder strSql = new StringBuilder();
             //strSql.Append("select id,channel_id,call_index,title,zhaiyao,add_time,img_url from " + databaseprefix + "article ");
-            strSql.Append("select id,channel_id,call_index,title,zhaiyao,add_time,img_url from " + databaseprefix + "article a left join " + databaseprefix + "article_attribute_value b on a.id = b.article_id ");
+            strSql.Append("select id,channel_id,call_index,title,zhaiyao,add_time,img_url,sell_price,market_price from " + databaseprefix + "article a left join " + databaseprefix + "article_attribute_value b on a.id = b.article_id ");
             strSql.Append(" where tag_id=(select id from " + databaseprefix + "article_tags where title='" + tags + "'))");
             if (!string.IsNullOrEmpty(channel_name))
             {
