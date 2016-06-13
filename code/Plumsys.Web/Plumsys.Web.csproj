@@ -282,7 +282,10 @@
     <Content Include="aspx\plugin\feedback.aspx" />
     <Content Include="aspx\plugin\link.aspx" />
     <Content Include="aspx\plugin\mfeedback.aspx" />
+    <Content Include="aspx\ux_web\content.aspx" />
     <Content Include="aspx\ux_web\index.aspx" />
+    <Content Include="aspx\ux_web\tourist_mall_list.aspx" />
+    <Content Include="aspx\ux_web\tourist_mall_show.aspx" />
     <Content Include="crossdomain.xml" />
     <Content Include="css\image1.gif" />
     <Content Include="css\image2.gif" />
@@ -733,10 +736,10 @@
     <Content Include="templates\mobile\_nav.html" />
     <Content Include="templates\ux_default\about.png" />
     <Content Include="templates\ux_default\about.xml" />
-    <Content Include="templates\ux_default\AbouUS.html" />
-    <Content Include="templates\ux_default\CategoryInfo.html" />
+    <Content Include="templates\ux_default\content.html" />
+    <Content Include="templates\ux_default\tourist_mall_list.html" />
     <Content Include="templates\ux_default\css\about_us.css" />
-    <Content Include="templates\ux_default\css\category_info.css" />
+    <Content Include="templates\ux_default\css\info_list.css" />
     <Content Include="templates\ux_default\css\common.css" />
     <Content Include="templates\ux_default\css\user_center.css" />
     <Content Include="templates\ux_default\css\index.css" />
@@ -887,9 +890,16 @@
     <Content Include="templates\ux_default\images\yj_icon-03.png" />
     <Content Include="templates\ux_default\images\yj_menuBg.png" />
     <Content Include="templates\ux_default\images\yj_menuHover.png" />
-    <Content Include="templates\ux_default\infoDetail.html" />
-    <Content Include="templates\ux_default\js\about_us.js" />
-    <Content Include="templates\ux_default\js\category_info.js" />
+    <Content Include="templates\ux_default\tourist_mall_show.html" />
+    <Content Include="templates\ux_default\js\avatar.js" />
+    <Content Include="templates\ux_default\js\cart.js" />
+    <Content Include="templates\ux_default\js\info_list.js" />
+    <Content Include="templates\ux_default\js\common.js" />
+    <Content Include="scripts\jquery\jquery.flexslider-min.js" />
+    <Content Include="templates\ux_default\js\lightbox.min.js" />
+    <Content Include="templates\ux_default\js\login-validate.js" />
+    <Content Include="templates\ux_default\js\picture.js" />
+    <Content Include="templates\ux_default\js\register-validate.js" />
     <Content Include="templates\ux_default\js\user_center.js" />
     <Content Include="templates\ux_default\js\index.js" />
     <Content Include="templates\ux_default\js\info_detail.js" />
@@ -1876,6 +1886,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Develop.pubxml" />
+    <Content Include="scripts\jquery\juqery.responsiveslides.min.js" />
     <None Include="templates\mobile\jqmobi\css\src\afui.less" />
     <None Include="templates\mobile\jqmobi\plugins\README.md" />
     <None Include="templates\mobile\jqmobi\ui\README.md" />

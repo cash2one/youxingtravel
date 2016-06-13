@@ -67,6 +67,10 @@ namespace Plumsys.Web.admin.article
                 if (action == PLEnums.ActionEnum.Edit.ToString() || action == PLEnums.ActionEnum.Copy.ToString()) //修改
                 {
                     ShowInfo(this.id);
+                }
+                //所有操作以后都是待审核
+                if (action == PLEnums.ActionEnum.Add.ToString() || action == PLEnums.ActionEnum.Copy.ToString() || action == PLEnums.ActionEnum.Edit.ToString())
+                {
                     if (GetAdminInfo().role_type != 1)
                     {
                         rblStatus.Enabled = false;
@@ -374,7 +378,7 @@ namespace Plumsys.Web.admin.article
             DataTable dt = bll.GetList(0);
 
             this.ddlAreaId.Items.Clear();
-            this.ddlAreaId.Items.Add(new ListItem("请选择地区...", ""));
+            this.ddlAreaId.Items.Add(new ListItem("请选择地区...", "0"));
             foreach (DataRow dr in dt.Rows)
             {
                 string Id = dr["id"].ToString();

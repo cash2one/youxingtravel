@@ -374,7 +374,7 @@ namespace Plumsys.DAL
 			            parameters[19].Value = model.is_slide;
 			            parameters[20].Value = model.is_sys;
 			            parameters[21].Value = model.user_name;
-                        parameters[22].Value = model.id;
+                        parameters[22].Value = model.user_id;
 			            parameters[23].Value = model.add_time;
 			            parameters[24].Value = model.update_time;
                         parameters[25].Value = model.area_id;
