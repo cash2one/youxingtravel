@@ -1347,7 +1347,7 @@ var {
 	width: 200px; height: 82px;
 }
 .Logo img {
-	width: 200px; height: 82px;
+	width: 200px;margin-top:10px;
 }
 .Logo {
 	float: left;

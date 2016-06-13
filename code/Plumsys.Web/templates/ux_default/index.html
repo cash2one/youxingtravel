@@ -11,8 +11,9 @@
     <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/juqery.responsiveslides.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery.lazyload.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
+
     <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/index.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -92,10 +93,10 @@
                 <div id="header_search_box">
                     <div class="s-lft">
                         <input id="defaultSearch" type="hidden" />
-                        <input name="home_city" class="typeahead city" id="header_search_city_input" type="text" placeholder="跟团游/自由行/酒店/门票" value="" />
+                        <input name="home_city" class="typeahead city" id="keywords" onkeydown="if(event.keyCode==13){SiteSearch('<%linkurl("search")%>', '#keywords');return false};" type="text" placeholder="跟团游/自由行/酒店/门票" value="" />
                     </div>
                     <div class="s-rgt">
-                        <input class="btn" id="header_search_button" type="button" value="" />
+                        <input class="btn" id="header_search_button" onclick="SiteSearch('<%linkurl("search")%>', '#keywords');" type="submit" value="" />
                     </div>
                     <div class="clear"></div>
                 </div>
