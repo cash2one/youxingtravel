@@ -14,6 +14,7 @@ function getClientLanguage() {
             return null
     }
 }
+
 function translate(e, t) {
     e = e.childNodes;
     for (var n, i = 0,
@@ -4024,8 +4025,8 @@ $(window).bind("pageshow",
 function (e) {
     e.originalEvent.persisted && window.location.reload()
 });
-var initSearch = new InitSearch(searchData);
-initSearch.init();
+//var initSearch = new InitSearch(searchData);
+//initSearch.init();
 var businessVisit = document.getElementById("businessVisit");
 if (businessVisit) {
     var tour_ids = "";

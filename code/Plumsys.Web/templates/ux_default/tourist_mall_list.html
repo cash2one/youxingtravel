@@ -109,6 +109,9 @@
                             </dl>
                             <dl class="playdate">
                                 <dt>游玩日期 :</dt>
+                                <script>
+                                    var nowday = new Date();
+                                </script>
                                 <dd id="daterange">
                                     <span>
                                         <a class="date_range_click" href="javascript:void(0)"
@@ -120,7 +123,7 @@
                                         <a class="date_range_click"
                                            href="javascript:void(0)" rel="2016-05-16~2016-05-22">本周</a>
                                     </span>                             <span class="DateSelect">
-                                        <input id="StartDate" type="text" placeholder="开始时间" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" value="" /><input class="querydate" id="querydate" type="button" value="确定" />
+                                                                            <input id="StartDate" type="text" placeholder="开始时间" onclick="JTC.setday({minDate:nowday, ranged: true})" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" onclick="JTC.setday({minDate:nowday, ranged: true})" value="" /><input class="querydate" id="querydate" type="button" value="确定" />
                                     </span>
                                 </dd>
                                 <div class="clear"></div>
@@ -268,5 +271,6 @@
     <!--footer begin-->
     <%template src="_footer.html"%>
     <!--footer end-->
+    <script type="text/javascript" src="<%templateskin%>/js/JTimer_1.3.js"></script>
 </body>
 </html>
