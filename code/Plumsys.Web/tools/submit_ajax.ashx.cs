@@ -2033,6 +2033,7 @@ namespace Plumsys.Web.tools
             }
             //对不同商户的商品进行分组拆单 add by dj
             List<int> seller_ids = ShopCart.GroupListBySellerId(goodsList);
+            string order_nos = string.Empty;
             foreach (int seller_id in seller_ids)
             {
                 List<Model.cart_items> group_goodslist = goodsList.FindAll(p => p.seller_id == seller_id);
@@ -2060,6 +2061,7 @@ namespace Plumsys.Web.tools
                 model.real_amount = group_goodsTotal.real_amount;
                 model.express_status = 1;
                 model.express_fee = expModel.express_fee; //物流费用
+                order_nos += model.order_no + ",";
                 //是否先款后货
                 if (payModel.type == 1)
                 {
@@ -2128,7 +2130,7 @@ namespace Plumsys.Web.tools
             Utils.WriteCookie(PLKeys.COOKIE_SHOPPING_BUY, "");
             //提交成功，返回URL
             context.Response.Write("{\"status\":1, \"url\":\""
-                + new Web.UI.BasePage().getlink(sitepath, new Web.UI.BasePage().linkurl("userorder", "?action=list")) + "\", \"msg\":\"恭喜您，订单已成功提交！\"}");
+                + new Web.UI.BasePage().getlink(sitepath, new Web.UI.BasePage().linkurl("payment", "?action=confirm&order_no=" + order_nos.TrimEnd(','))) + "\", \"msg\":\"恭喜您，订单已成功提交！\"}");
             return;
         }
         #endregion

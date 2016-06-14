@@ -154,7 +154,7 @@
     <Compile Include="Page\userorder_show.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page\userpoint.cs">
+    <Compile Include="userpoint.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -35,6 +35,12 @@ namespace Plumsys.Web.UI.Page
             //取得处事类型
             action = PLRequest.GetString("action");
             order_no = PLRequest.GetString("order_no");
+            if (order_no.Split(',').Length > 1)
+            {
+                //如果多订单支付
+                HttpContext.Current.Response.Redirect(linkurl("userorder", "list"));
+                return;
+            }
             if (order_no.ToUpper().StartsWith("R")) //充值订单
             {
                 order_type = PLEnums.AmountTypeEnum.Recharge.ToString().ToLower();
