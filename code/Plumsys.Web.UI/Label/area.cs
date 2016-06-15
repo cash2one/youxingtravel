@@ -23,6 +23,26 @@ namespace Plumsys.Web.UI
         }
 
         /// <summary>
+        /// 返回父id
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        protected int get_area_parent_id(int category_id)
+        {
+            BLL.area_category bll = new BLL.area_category();
+            return bll.GetParentId(category_id);
+        }
+        /// <summary>
+        /// 返回父id
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        protected int get_area_parent_id(string category_id)
+        {
+            BLL.area_category bll = new BLL.area_category();
+            return bll.GetParentId(Convert.ToInt32(category_id));
+        }
+        /// <summary>
         /// 返回类别一个实体类
         /// </summary>
         /// <param name="area_id">类别ID</param>
@@ -59,6 +79,15 @@ namespace Plumsys.Web.UI
         }
 
         /// <summary>
+        /// 返回所有父类别列表
+        /// </summary>
+        /// <param name="id">父类别ID</param>
+        /// <returns>DataTable</returns>
+        protected DataTable get_area_parent_list(int id)
+        {
+            return new BLL.area_category().GetParentList(id);
+        }
+        /// <summary>
         /// 返回指定类别下列表(一层)
         /// </summary>
         /// <param name="parent_id">父类别ID</param>
@@ -68,6 +97,15 @@ namespace Plumsys.Web.UI
             return new BLL.area_category().GetChildList(parent_id);
         }
 
+        /// <summary>
+        /// 返回指定类别上的列表(一层)
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns>DataTable</returns>
+        protected DataTable get_area_parent(int id)
+        {
+            return new BLL.area_category().GetParent(id);
+        }
         #region 私有方法===========================================
         /// <summary>
         /// 递归找到父节点

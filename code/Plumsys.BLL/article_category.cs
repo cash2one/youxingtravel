@@ -118,6 +118,53 @@ namespace Plumsys.BLL
             int channel_id = new BLL.channel().GetChannelId(channel_name);
             return dal.GetList(parent_id, channel_id);
         }
+
+
+        /// <summary>
+        /// 取得该频道指定类别上的列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="channel_id">频道ID</param>
+        /// <returns></returns>
+        public DataTable GetParent(int id, int channel_id)
+        {
+            return dal.GetParent(id, channel_id);
+        }
+
+        /// <summary>
+        /// 取得该频道指定类别上的列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="channel_name"></param>
+        /// <returns></returns>
+        public DataTable GetParent(int id, string channel_name)
+        {
+            int channel_id = new BLL.channel().GetChannelId(channel_name);
+            return dal.GetParent(id, channel_id);
+        }
+
+        /// <summary>
+        /// 取得该频道上所有父类别列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="channel_id">频道ID</param>
+        /// <returns>DataTable</returns>
+        public DataTable GetParentList(int id, int channel_id)
+        {
+            return dal.GetParentList(id, channel_id);
+        }
+
+        /// <summary>
+        /// 取得该频道上所有父类别列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="channel_name">频道名称</param>
+        /// <returns>DataTable</returns>
+        public DataTable GetParentList(int id, string channel_name)
+        {
+            int channel_id = new BLL.channel().GetChannelId(channel_name);
+            return dal.GetParentList(id, channel_id);
+        }
         #endregion
 
         #region 扩展方法================================

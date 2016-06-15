@@ -11,6 +11,7 @@ namespace Plumsys.Web.UI.Page
         protected int category_id;  //类别ID
         protected int totalcount;   //OUT数据总数
         protected string pagelist;  //分页页码
+        protected int area_id; //地区选择
 
         protected Model.article_category model = new Model.article_category(); //分类的实体
         /// <summary>
@@ -19,6 +20,7 @@ namespace Plumsys.Web.UI.Page
         protected override void ShowPage()
         {
             page = PLRequest.GetQueryInt("page", 1);
+            area_id = PLRequest.GetQueryInt("area_id", 0);
             category_id = PLRequest.GetQueryInt("category_id");
             BLL.article_category bll = new BLL.article_category();
             model.title = "所有类别";

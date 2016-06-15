@@ -21,7 +21,28 @@ namespace Plumsys.Web.UI
             }
             return default_value;
         }
+        /// <summary>
+        /// 返回父id
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        protected int get_category_parent_id(int category_id)
+        {
+            BLL.article_category bll = new BLL.article_category();
+            return bll.GetParentId(category_id);
+        }
 
+        /// <summary>
+        /// 返回父id
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        protected int get_category_parent_id(string category_id)
+        {
+
+            BLL.article_category bll = new BLL.article_category();
+            return bll.GetParentId(Convert.ToInt32(category_id));
+        }
         /// <summary>
         /// 返回类别一个实体类
         /// </summary>
@@ -70,6 +91,28 @@ namespace Plumsys.Web.UI
             return new BLL.article_category().GetChildList(parent_id, channel_name);
         }
 
+
+        /// <summary>
+        /// 返回所有父级别类别列表
+        /// </summary>
+        /// <param name="channel_name">频道名称</param>
+        /// <param name="id">父类别ID</param>
+        /// <returns>DataTable</returns>
+        protected DataTable get_category_parent_list(string channel_name, int id)
+        {
+            return new BLL.article_category().GetParentList(id, channel_name);
+        }
+
+        /// <summary>
+        /// 返回指定类别父级列表 一次
+        /// </summary>
+        /// <param name="channel_name">频道名称</param>
+        /// <param name="id">ID</param>
+        /// <returns>DataTable</returns>
+        protected DataTable get_category_parent(string channel_name, int id)
+        {
+            return new BLL.article_category().GetParent(id, channel_name);
+        }
         #region 私有方法===========================================
         /// <summary>
         /// 递归找到父节点

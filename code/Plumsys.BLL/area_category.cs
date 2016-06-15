@@ -84,6 +84,24 @@ namespace Plumsys.BLL
         }
 
         /// <summary>
+        /// 取得该频道指定类别上的列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public DataTable GetParent(int id)
+        {
+            return dal.GetParent(id);
+        }
+        /// <summary>
+        /// 取得该频道指定类别上的所有列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public DataTable GetParentList(int id)
+        {
+            return dal.GetParentList(id);
+        }
+        /// <summary>
         /// 取得该频道下所有类别列表
         /// </summary>
         /// <param name="parent_id">父ID</param>

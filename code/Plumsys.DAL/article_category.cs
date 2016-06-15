@@ -341,6 +341,50 @@ namespace Plumsys.DAL
             GetChilds(oldData, newData, parent_id, channel_id);
             return newData;
         }
+
+
+        /// <summary>
+        /// 取得指定类别上的列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="channel_id">频道ID</param>
+        /// <returns></returns>
+        public DataTable GetParent(int id, int channel_id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select id,channel_id,title,call_index,parent_id,class_list,class_layer,sort_id,link_url,img_url,content,seo_title,seo_keywords,seo_description");
+            strSql.Append(" from " + databaseprefix + "article_category");
+            strSql.Append(" where channel_id=" + channel_id + " and id=(select top 1 parent_id from " + databaseprefix + "article_category where id=" + id + " and channel_id=" + channel_id + ") order id asc");
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            return ds.Tables[0];
+        }
+
+        /// <summary>
+        /// 取得所有父级别类别列表
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="channel_id">频道ID</param>
+        /// <returns></returns>
+        public DataTable GetParentList(int id, int channel_id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select id,channel_id,title,call_index,parent_id,class_list,class_layer,sort_id,link_url,img_url,content,seo_title,seo_keywords,seo_description");
+            strSql.Append(" from " + databaseprefix + "article_category");
+            strSql.Append(" where channel_id=" + channel_id + " order by sort_id asc,id desc");
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            DataTable oldData = ds.Tables[0] as DataTable;
+            if (oldData == null)
+            {
+                return null;
+            }
+            //复制结构
+            DataTable newData = oldData.Clone();
+            //调用迭代组合成DAGATABLE
+            GetParents(oldData, newData, id, channel_id);
+            DataView dv = newData.DefaultView;
+            dv.Sort = " id asc";
+            return dv.ToTable();
+        }
         #endregion
 
         #region 扩展方法================================
@@ -452,6 +496,35 @@ namespace Plumsys.DAL
             }
         }
 
+        /// <summary>
+        /// 从内存中取得所有上级类别列表（自身迭代）
+        /// </summary>
+        private void GetParents(DataTable oldData, DataTable newData, int id, int channel_id)
+        {
+            DataRow[] dr = oldData.Select("id=" + id);
+            for (int i = 0; i < dr.Length; i++)
+            {
+                //添加一行数据
+                DataRow row = newData.NewRow();
+                row["id"] = int.Parse(dr[i]["id"].ToString());
+                row["channel_id"] = int.Parse(dr[i]["channel_id"].ToString());
+                row["title"] = dr[i]["title"].ToString();
+                row["call_index"] = dr[i]["call_index"].ToString();
+                row["parent_id"] = int.Parse(dr[i]["parent_id"].ToString());
+                row["class_list"] = dr[i]["class_list"].ToString();
+                row["class_layer"] = int.Parse(dr[i]["class_layer"].ToString());
+                row["sort_id"] = int.Parse(dr[i]["sort_id"].ToString());
+                row["link_url"] = dr[i]["link_url"].ToString();
+                row["img_url"] = dr[i]["img_url"].ToString();
+                row["content"] = dr[i]["content"].ToString();
+                row["seo_title"] = dr[i]["seo_title"].ToString();
+                row["seo_keywords"] = dr[i]["seo_keywords"].ToString();
+                row["seo_description"] = dr[i]["seo_description"].ToString();
+                newData.Rows.Add(row);
+                //调用自身迭代
+                this.GetParents(oldData, newData, int.Parse(dr[i]["parent_id"].ToString()), channel_id);
+            }
+        }
         /// <summary>
         /// 修改子节点的ID列表及深度（自身迭代）
         /// </summary>
