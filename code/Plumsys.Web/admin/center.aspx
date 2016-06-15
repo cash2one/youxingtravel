@@ -41,8 +41,7 @@
     <li>站点名称：<%=siteConfig.webname %></li>
     <li>公司名称：<%=siteConfig.webcompany %></li>
     <li>网站域名：<%=siteConfig.weburl %></li>
-    <li>安装目录：<%=siteConfig.webpath %></li>
-    <li>网站管理目录：<%=siteConfig.webmanagepath %></li>
+  <%--  <li>网站管理目录：<%=siteConfig.webmanagepath %></li>
     <li>附件上传目录：<%=siteConfig.filepath %></li>
     <li>服务器名称：<%=Server.MachineName%></li>
     <li>服务器IP：<%=Request.ServerVariables["LOCAL_ADDR"] %></li>
@@ -50,14 +49,14 @@
     <li>操作系统：<%=Environment.OSVersion.ToString()%></li>
     <li>IIS环境：<%=Request.ServerVariables["SERVER_SOFTWARE"]%></li>
     <li>服务器端口：<%=Request.ServerVariables["SERVER_PORT"]%></li>
-    <li>目录物理路径：<%=Request.ServerVariables["APPL_PHYSICAL_PATH"]%></li>
+    <li>目录物理路径：<%=Request.ServerVariables["APPL_PHYSICAL_PATH"]%></li>--%>
     <li>系统版本：V<%=Utils.GetVersion()%></li>
-    <li>升级通知：<asp:Literal ID="LitUpgrade" runat="server"/></li>
+  <%--  <li>升级通知：<asp:Literal ID="LitUpgrade" runat="server"/></li>--%>
   </ul>
 </div>
 <div class="line20"></div>
 
-<div class="nlist-3">
+<%--<div class="nlist-3">
   <ul>
     <li><a onclick="parent.linkMenuTree(true, 'sys_config');" class="icon-setting" href="javascript:;"></a><span>系统设置</span></li>
     <li><a onclick="parent.linkMenuTree(true, 'sys_site_manage');" class="icon-channel" href="javascript:;"></a><span>站点管理</span></li>
@@ -81,7 +80,7 @@
   <ul>
     <asp:Literal ID="LitNotice" runat="server"/>
   </ul>
-</div>
+</div>--%>
 <!--/内容-->
 
 </form>
