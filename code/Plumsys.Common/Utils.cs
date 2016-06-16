@@ -736,7 +736,7 @@ namespace Plumsys.Common
         {
             return !Regex.IsMatch(str, @"[-|;|,|\/|\(|\)|\[|\]|\}|\{|%|@|\*|!|\']");
         }
-        
+
         /// <summary>
         /// 检查危险字符
         /// </summary>
@@ -1359,7 +1359,7 @@ namespace Plumsys.Common
 
             return responseStr;
         }
-        
+
         /// <summary>
         /// HTTP GET方式请求数据.
         /// </summary>
@@ -1494,5 +1494,42 @@ namespace Plumsys.Common
         }
         #endregion
 
+        #region 检测Request 请求是否危险
+        public static bool CheckRequest(HttpRequest Request)
+        {
+            //遍历Post参数，隐藏域除外
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form[i].ToString() == "__VIEWSTATE") continue;
+                if (IsDanger(Request.Form[i].ToString())) return false;
+            }
+            for (int i = 0; i < Request.QueryString.Count; i++)
+            {
+                if (IsDanger(Request.QueryString[i])) return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// 检测危险字符串
+        /// </summary>
+        /// <param name="InText"></param>
+        /// <returns></returns>
+        protected static bool IsDanger(string InText)
+        {
+
+            string word = @"exec|insert|select|delete|update|master|truncate|char|declare|join|iframe|href|script|<|>|request";
+
+            if (InText == null)
+
+                return false;
+
+            if (Regex.IsMatch(InText, word))
+
+                return true;
+
+            return false;
+
+        }
+        #endregion
     }
 }

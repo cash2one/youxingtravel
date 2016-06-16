@@ -73,7 +73,7 @@ override protected void OnInit(EventArgs e)
 	}	//end for if
 
 	templateBuilder.Append("\r\n      <!--/小类-->\r\n    </p>\r\n  </div>\r\n  <div class=\"wrapper igoods clearfix\">\r\n    <div class=\"img-list2\">\r\n      <ul>\r\n        ");
-	DataTable dt = get_article_list(channel, Utils.StrToInt(Utils.ObjectToStr(cdr["id"]), 0), 5, "status=0");
+	DataTable dt = get_article_list(channel, Utils.StrToInt(Utils.ObjectToStr(cdr["id"]), 0),0, 5, "status=0");
 
 	foreach(DataRow dr in dt.Rows)
 	{

@@ -495,6 +495,7 @@
     <Content Include="editor\themes\qq\editor.gif" />
     <Content Include="editor\themes\qq\qq.css" />
     <Content Include="editor\themes\simple\simple.css" />
+    <Content Include="error.html" />
     <Content Include="favicon.ico" />
     <Content Include="images\oauth\feixin.png" />
     <Content Include="images\oauth\kaixin.png" />

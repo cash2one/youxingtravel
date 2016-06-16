@@ -9,14 +9,14 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-08 9:42:51.
-		本页面代码由Plumsys模板引擎生成于 2016-06-08 9:42:51. 
+		This page was created by Plumsys Template Engine at 2016-06-16 6:29:36.
+		本页面代码由Plumsys模板引擎生成于 2016-06-16 6:29:36. 
 	*/
 
 	base.OnInit(e);
 	StringBuilder templateBuilder = new StringBuilder(220000);
 
-	templateBuilder.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n    <title>");
+	templateBuilder.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />\r\n    <title>");
 	templateBuilder.Append(Utils.ObjectToStr(site.seo_title));
 	templateBuilder.Append("</title>\r\n    <meta name=\"keywords\" content=\" ");
 	templateBuilder.Append(Utils.ObjectToStr(site.seo_keyword));
@@ -36,12 +36,12 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
 	templateBuilder.Append("/templates/ux_default");
 	templateBuilder.Append("/js/jquery.flexslider-min.js\"></");
+	templateBuilder.Append("script>\r\n\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
+	templateBuilder.Append("/templates/ux_default");
+	templateBuilder.Append("/js/index.js\"></");
 	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
 	templateBuilder.Append("/templates/ux_default");
 	templateBuilder.Append("/js/common.js\"></");
-	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
-	templateBuilder.Append("/templates/ux_default");
-	templateBuilder.Append("/js/index.js\"></");
 	templateBuilder.Append("script>\r\n</head>\r\n<body>\r\n    <div class=\"wrap\">\r\n        <div class=\"Head\">\r\n            <div class=\"Navi\">\r\n                <div class=\"MainPage\">\r\n                    <div class=\"Logo\">\r\n                        <a title=\"logo\" href=\"");
 	templateBuilder.Append(Utils.ObjectToStr(site.domain));
 	templateBuilder.Append("\"\r\n                           target=\"_self\">\r\n                            <img alt=\"");
@@ -63,7 +63,22 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("\" target=\"_self\">\r\n                                                " + Utils.ObjectToStr(ncdr["title"]) + "\r\n                                                <div class=\"navitag\" style=\"display: none;\"></div>\r\n                                            </a>\r\n                                        </li>\r\n                                        ");
 	}	//end for if
 
-	templateBuilder.Append("\r\n                                        <!--/类别-->\r\n                                    </ul>\r\n                                </div>\r\n                                <div class=\"clear\"></div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"RightNavi\">\r\n                        <span id=\"un_login\">\r\n                            <a class=\"singin\" href=\"#\" target=\"_self\">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class=\"singup\" href=\"#\" target=\"_self\">注册</a>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"SliderBox\">\r\n            <div class=\"Slider\">\r\n                <ul class=\"rslides\">\r\n                    ");
+	templateBuilder.Append("\r\n                                        <!--/类别-->\r\n                                    </ul>\r\n                                </div>\r\n                                <div class=\"clear\"></div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"RightNavi\">\r\n                        <script type=\"text/javascript\">\r\n                            $.ajax({\r\n                                type: \"POST\",\r\n                                url: \"");
+	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
+	templateBuilder.Append("tools/submit_ajax.ashx?action=user_check_login\",\r\n                                dataType: \"json\",\r\n                                timeout: 20000,\r\n                                success: function (data, textStatus) {\r\n                                    if (data.status == 1) {\r\n                                        $(\"#un_login\").append('<a class=\"singin\" href=\"");
+	templateBuilder.Append(linkurl("usercenter","index"));
+
+	templateBuilder.Append("\">我的优行</a>&nbsp;&nbsp;|&nbsp;&nbsp;');\r\n                                        $(\"#un_login\").append('<a class=\"singup\" href=\"");
+	templateBuilder.Append(linkurl("usercenter","exit"));
+
+	templateBuilder.Append("\">退出</a>');\r\n                                    } else {\r\n                                        $(\"#un_login\").append('<a class=\"singin\" href=\"");
+	templateBuilder.Append(linkurl("login"));
+
+	templateBuilder.Append("\" target=\"_self\">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;');\r\n                                        $(\"#un_login\").append('<a class=\"singup\" href=\"");
+	templateBuilder.Append(linkurl("register"));
+
+	templateBuilder.Append("\" target=\"_self\">注册</a>');\r\n                                    }\r\n                                }\r\n                            });\r\n                        </");
+	templateBuilder.Append("script>\r\n                        <span id=\"un_login\">\r\n                           \r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"SliderBox\">\r\n            <div class=\"Slider\" style=\"position:relative;\">\r\n                <ul class=\"rslides\">\r\n                    ");
 	DataTable focusNews = get_article_list("tourist_mall", 0,0, 8, "status=0 and is_slide=1 and img_url<>''");
 
 	foreach(DataRow dr in focusNews.Rows)
@@ -75,7 +90,13 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("\" target=\"_blank\">\r\n                            <img src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\" />\r\n                        </a>\r\n                    </li>\r\n                    ");
 	}	//end for if
 
-	templateBuilder.Append("\r\n                </ul>\r\n            </div>\r\n        </div>\r\n        <div class=\"HeadMainPage\">\r\n            <div class=\"search-new\">\r\n                <div id=\"header_search_box\">\r\n                    <div class=\"s-lft\">\r\n                        <input id=\"defaultSearch\" type=\"hidden\" />\r\n                        <input name=\"home_city\" class=\"typeahead city\" id=\"header_search_city_input\" type=\"text\" placeholder=\"跟团游/自由行/酒店/门票\" value=\"\" />\r\n                    </div>\r\n                    <div class=\"s-rgt\">\r\n                        <input class=\"btn\" id=\"header_search_button\" type=\"button\" value=\"\" />\r\n                    </div>\r\n                    <div class=\"clear\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!--类别-->\r\n        ");
+	templateBuilder.Append("\r\n                </ul>\r\n            </div>\r\n        </div>\r\n        <div class=\"HeadMainPage\">\r\n            <div class=\"search-new\">\r\n                <div id=\"header_search_box\">\r\n                    <div class=\"s-lft\">\r\n                        <input id=\"defaultSearch\" type=\"hidden\" />\r\n                        <input name=\"home_city\" class=\"typeahead city\" id=\"keywords\" onkeydown=\"if(event.keyCode==13){SiteSearch('");
+	templateBuilder.Append(linkurl("search"));
+
+	templateBuilder.Append("', '#keywords');return false};\" type=\"text\" placeholder=\"跟团游/自由行/酒店/门票\" value=\"\" />\r\n                    </div>\r\n                    <div class=\"s-rgt\">\r\n                        <input class=\"btn\" id=\"header_search_button\" onclick=\"SiteSearch('");
+	templateBuilder.Append(linkurl("search"));
+
+	templateBuilder.Append("', '#keywords');\" type=\"submit\" value=\"\" />\r\n                    </div>\r\n                    <div class=\"clear\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!--类别-->\r\n        ");
 	DataTable categoryList = get_category_child_list("tourist_mall",0);
 
 	int cdr__loop__id=0;
