@@ -1347,7 +1347,7 @@ var {
 	width: 200px; height: 82px;
 }
 .Logo img {
-	width: 200px;margin-top:10px;
+	width: 200px; margin-top:10px;
 }
 .Logo {
 	float: left;
@@ -1872,3 +1872,116 @@ var {
 .navitems li dd a:hover{
     background-color: rgba(136, 180, 34, 1) !important;
 }
+.serchbox{
+	position:absolute;
+	top:140px;
+	left:-240px;
+	width:500px;
+	height:300px;
+	
+}
+  .hidden{
+	  display:none;
+  }
+  .searchtype{
+	  width:120px;
+	  height:300px;
+	  float:left;
+	  background-color:rgba(137, 184, 35, 0.8);
+  }
+  .searchtype ul{
+	  width:120px;
+	  height:300px;
+	  text-align:center;
+	  line-height:50px;
+	  }
+  .searchtype li{
+	  height:50px;
+	  color:#FFF;
+	  font-size:15px;
+	  }
+   .searchtype li:hover{
+	  cursor:pointer;
+	  font-size:15px;
+	  color:#000;
+	  background:#FFF;
+	  }
+.current{
+	  color:#000 !important;
+	  background:rgba(255, 255, 255, 0.8) !important;
+}
+  .searchtypeconnent{
+     width:380px;
+	 height:300px;
+	  float:left;
+	 background-color:rgba(255, 255, 255, 0.8);
+  }
+ .ml20{
+	 margin-left:20px;
+ }
+ .mt10{
+	 margin-top:10px;
+	 
+}
+ .chufa{
+	 float:left;
+	 width:140px;
+ }
+  .chufa .inputchufa{
+	   width:120px;
+	   height:30px;
+	  border:1px solid #ddd;
+  }
+ .mudi{
+	  float:left;
+	 width:220px;
+ }
+ .mudi .inputmudi{
+	  width:210px;
+	  height:30px;
+	  border:1px solid #ddd;
+ }
+ .searchbottondetail{
+   margin-right:10px;
+   
+ }
+  .searchbottondetail input{
+   width:70px;
+   height:40px;
+   background-color:rgba(137, 184, 35, 0.8);
+   color:#FFF;
+   border:0px;
+   cursor:pointer;
+   
+ }
+ .bordorline{
+	 border-bottom:1px;
+	 border-bottom-style:solid;
+	 border-bottom-color:#ddd;
+	 width:350px;
+ }
+ .resoucity{
+  color:#999;
+ }
+ .resoucity{
+	 width:75px;
+ }
+ .resoucitylist{
+	 width:275px;
+ }
+  .resoucitylist ul li{
+	 float:left;
+	 margin-right:5px;
+	 
+ }
+ .searchbox input{
+	   border:1px solid #ddd;
+	   width:350px;
+	   height:30px;
+ }
+ .bordorheader{
+	  border-bottom:1px;
+	 border-bottom-style:solid;
+	 border-bottom-color:#ddd;
+	 width:350px;
+ }
