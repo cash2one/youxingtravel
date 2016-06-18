@@ -362,7 +362,7 @@ body{ text-align:center; background:#fff; *position:relative; }
 	.pic-scroll .prev{ float:left; margin-right:5px; }
 	.pic-scroll .next{ float:right; }
 	.pic-scroll .prev,.pic-scroll .next{ display:block; font-family:"宋体"; text-align:center; width:10px; height:88px; line-height:88px; border:1px solid #e8e8e8; background:#f7f7f7; cursor:pointer; text-decoration:none; }
-	.pic-scroll .items{ position:relative; float:left; width:660px; height:100px; overflow:hidden; }
+	.pic-scroll .items{ position:relative; float:left; width:690px; height:100px; overflow:hidden; }
 	.pic-scroll .items ul{ position:absolute; margin:0; padding:0; width:999999px; height:100%; }
 	.pic-scroll .items ul li{ float:left; margin:0; padding:0; width:126px; text-align:center;margin-left:10px; }
 	.pic-scroll .items ul li img{ padding:2px; border:1px solid #e8e8e8; width:126px; height:86px; }
