@@ -503,7 +503,14 @@ namespace Plumsys.DAL
                 {
                     model.user_name = row["user_name"].ToString();
                 }
-              
+                if (row["seller_id"] != null && row["seller_id"].ToString() != "")
+                {
+                    model.seller_id = int.Parse(row["seller_id"].ToString());
+                }
+                if (row["seller_name"] != null)
+                {
+                    model.seller_name = row["seller_name"].ToString();
+                }
                 if (row["payment_id"] != null && row["payment_id"].ToString() != "")
                 {
                     model.payment_id = int.Parse(row["payment_id"].ToString());
