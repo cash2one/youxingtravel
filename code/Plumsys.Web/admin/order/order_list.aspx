@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"   CodeBehind="order_list.aspx.cs" Inherits="Plumsys.Web.admin.order.order_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"     CodeBehind="order_list.aspx.cs" Inherits="Plumsys.Web.admin.order.order_list" %>
 <%@ Import namespace="Plumsys.Common" %>
 
 <!DOCTYPE html>

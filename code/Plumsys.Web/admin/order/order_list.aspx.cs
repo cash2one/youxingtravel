@@ -37,7 +37,7 @@ namespace Plumsys.Web.admin.order
                     getAdminInfo = "and seller_id=" + GetAdminInfo().id;
                 }
                 ChkAdminLevel("order_list", PLEnums.ActionEnum.View.ToString()); //检查权限
-                RptBind("id>0 " + getAdminInfo + CombSqlTxt(this.status, this.payment_status, this.express_status, this.keywords), "status asc,add_time desc,id desc");
+                RptBind("id>0 " + getAdminInfo + CombSqlTxt(this.status, this.payment_status, this.express_status, this.keywords), "add_time desc,id desc,status asc");
             }
         }
 
