@@ -11,7 +11,7 @@
         // 容器dom对象
         dom: null,
         // 触发tab切换的事件：click|mouseover
-        triggerEvent: 'mouseover',
+        triggerEvent: 'click',
         // 高亮时的样式名
         activeCls: ''
     };
