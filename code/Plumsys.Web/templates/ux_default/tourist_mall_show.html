@@ -108,7 +108,7 @@
                             var nowday = new Date();
                         </script>
                         <dl>
-                            <dt>购买日期</dt>
+                            <dt>预定日期</dt>
                             <dd>
                                 <div class="stock-box2">
                                     <input type="text" placeholder="请选择日期" onclick="JTC.setday({minDate:nowday, ranged: true})" />
@@ -133,8 +133,8 @@
                         <dl>
                             <dd>
                                 <div id="buyButton" class="btn-buy">
-                                    <button class="buy over" onclick='cartAdd(this,'{config.webpath}',1,'<%linkurl("shopping")%>');' disable="disable">立即购买</button>
-                                    <button class="add over" onclick='cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');' disable="disable">加入购物车</button>
+                                    <button class="buy over" onclick="cartAdd(this,'{config.webpath}',1,'<%linkurl("shopping")%>');" disable="disable">立即购买</button>
+                                    <button class="add over" onclick="cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');" disable="disable">加入购物车</button>
                                     <!--<span id="submbuy" onclick='cartAdd(this,' {config.webpath}',1,'<%linkurl("shopping")%>');'  disable="disable">立即预订</span><span class="Love WishList" onclick='cartAdd(this,' {config.webpath}',0,'<%linkurl("cart")%>');' disable="disable">加入购物车</span>-->
                                 </div>
                             </dd>
@@ -182,8 +182,8 @@
                         ¥{model.fields[sell_price]}起
 
                     </div>
-                    <div class="FixedBuyBtn" id="submbuy01" onclick=" JTC.setday({minDate:nowday, ranged: true})">立即预订</div>
-                    <div class="Love FixedWishBtn" onclick="cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');">加入购物车</div>
+                    <div class="FixedBuyBtn" id="submbuy01" onclick="JTC.setday({minDate:nowday, ranged: true})">立即预订</div>
+                    <div class="Love FixedWishBtn" onclick="cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');" >加入购物车</div>
                     <!--<div class="ShareTitle">分享至</div>
                     <div class="ShareBox">
                      

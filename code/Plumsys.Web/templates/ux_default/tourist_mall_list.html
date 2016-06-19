@@ -7,10 +7,7 @@
     <meta name="keywords" content=" {site.seo_keyword}" />
     <meta name="description" content="{site.seo_description}" />
     <link href="<%templateskin%>/css/info_list.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/info_list.js"></script>
-    <script type="text/javascript" src="<%templateskin%>/js/JTimer_1.3.js"></script>
+   
     <style>
         .Zebra_DatePicker td.dp_selected {
             background: #fe5098;
@@ -200,6 +197,18 @@
                                                 <a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'> <img width="280" height="146" class="lazy_img" alt="" src="{dr[img_url]}" /></a>
                                                 </a>
                                             </div>
+                                            <!--<div class="add"><b></b> 西班牙 - 马德里</div>
+                                            <div class="Love" onclick="cartAdd(this,' {config.webpath}',0,'<%linkurl("cart")%>');" disable="disable" ><span>加入购物车</span><i></i></div>-->
+                                            <div class="infos" style="display: none;">
+                                                <a class="SearchLinker" href="#"
+                                                   target="_blank">
+                                                    <p>
+                                                       
+                                                     {dr[zhaiyao]}
+
+                                                    </p>
+                                                </a>
+                                            </div>
                                         </dt>
                                         <dd>
                                             <div class="name"><a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'>{dr[title]}</a></div>
@@ -243,6 +252,12 @@
         <img src="images/xubox_loading2.gif" />&nbsp;搜索中...&nbsp;
     </div>
     </div>
+    <script type="text/javascript" charset="utf-8" src="{config.webpath}scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/info_list.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/JTimer_1.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/cart.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/CategoryInfo.js"></script>
     <!--footer begin-->
     <%template src="_footer.html"%>
     <!--footer end-->
