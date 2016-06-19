@@ -1822,6 +1822,12 @@ $(".BackToTop").click(function() {
     },
     800)
 }),
+$(".FixedBuyBtn").click(function () {
+    $("body,html").animate({
+        scrollTop: 0
+    },
+    800)
+}),
 $(window).scroll(function() {
     $(window).scrollTop() < 300 ? $(".RightBox").hide() : $(".RightBox").show()
 }),

@@ -133,7 +133,7 @@
                         <dl>
                             <dd>
                                 <div id="buyButton" class="btn-buy">
-                                    <button class="buy over" onclick="cartAdd(this,'{config.webpath}',1,'<%linkurl("shopping")%>');" disable="disable">立即购买</button>
+                                    <button class="buy over" onclick="cartAdd(this,'{config.webpath}',1,'<%linkurl("shopping")%>');" disable="disable">立即预订</button>
                                     <button class="add over" onclick="cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');" disable="disable">加入购物车</button>
                                     <!--<span id="submbuy" onclick='cartAdd(this,' {config.webpath}',1,'<%linkurl("shopping")%>');'  disable="disable">立即预订</span><span class="Love WishList" onclick='cartAdd(this,' {config.webpath}',0,'<%linkurl("cart")%>');' disable="disable">加入购物车</span>-->
                                 </div>
@@ -182,7 +182,7 @@
                         ¥{model.fields[sell_price]}起
 
                     </div>
-                    <div class="FixedBuyBtn" id="submbuy01" onclick="JTC.setday({minDate:nowday, ranged: true})">立即预订</div>
+                    <div class="FixedBuyBtn">立即预订</div>
                     <div class="Love FixedWishBtn" onclick="cartAdd(this,'{config.webpath}',0,'<%linkurl("cart")%>');" >加入购物车</div>
                     <!--<div class="ShareTitle">分享至</div>
                     <div class="ShareBox">
@@ -340,7 +340,7 @@
     </div>
     <script type="text/javascript" src="<%templateskin%>/js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="<%templateskin%>/js/info_detail.js"></script>
-    <!--<script>
+    <script>
         $(".zxkfli").click(function () {
             $("iframe").css("margin-right", "");
         })
@@ -395,7 +395,7 @@
         //推荐
         $(".recomm_title:first").addClass("hover");
         $(".related-img:first").show();
-    </script>-->
+    </script>
     <!-- poi -->
     <script type="text/javascript" src="<%templateskin%>/js/js.js"></script>
     <script>
