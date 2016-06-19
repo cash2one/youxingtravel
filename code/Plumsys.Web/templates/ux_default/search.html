@@ -23,100 +23,23 @@
         <!--Header-->
         <%template src="_header.html"%>
         <!--/Header-->
-        <!--C#代码-->
-        <%csharp%>
-        string orderby="add_time desc,id asc";
-        string strBy=PLRequest.GetQueryString("orderby");
-        if(strBy=="click"){
-        orderby="click desc";
-        }else if(strBy=="min"){
-        orderby="sell_price asc";
-        }else if(strBy=="max"){
-        orderby="sell_price desc";
-        }
-        string strwhere="status=0";
-        int minPrice=PLRequest.GetQueryInt("min_price",0);
-        if(minPrice>0){
-        strwhere+="and sell_price>="+minPrice;
-        }
-        int maxPrice=PLRequest.GetQueryInt("max_price",0);
-        if(maxPrice>0){
-        strwhere+="and sell_price<="+maxPrice;
-        }
-        Dictionary<string,string>
-            dicSpecIds=new Dictionary<string,string>
-                ();
-                for (int i = 0; i < Request.QueryString.AllKeys.Length; i++)
-                {
-                string paramKey=Request.QueryString.GetKey(i).ToString();
-                int paramValue=Utils.StrToInt(Request.QueryString[i].ToString(),0);
-                if(paramKey.StartsWith("s_") && paramValue>0)
-                {
-                dicSpecIds.Add(paramKey,paramValue.ToString());
-                }
-                }
-                <%/csharp%>
                 <!--/C#代码-->
                 <div class="content">
                     <div class="c-wrapper">
-                        <!-- 筛选项 begin -->
-                        <div class="searched">
-                            <dl class="yxz">
-                                <dt style="background: none;">您已选择 :</dt>
-                                <dd style="margin-left: 15px;">
-                                    <!-- <span>主题</span> -->
-                                    <span class="cur_content">
-                                        <span id="check_theme">跟团游</span>
-                                        <a class="search_cancel" id="themeview" href="javascript:void(0)"
-                                           rel="Ticket">×</a>
-                                    </span>
-
-                                </dd>
-                            </dl>
-                            <dl class="mdd">
-                                <dt>目 的 地 :</dt>
-                                <dd id="mdd">
-                                   
-                                </dd>
-                                <div class="clear"></div>
-                            </dl>
-                            <dl class="leixing">
-                               
-                                
-                                <div class="clear"></div>
-                            </dl>
-                            <dl class="playdate">
-                                <dt>游玩日期 :</dt>
-                                <dd id="daterange">
-                                    <span>
-                                        <a class="date_range_click" href="javascript:void(0)"
-                                           rel="2016-05-16~2016-05-16">今天</a>
-                                    </span>
-                                    <span>
-                                        <a class="date_range_click" href="javascript:void(0)" rel="2016-05-17~2016-05-17">明天</a>
-                                    </span>                         <span>
-                                        <a class="date_range_click"
-                                           href="javascript:void(0)" rel="2016-05-16~2016-05-22">本周</a>
-                                    </span>                             <span class="DateSelect">
-                                        <input id="StartDate" type="text" placeholder="开始时间" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" value="" /><input class="querydate" id="querydate" type="button" value="确定" />
-                                    </span>
-                                </dd>
-                                <div class="clear"></div>
-                            </dl>
-                            <div class="clear"></div>
-                        </div>
-                        <!-- 筛选项 end -->
                         <!-- 筛选列表 begin -->
-                        <input id="orderType" type="hidden" />
                         <div class="searchlist">
                             <!-- 排序方式 begin -->
                             <div class="sort">
-                              
-                                <!--<div class="pagelist">
-                                    <span class="prev">
-                                        <a href="javascript:void(0);"></a>
-                                    </span><span class="next"><a href="#"></a></span>
-                                </div>-->
+                                <ul>
+                                    <li><b class="sort_click" id="sort_default">综合</b></li>
+                                    <li><b class="sort_click" id="sale_amount">销量优先</b></li>
+                                    <li>
+                                        <b class="sort_click" id="soldprice_yuan">
+                                            价格<i class="PriceHigh"></i><i class="PriceLow"></i>
+                                        </b>
+                                    </li>
+
+                                </ul>
                             </div>
                             <!-- 筛选结果 begin -->
                             <div class="lists">
@@ -167,25 +90,24 @@
                                 <div class="nodata">暂时无法找到您想要的商品！</div>
                                 <%/if%>
                                 <div class="clear"></div>
-                            </div><!-- 筛选结果 end -->                 <!-- 分页开始 -->
+                            </div>
+                        <!-- 筛选结果 end -->                
+                         <!-- 分页开始 -->
 
                             <div class="page">
-                               
                                 {pagelist}
                             </div>
-                        </div><!-- 筛选列表 end -->
+                        </div>
+                        <!-- 筛选列表 end -->
                     </div>
                 </div>
-            </string,string>
-        </string,string>
-    </div>
-        </div>
+      <!--footer begin-->
+      <%template src="_footer.html"%>
+      <!--footer end-->
         <div id="load_img" style="display: none;">
             <img src="images/xubox_loading2.gif" />&nbsp;搜索中...&nbsp;
         </div>
     </div>
-    <!--footer begin-->
-    <%template src="_footer.html"%>
-    <!--footer end-->
+   
 </body>
 </html>
