@@ -2041,3 +2041,13 @@ button.Zebra_DatePicker_Icon_Inside {
 .navitems li dd a:hover{
 	background:  rgba(136, 180, 34, 1) !important; color: rgb(255, 255, 255) !important;
 }
+
+/*Ò³ÂëÈÝÆ÷*/
+.page-box{ margin-top:15px; color:#999; font-size:14px; }
+
+div.digg{ margin:0; padding:0; text-align:left; font-size:14px; }
+    div.digg a{ display:block; float:left; padding:5px 12px; margin:0 0 0 8px; border:1px solid #e1e2e3; line-height:20px; height:20px; color:rgb(102,102,102); background:#fff; text-decoration:none; }
+    div.digg a:hover { border:1px solid rgba(136, 180, 34, 1); }
+    div.digg span{ display:block; float:left; padding:5px 0; line-height:20px; height:20px; }
+    div.digg span.current { padding:5px 12px; margin:0 0 0 8px; color:rgb(102,102,102); font-weight:bold; background-color:rgba(136, 180, 34, 1) }
+    div.digg span.disabled { border:1px solid #eee; padding:5px 12px; margin:0 0 0 8px; color:#ddd; }
