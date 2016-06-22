@@ -40,6 +40,10 @@ namespace Plumsys.Common
             /// </summary>
             Audit,
             /// <summary>
+            /// 退回
+            /// </summary>
+            Returned,
+            /// <summary>
             /// 回复
             /// </summary>
             Reply,

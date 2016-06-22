@@ -44,6 +44,7 @@ namespace Plumsys.Web.admin.article
             auths=GetAdminAuth("channel_" + this.channel_name + "_list");
             btnSave.Visible = auths[PLEnums.ActionEnum.Edit];
             btnAudit.Visible = auths[PLEnums.ActionEnum.Audit];
+            btnReturned.Visible = auths[PLEnums.ActionEnum.Returned];
             btnDelete.Visible = auths[PLEnums.ActionEnum.Delete];
             if (!Page.IsPostBack)
             {
@@ -174,6 +175,9 @@ namespace Plumsys.Web.admin.article
                         break;
                     case "unIsLock":
                         strTemp.Append(" and status=0");
+                        break;
+                    case "isReturned":
+                        strTemp.Append(" and status=3");
                         break;
                     case "isMsg":
                         strTemp.Append(" and is_msg=1");
@@ -444,6 +448,34 @@ namespace Plumsys.Web.admin.article
                 this.channel_id.ToString(), this.category_id.ToString(), this.keywords, this.property,this.area_id.ToString()));
         }
 
+        //批量退回
+        protected void btnReturned_Click(object sender, EventArgs e)
+        {
+            ChkAdminLevel("channel_" + this.channel_name + "_list", PLEnums.ActionEnum.Returned.ToString()); //检查权限
+            BLL.article bll = new BLL.article();
+            Repeater rptList = new Repeater();
+            switch (this.prolistview)
+            {
+                case "Txt":
+                    rptList = this.rptList1;
+                    break;
+                default:
+                    rptList = this.rptList2;
+                    break;
+            }
+            for (int i = 0; i < rptList.Items.Count; i++)
+            {
+                int id = Convert.ToInt32(((HiddenField)rptList.Items[i].FindControl("hidId")).Value);
+                CheckBox cb = (CheckBox)rptList.Items[i].FindControl("chkId");
+                if (cb.Checked)
+                {
+                    bll.UpdateField(id, "status=3");
+                }
+            }
+            AddAdminLog(PLEnums.ActionEnum.Returned.ToString(), "退回" + this.channel_name + "频道内容信息"); //记录日志
+            JscriptMsg("批量退回成功！", Utils.CombUrlTxt("article_list.aspx", "channel_id={0}&category_id={1}&keywords={2}&property={3}&area_id={4}",
+                this.channel_id.ToString(), this.category_id.ToString(), this.keywords, this.property, this.area_id.ToString()));
+        }
         //批量删除
         protected void btnDelete_Click(object sender, EventArgs e)
         {

@@ -1809,19 +1809,19 @@
       <DependentUpon>wx.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="templates\ux_default\tools\admin_ajax.ashx.cs">
+    <Compile Include="tools\admin_ajax.ashx.cs">
       <DependentUpon>admin_ajax.ashx</DependentUpon>
     </Compile>
-    <Compile Include="templates\ux_default\tools\download.ashx.cs">
+    <Compile Include="tools\download.ashx.cs">
       <DependentUpon>download.ashx</DependentUpon>
     </Compile>
-    <Compile Include="templates\ux_default\tools\submit_ajax.ashx.cs">
+    <Compile Include="tools\submit_ajax.ashx.cs">
       <DependentUpon>submit_ajax.ashx</DependentUpon>
     </Compile>
-    <Compile Include="templates\ux_default\tools\upload_ajax.ashx.cs">
+    <Compile Include="tools\upload_ajax.ashx.cs">
       <DependentUpon>upload_ajax.ashx</DependentUpon>
     </Compile>
-    <Compile Include="templates\ux_default\tools\verify_code.ashx.cs">
+    <Compile Include="tools\verify_code.ashx.cs">
       <DependentUpon>verify_code.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -1858,25 +1858,10 @@
     <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="templates\ux_default\tools\admin_ajax.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="templates\ux_default\tools\upload_ajax.ashx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="xmlconfig\user.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="xmlconfig\order.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="templates\ux_default\tools\submit_ajax.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="templates\ux_default\tools\verify_code.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="templates\ux_default\tools\download.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="xmlconfig\tenpaypc.config" />
@@ -1899,6 +1884,11 @@
     <Content Include="templates\ux_default\images\headnavibg.psd" />
     <Content Include="templates\ux_default\images\lovenormal.psd" />
     <Content Include="templates\ux_default\images\QQ图片20160515163843.psd" />
+    <Content Include="tools\admin_ajax.ashx" />
+    <Content Include="tools\download.ashx" />
+    <Content Include="tools\submit_ajax.ashx" />
+    <Content Include="tools\upload_ajax.ashx" />
+    <Content Include="tools\verify_code.ashx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

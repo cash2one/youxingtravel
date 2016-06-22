@@ -1442,6 +1442,7 @@ namespace Plumsys.Common
             dic.Add("Edit", "修改");
             dic.Add("Delete", "删除");
             dic.Add("Audit", "审核");
+            dic.Add("Returned","退回");
             dic.Add("Reply", "回复");
             dic.Add("Confirm", "确认");
             dic.Add("Cancel", "取消");

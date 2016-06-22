@@ -188,6 +188,7 @@ textarea.input{ width:300px; height:65px; }
 	.toolbar .l-list .icon-list li a.copy i{ background-position:-280px -28px; }
 	.toolbar .l-list .icon-list li a.date i{ background-position:-308px -28px; }
 	.toolbar .l-list .icon-list li a.lock i{ background-position:-336px -28px; }
+    .toolbar .l-list .icon-list li a.returned i{ background-position:-420px -28px; }
 	.toolbar .l-list .icon-list li a.msg i{ background-position:-364px -28px; }
 	.toolbar .l-list .menu-list{ float:left; display:block; margin:0; padding-bottom:5px; }
 	.toolbar .l-list .menu-list:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
