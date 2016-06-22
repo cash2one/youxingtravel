@@ -341,62 +341,6 @@
     </div>
     <script type="text/javascript" src="<%templateskin%>/js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="<%templateskin%>/js/info_detail.js"></script>
-    <script>
-        $(".zxkfli").click(function () {
-            $("iframe").css("margin-right", "");
-        })
-
-        var tourId = '9559';
-        var imageHead = '';
-        var min_days_before_book = parseInt('1');
-        /**
-         * 异步加载热门图片
-         * @author tian
-         */
-        var public = common_checkbrowse();
-        var showeffect = "";
-        if ((public['is'] == 'msie' && public['ver'] < 8.0)) { //根据浏览器版本来显示不同的滤镜效果
-            showeffect = "show";
-        } else {
-            showeffect = "fadeIn";
-        }
-        //滚动停止加载
-        $("img.lazy_img").lazyload({
-            event: "scroll",
-            effect: showeffect
-        });
-
-        var director = new Director(tourId);
-        director.defaultCurrentDay = '2016-05-29';
-        director.initialize();
-        var nowYear = 2016;
-        var nowMonth = 5 - 1;
-        var startYear = parseInt(director.sellstart_date.substr(0, 4));
-        var startMonth = parseInt(director.sellstart_date.substr(5, 2));
-        var endYear = parseInt(director.sellend_date.substr(0, 4));
-        var endMonth = parseInt(director.sellend_date.substr(5, 2));
-        if ((startYear == nowYear && startMonth > nowMonth) || startYear > nowYear) {
-            director.render(director.sellstart_date);
-        } else if ((endYear == nowYear && endMonth < nowMonth) || endYear < nowYear) {
-            director.render(director.sellend_date);
-        } else {
-            director.render(nowYear + (nowMonth < 9 ? "-0" : "-") + (nowMonth + 1));
-        }
-
-        // 当月无可售 跳下一月
-        while ($("#myDateTime table td.usable").size() < 1 && director.currentScence.month < director.sellend_date) $(".month-rgt").click();
-
-        //判断是不是法国
-        $(".position a").each(function () {
-            if ($(this).text() == "法国") {
-                $(".tour_zysx .order-content").before("<p style='color:#E53333;font-size:14px;'>为了您的出行安全，请在游览景点时配合工作人员进行安检。如遇突发情况造成景点游览时间更改或关闭，请您理解并遵循当地工作人员的安排</p>");
-            }
-        });
-
-        //推荐
-        $(".recomm_title:first").addClass("hover");
-        $(".related-img:first").show();
-    </script>
     <!-- poi -->
     <script type="text/javascript" src="<%templateskin%>/js/js.js"></script>
     <script>
