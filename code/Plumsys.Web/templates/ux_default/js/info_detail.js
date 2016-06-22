@@ -21,6 +21,7 @@ $(".FixedBuyBtn").click(function () {
         scrollTop: 0
     },
     800)
+    
 }),
 $(window).scroll(function () {
     $(window).scrollTop() < 300 ? $(".RightBox").hide() : $(".RightBox").show()
