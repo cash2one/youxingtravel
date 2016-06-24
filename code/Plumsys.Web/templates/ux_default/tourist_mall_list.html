@@ -195,7 +195,7 @@
                             <!-- 筛选结果 begin -->
                             <div class="lists">
                                 <%set DataTable goodsList=get_article_list(channel,category_id,0,dicSpecIds,pagesize,page,strwhere,orderby,out totalcount)%><!--数据-->
-                                <%set pagelist = Utils.OutPageList(pagesize, page, totalcount, linkurl("tourist_mall_list", "?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&orderby="+strBy+"&page=__id__"+get_article_spec_param(dicSpecIds,"")), 8)%><!--分页-->
+                                <%set pagelist = Utils.OutPageList(pagesize, page, totalcount, linkurl("tsearch", "?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&orderby="+strBy+"&page=__id__"+get_article_spec_param(dicSpecIds,"")), 8)%><!--分页-->
                                 <%foreach(DataRow dr in goodsList.Rows)%>
                                 <span class="product">
                                     <dl class="products">
