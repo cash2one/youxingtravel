@@ -12,6 +12,7 @@
     <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
     <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/info_list.js"></script>
     <script type="text/javascript" src="<%templateskin%>/js/JTimer_1.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/cart.js"></script>
     <style>
         .Zebra_DatePicker td.dp_selected {
             background: #fe5098;
@@ -20,6 +21,7 @@
 </head>
 <body>
     <div class="wrap">
+
         <!--Header-->
         <%template src="_header.html"%>
         <!--/Header-->
@@ -42,6 +44,20 @@
         int maxPrice=PLRequest.GetQueryInt("max_price",0);
         if(maxPrice>0){
         strwhere+="and sell_price<="+maxPrice;
+        }
+        string str_start_time=PLRequest.GetQueryString("start_time");
+        string str_end_time=PLRequest.GetQueryString("end_time");
+        if(!string.IsNullOrEmpty(str_start_time))
+        {
+        DateTime start_time= PLRequest.GetQueryDateTime("start_time");
+        string s_start_time=start_time.ToString("yyyy-MM-dd")+" 00:00:00";
+        strwhere+=" and start_date<='"+s_start_time+"'";
+        }
+        if(!string.IsNullOrEmpty(str_end_time))
+        {
+        DateTime end_time= PLRequest.GetQueryDateTime("str_end_time");
+        string s_end_time=end_time.ToString("yyyy-MM-dd")+" 23:59:59";
+        strwhere+=" and end_date>='"+s_end_time+"'";
         }
         Dictionary<string,string>
             dicSpecIds=new Dictionary<string,string>
@@ -69,7 +85,7 @@
                                     <%foreach(DataRow adr in areaList.Rows)%>
                                     <span class="cur_content">
                                         <span id="check_theme">{adr[title]}</span>
-                                        <a class="search_cancel" id="themeview" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&area_id="+get_area_parent_id({adr[id]})+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>'
+                                        <a class="search_cancel" id="themeview" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&area_id="+get_area_parent_id({adr[id]})+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>'
                                            rel="Ticket">×</a>
                                     </span>
                                     <%/foreach%>
@@ -77,7 +93,7 @@
                                     <%loop gdr GoodscList%>
                                     <span class="cur_content">
                                         <span id="check_theme">{gdr[title]}</span>
-                                        <a class="search_cancel" href='<%linkurl("tsearch","?category_id="+get_category_parent_id({gdr[id]})+"&min_price="+minPrice+"&max_price="+maxPrice+"&area_id="+area_id+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>' id="themeview"
+                                        <a class="search_cancel" href='<%linkurl("tsearch","?category_id="+get_category_parent_id({gdr[id]})+"&min_price="+minPrice+"&max_price="+maxPrice+"&area_id="+area_id+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>' id="themeview"
                                            rel="Ticket">×</a>
                                     </span>
                                     <%/loop%>
@@ -90,7 +106,7 @@
                                     <span class="MoreBtn" id="HideMore" style="display: none;">收起∧</span>
                                     <%set DataTable categoryareaList=get_area_child_list(area_id)%>
                                     <%foreach(DataRow cdr in categoryareaList.Rows)%>
-                                    <a href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&area_id="+{cdr[id]}+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>{cdr[title]}</a>
+                                    <a href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&area_id="+{cdr[id]}+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>{cdr[title]}</a>
                                     <%/foreach%>
                                 </dd>
                                 <div class="clear"></div>
@@ -100,7 +116,7 @@
                                 <dd id="leixing">
                                     <%set DataTable GoodsCategoryList=get_category_child_list(channel,model.id)%>
                                     <%loop gcdr GoodsCategoryList%>
-                                    <a class="selected" href='<%linkurl("tsearch","?category_id="+{gcdr[id]}+"&min_price="+minPrice+"&max_price="+maxPrice+"&orderby="+strBy+get_article_spec_param(dicSpecIds,""))%>'>{gcdr[title]}</a>
+                                    <a class="selected" href='<%linkurl("tsearch","?category_id="+{gcdr[id]}+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby="+strBy+get_article_spec_param(dicSpecIds,""))%>'>{gcdr[title]}</a>
                                     <%/loop%>
                                 </dd>
                                 <div class="clear"></div>
@@ -112,16 +128,16 @@
                                 </script>
                                 <dd id="daterange">
                                     <span>
-                                        <a class="date_range_click" href="javascript:void(0)"
-                                           rel="2016-05-16~2016-05-16">今天</a>
+                                        <a class="date_range_click" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+DateTime.Now.ToString("yyyy-MM-dd")+"&end_time="+DateTime.Now.ToString("yyyy-MM-dd")+"&orderby="+strBy+get_article_spec_param(dicSpecIds,""))%>'>今天</a>
                                     </span>
                                     <span>
-                                        <a class="date_range_click" href="javascript:void(0)" rel="2016-05-17~2016-05-17">明天</a>
-                                    </span>                         <span>
-                                        <a class="date_range_click"
-                                           href="javascript:void(0)" rel="2016-05-16~2016-05-22">本周</a>
-                                    </span>                             <span class="DateSelect">
-                                        <input id="StartDate" type="text" placeholder="开始时间" onclick="JTC.setday({minDate:nowday, ranged: true})" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" onclick="JTC.setday({minDate:nowday, ranged: true})" value="" /><input class="querydate" id="querydate" type="button" value="确定" />
+                                        <a class="date_range_click" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")+"&end_time="+DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")+"&orderby="+strBy+get_article_spec_param(dicSpecIds,""))%>' rel="2016-05-17~2016-05-17">明天</a>
+                                    </span>
+                                    <span>
+                                        <a class="date_range_click" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+CalculateFirstDateOfWeek(DateTime.Now).ToString("yyyy-MM-dd")+"&end_time="+CalculateLastDateOfWeek(DateTime.Now).ToString("yyyy-MM-dd")+"&orderby="+strBy+get_article_spec_param(dicSpecIds,""))%>'>本周</a>
+                                    </span>
+                                    <span class="DateSelect">
+                                        <input id="StartDate" type="text" placeholder="开始时间" onclick="JTC.setday({minDate:nowday, ranged: true})" value="" /> — <input id="EndDate" type="text" placeholder="结束时间" onclick="JTC.setday({minDate:nowday, ranged: true})" value="" /><input class="querydate" id="querydate" type="button" value="确定" onclick="date_click()" />
                                     </span>
                                 </dd>
                                 <div class="clear"></div>
@@ -149,18 +165,18 @@
                                     <li>
                                         <b class="sort_click" id="sort_default">
                                             <%if(strBy=="click")%>
-                                            <a class="selected" href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>综合</a>
+                                            <a class="selected" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>综合</a>
                                             <%else%>
-                                            <a href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>综合</a>
+                                            <a href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=click"+get_article_spec_param(dicSpecIds,""))%>'>综合</a>
                                             <%/if%>
                                         </b>
                                     </li>
                                     <li>
                                         <b class="sort_click" id="sale_amount">
                                             <%if(strBy==""||strBy=="time")%>
-                                            <a class="first selected" href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=time"+get_article_spec_param(dicSpecIds,""))%>'>销量优先</a>
+                                            <a class="first selected" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=time"+get_article_spec_param(dicSpecIds,""))%>'>上架时间</a>
                                             <%else%>
-                                            <a class="first" href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=time"+get_article_spec_param(dicSpecIds,""))%>'>销量优先</a>
+                                            <a class="first" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=time"+get_article_spec_param(dicSpecIds,""))%>'>上架时间</a>
                                             <%/if%>
                                         </b>
                                     </li>
@@ -168,37 +184,39 @@
                                         <b class="sort_click" id="soldprice_yuan">
                                             价格
                                             <%if(strBy=="max")%>
-                                            <a class="selected" href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceHigh"></i></a>
+                                            <a class="selected" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceHigh"></i></a>
                                             <%else%>
-                                            <a href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceHigh"></i></a>
+                                            <a href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceHigh"></i></a>
                                             <%/if%>
-
                                             <%if(strBy=="min")%>
-                                            <a class="selected" href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=min"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceLow"> </i></a>
+                                            <a class="selected" href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=min"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceLow"> </i></a>
                                             <%else%>
-                                            <a href='<%linkurl("tsearch","?category_id="+category_id+" &min_price="+minPrice+" &max_price="+maxPrice+" &orderby=min"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceLow"> </i></a>
+                                            <a href='<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=max"+get_article_spec_param(dicSpecIds,""))%>'><i class="PriceLow"></i></a>
                                             <%/if%>
-
                                         </b>
                                     </li>
-
                                 </ul>
-                                <!--<div class="pagelist">
-                                    <span class="prev">
-                                        <a href="javascript:void(0);"></a>
-                                    </span><span class="next"><a href="#"></a></span>
-                                </div>-->
                             </div>
                             <!-- 筛选结果 begin -->
                             <div class="lists">
                                 <%set DataTable goodsList=get_article_list(channel,category_id,0,dicSpecIds,pagesize,page,strwhere,orderby,out totalcount)%><!--数据-->
-                                <%set pagelist = Utils.OutPageList(pagesize, page, totalcount, linkurl("tourist_mall_list", "?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&orderby="+strBy+"&page=__id__"+get_article_spec_param(dicSpecIds,"")), 8)%><!--分页-->
+                                <%set pagelist = Utils.OutPageList(pagesize, page, totalcount, linkurl("tsearch", "?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby="+strBy+"&page=__id__"+get_article_spec_param(dicSpecIds,"")), 8)%><!--分页-->
                                 <%foreach(DataRow dr in goodsList.Rows)%>
                                 <span class="product">
                                     <dl class="products">
                                         <dt class="model1">
                                             <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
                                                 <a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'> <img width="280" height="146" class="lazy_img" alt="" src="{dr[img_url]}" /></a>
+                                                </a>
+                                            </div>
+                                            <div class="infos" style="display: none;">
+                                                <a class="SearchLinker" href='<%linkurl("tourist_mall_show",{dr[id]})%> '
+                                                   target="_blank">
+                                                    <p>
+
+                                                        {dr[zhaiyao]}
+
+                                                    </p>
                                                 </a>
                                             </div>
                                         </dt>
@@ -219,33 +237,43 @@
                                 <div class="nodata">暂时无法找到您想要的商品！</div>
                                 <%/if%>
                                 <div class="clear"></div>
-                            </div><!-- 筛选结果 end -->                 <!-- 分页开始 -->
 
+                            </div><!-- 筛选结果 end -->                 <!-- 分页开始 -->
                             <div class="page">
-                                <!--<a href="javascript:void();">上一页</a>
-                                <a class="hover" href="javascript:void();">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#">5</a>
-                                <a href="#">6</a>
-                                <a href="#">7</a>
-                                ...   <a href="#">下一页</a>-->
-                                {pagelist}
+                                <!--页码列表-->
+                                <div class="page-box">
+                                    <div class="digg">{pagelist}</div>
+                                </div>
+                                <!--/页码列表-->
                             </div>
+
                         </div><!-- 筛选列表 end -->
                     </div>
                 </div>
             </string,string>
         </string,string>
     </div>
-    </div>
     <div id="load_img" style="display: none;">
         <img src="images/xubox_loading2.gif" />&nbsp;搜索中...&nbsp;
-    </div>
     </div>
     <!--footer begin-->
     <%template src="_footer.html"%>
     <!--footer end-->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            var req_sdate = getUrlParam('start_time');
+            var req_edate = getUrlParam('end_time');
+            $("#StartDate").val(req_sdate);
+            $("#EndDate").val(req_edate);
+        })
+        function date_click() {
+            var s_date = $("#StartDate").val();
+            var e_date = $("#EndDate").val();
+            var url = '<%linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time=#sdate#&end_time=#edate#&orderby="+strBy+get_article_spec_param(dicSpecIds,""))%>';
+            url = url.replace('#sdate#', s_date);
+            url = url.replace('#edate#', e_date);
+            location.href = url;
+        }
+    </script>
 </body>
 </html>

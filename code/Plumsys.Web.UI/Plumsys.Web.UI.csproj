@@ -67,6 +67,9 @@
     <Compile Include="Label\area.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Label\date.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Label\express.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

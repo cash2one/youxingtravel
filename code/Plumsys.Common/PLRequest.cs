@@ -475,7 +475,15 @@ namespace Plumsys.Common
 		{
 			return Utils.StrToFloat(HttpContext.Current.Request.QueryString[strName], defValue);
 		}
-
+        /// <summary>
+        /// 获得指定Url参数的datetime类型值
+        /// </summary>
+        /// <param name="strName"></param>
+        /// <returns></returns>
+        public static DateTime GetQueryDateTime(string strName)
+        {
+            return Utils.StrToDateTime(HttpContext.Current.Request.QueryString[strName], DateTime.Now);
+        }
 		/// <summary>
 		/// 获得指定表单参数的float类型值
 		/// </summary>
