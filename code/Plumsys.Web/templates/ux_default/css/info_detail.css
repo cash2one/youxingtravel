@@ -5991,14 +5991,14 @@ a.hwlayout_box_close {
 }
 
 .FixedBuy {
-    background: rgb(255, 255, 255);
+    background: rgb(238, 238, 238);
     top: 0px;
     width: 312px;
     height: 328px;
     right: 0px;
     border-bottom-color: rgb(78, 78, 78);
     border-bottom-width: 2px;
-    border-bottom-style: solid;
+    /*border-bottom-style: solid;*/
     display: none;
     position: absolute;
 }
@@ -6016,7 +6016,7 @@ a.hwlayout_box_close {
 }
 
 .FixedBuyBtn {
-    background: linear-gradient(180deg, rgb(239, 43, 142), rgb(232, 15, 125));
+    background: rgb(255, 68, 0);
     margin: 38px auto 0px;
     border-radius: 3px;
     width: 198px;
@@ -6026,7 +6026,7 @@ a.hwlayout_box_close {
 }
 
     .FixedBuyBtn:hover {
-        background: linear-gradient(180deg, rgb(244, 53, 163), rgb(238, 14, 143));
+        background: rgb(255, 68, 0);
     }
 
 .FixedWishBtn {

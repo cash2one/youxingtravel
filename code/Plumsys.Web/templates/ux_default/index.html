@@ -356,7 +356,7 @@
                     <%foreach(DataRow dr in focusNews.Rows)%>
                     <li>
                         <a title="{dr[title]}" href="<%linkurl("tourist_mall_show",{dr[id]})%>" target="_blank">
-                            <img src="{dr[img_url]}" />
+                            <img src="{dr[img_url]}"  width="1920" height="600"/>
                         </a>
                     </li>
                     <%/foreach%>
