@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-27 23:06:39.
-		本页面代码由Plumsys模板引擎生成于 2016-06-27 23:06:39. 
+		This page was created by Plumsys Template Engine at 2016-06-28 23:06:13.
+		本页面代码由Plumsys模板引擎生成于 2016-06-28 23:06:13. 
 	*/
 
 	base.OnInit(e);
@@ -73,7 +73,7 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("\r\n                    <li>\r\n                        <a title=\"" + Utils.ObjectToStr(dr["title"]) + "\" href=\"");
 	templateBuilder.Append(linkurl("tourist_mall_show",Utils.ObjectToStr(dr["id"])));
 
-	templateBuilder.Append("\" target=\"_blank\">\r\n                            <img src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\" />\r\n                        </a>\r\n                    </li>\r\n                    ");
+	templateBuilder.Append("\" target=\"_blank\">\r\n                            <img src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\"  width=\"1920\" height=\"600\"/>\r\n                        </a>\r\n                    </li>\r\n                    ");
 	}	//end for if
 
 	templateBuilder.Append("\r\n                </ul>\r\n            </div>\r\n        </div>\r\n        <div class=\"HeadMainPage\">\r\n            <div class=\"search-new\">\r\n                <div id=\"header_search_box\">\r\n                    <div class=\"s-lft\">\r\n                        <input name=\"home_city\" class=\"typeahead city\" id=\"keywords\" onkeydown=\"if(event.keyCode==13){SiteSearch('");

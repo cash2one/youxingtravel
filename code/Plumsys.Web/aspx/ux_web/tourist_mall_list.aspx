@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-27 23:06:53.
-		本页面代码由Plumsys模板引擎生成于 2016-06-27 23:06:53. 
+		This page was created by Plumsys Template Engine at 2016-06-29 0:12:34.
+		本页面代码由Plumsys模板引擎生成于 2016-06-29 0:12:34. 
 	*/
 
 	base.OnInit(e);
@@ -122,17 +122,33 @@ override protected void OnInit(EventArgs e)
 	        }
 	        string str_start_time=PLRequest.GetQueryString("start_time");
 	        string str_end_time=PLRequest.GetQueryString("end_time");
+	        string ss_start_time= string.Empty;
+	        string se_end_time= string.Empty;
+	        string se_start_time= string.Empty;
+	        string ss_end_time= string.Empty;
 	        if(!string.IsNullOrEmpty(str_start_time))
 	        {
-	            DateTime start_time= PLRequest.GetQueryDateTime("start_time");
-	            string s_start_time=start_time.ToString("yyyy-MM-dd")+" 00:00:00";
-	            strwhere+=" and start_date<='"+s_start_time+"'";
+	        DateTime start_time= PLRequest.GetQueryDateTime("start_time");
+	        ss_start_time=start_time.ToString("yyyy-MM-dd")+" 00:00:00";
+	        se_start_time=start_time.ToString("yyyy-MM-dd")+" 23:59:59";
 	        }
 	        if(!string.IsNullOrEmpty(str_end_time))
 	        {
-	            DateTime end_time= PLRequest.GetQueryDateTime("str_end_time");
-	            string s_end_time=end_time.ToString("yyyy-MM-dd")+" 23:59:59";
-	            strwhere+=" and end_date>='"+s_end_time+"'";
+	        DateTime end_time= PLRequest.GetQueryDateTime("end_time");
+	        ss_end_time=end_time.ToString("yyyy-MM-dd")+" 00:00:00";
+	        se_end_time=end_time.ToString("yyyy-MM-dd")+" 23:59:59";
+	        }
+	        if(!string.IsNullOrEmpty(ss_start_time) && !string.IsNullOrEmpty(se_end_time))
+	        {
+	        strwhere+=" and ((start_date<='"+se_end_time+"' and end_date>='"+ss_end_time+"') or (start_date<='"+se_start_time+"' and end_date>='"+ss_start_time+"') or (start_date>='"+se_start_time+"' and end_date<='"+se_end_time+"'))";
+	        }
+	        if(!string.IsNullOrEmpty(ss_start_time) && string.IsNullOrEmpty(se_end_time))
+	        {
+	        strwhere+=" and start_date<='"+se_start_time+"' and end_date>='"+ss_start_time+"'";
+	        }
+	        if(string.IsNullOrEmpty(ss_start_time) && !string.IsNullOrEmpty(se_end_time))
+	        {
+	        strwhere+=" and start_date<='"+se_end_time+"' and end_date>='"+ss_end_time+"'";
 	        }
 	        Dictionary<string,string>
 	            dicSpecIds=new Dictionary<string,string>
