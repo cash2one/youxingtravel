@@ -51,13 +51,13 @@
         {
         DateTime start_time= PLRequest.GetQueryDateTime("start_time");
         string s_start_time=start_time.ToString("yyyy-MM-dd")+" 00:00:00";
-        strwhere+=" and start_date<='"+s_start_time+"'";
+        strwhere+=" and start_date=>'"+s_start_time+"'";
         }
         if(!string.IsNullOrEmpty(str_end_time))
         {
         DateTime end_time= PLRequest.GetQueryDateTime("str_end_time");
         string s_end_time=end_time.ToString("yyyy-MM-dd")+" 23:59:59";
-        strwhere+=" and end_date>='"+s_end_time+"'";
+        strwhere+=" and end_date<='"+s_end_time+"'";
         }
         Dictionary<string,string>
             dicSpecIds=new Dictionary<string,string>
