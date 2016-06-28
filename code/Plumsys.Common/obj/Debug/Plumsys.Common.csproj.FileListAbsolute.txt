@@ -16,3 +16,4 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\bin\Debug\Plu
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\bin\Debug\Plumsys.Common.pdb
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.csprojResolveAssemblyReference.cache

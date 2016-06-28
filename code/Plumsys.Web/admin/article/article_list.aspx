@@ -55,6 +55,8 @@
                                 <asp:LinkButton ID="btnSave" runat="server" CssClass="save" OnClick="btnSave_Click"><i></i><span>保存</span></asp:LinkButton></li>
                             <li>
                                 <asp:LinkButton ID="btnAudit" runat="server" CssClass="lock" OnClientClick="return ExePostBack('btnAudit','审核后前台将显示该信息，确定继续吗？');" OnClick="btnAudit_Click"><i></i><span>审核</span></asp:LinkButton></li>
+                            <li>
+                                <asp:LinkButton ID="btnReturned" runat="server" CssClass="returned" OnClientClick="return ExePostBack('btnReturned','退回后商商户需要重新提交，确定继续吗？');" OnClick="btnReturned_Click"><i></i><span>退回</span></asp:LinkButton></li>
                             <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                             <li>
                                 <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
@@ -77,6 +79,7 @@
                                     <asp:ListItem Value="" Selected="True">所有属性</asp:ListItem>
                                     <asp:ListItem Value="isLock">待审核</asp:ListItem>
                                     <asp:ListItem Value="unIsLock">已审核</asp:ListItem>
+                                    <asp:ListItem Value="isReturned">已退回</asp:ListItem>
                                     <asp:ListItem Value="isMsg">可评论</asp:ListItem>
                                     <asp:ListItem Value="isTop">置顶</asp:ListItem>
                                     <asp:ListItem Value="isRed">推荐</asp:ListItem>

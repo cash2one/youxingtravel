@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-16 6:29:36.
-		本页面代码由Plumsys模板引擎生成于 2016-06-16 6:29:36. 
+		This page was created by Plumsys Template Engine at 2016-06-27 23:06:53.
+		本页面代码由Plumsys模板引擎生成于 2016-06-27 23:06:53. 
 	*/
 
 	base.OnInit(e);
@@ -73,14 +73,23 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("\">我的优行</a>&nbsp;&nbsp;|&nbsp;&nbsp;');\r\n                            $(\"#menu\").append('<a id=\"uloginout\" href=\"");
 	templateBuilder.Append(linkurl("usercenter","exit"));
 
-	templateBuilder.Append("\">退出</a>');\r\n                            $(\"#menu\").append('</span>');\r\n                        } else {\r\n                            $(\"#menu\").append('<span id=\"un_login\">');\r\n                            $(\"#menu\").append('<a class=\"singin\" href=\"");
+	templateBuilder.Append("\">退出</a>');\r\n                            //$(\"#menu\").append(' <a href=\"");
+	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append("\">购物车<span id=\"shoppingCartCount\"> ');\r\n                            //$(\"#menu\").append('<script type=\"text/javascript\" src=\"");
+	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
+	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></span>件</a>');\r\n          \r\n                            $(\"#menu\").append('</span>');\r\n                        } else {\r\n                            $(\"#menu\").append('<span id=\"un_login\">');\r\n                            $(\"#menu\").append('<a class=\"singin\" href=\"");
 	templateBuilder.Append(linkurl("login"));
 
 	templateBuilder.Append("\">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;');\r\n                            $(\"#menu\").append('<a class=\"singup\" href=\"");
 	templateBuilder.Append(linkurl("register"));
 
 	templateBuilder.Append("\">注册</a>');\r\n                            $(\"#menu\").append('</span>');\r\n                        }\r\n                    }\r\n                });\r\n            </");
-	templateBuilder.Append("script>\r\n            <div id=\"menu\" class=\"RightNavi\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--nav end-->\r\n");
+	templateBuilder.Append("script>\r\n            <div id=\"menu\" class=\"RightNavi\">\r\n              <a href='");
+	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append("'>购物车<span id=\"shoppingCartCount\">\r\n                <script type=\"text/javascript\" src=\"");
+	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
+	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></");
+	templateBuilder.Append("script></span>件</a>&nbsp;&nbsp;|&nbsp;&nbsp;\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--nav end-->\r\n");
 
 
 	templateBuilder.Append("\r\n        <!--nav end-->\r\n        <!--content begin-->\r\n         <div class=\"content us\">\r\n            <div class=\"lft\">\r\n                <ul>\r\n                    <!--类别-->\r\n                    ");

@@ -462,5 +462,6 @@ override protected void OnInit(EventArgs e)
 
 	templateBuilder.Append("\r\n<!--/Footer-->\r\n</body>\r\n</html>");
 	Response.Write(templateBuilder.ToString());
+
 }
 </script>
