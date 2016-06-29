@@ -61,7 +61,7 @@
               <%set List<Plumsys.Model.article> ls=get_order_goods_list({strtoint({dr[id]})})%>
               <%if(ls!=null)%>
               <%foreach(Plumsys.Model.article modelt in ls)%>
-              <a target="_blank" title="{modelt.title}" href="<%linkurl("goods_show",{modelt.id})%>">
+              <a target="_blank" title="{modelt.title}" href="<%linkurl("tourist_mall_show",{modelt.id})%>">
                 <img width="60" height="60" alt="{modelt.title}" src="{modelt.img_url}" class="img">
               </a>
               <%/foreach%>

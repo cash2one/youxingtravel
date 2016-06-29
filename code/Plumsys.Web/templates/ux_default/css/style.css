@@ -81,7 +81,7 @@ input.btn, button.btn{ height:40px; cursor:pointer; overflow:visible; }
 
 /*页面布局
 ----------------------------------------------*/
-body{ text-align:center; background:#fff; *position:relative; }
+body{ text-align:left; background:#fff; *position:relative; }
 .section{ position:relative; margin:0 auto; padding:0; width:1180px; min-width:941px; max-width:1180px; text-align:left; overflow:hidden; }
 .wrapper{ position:relative; margin:0 auto; width:100%; height:288px; overflow:hidden; }
 	.wrapper.igoods{ height:327px; }
