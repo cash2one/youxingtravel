@@ -91,6 +91,7 @@ function cartAdd(obj, webpath, linktype, linkurl){
 	var articleId = parseInt($("#commodityArticleId").val());
 	var goodsId = parseInt($("#commodityGoodsId").val());
 	var selectNum = parseInt($("#commoditySelectNum").val());
+	var selectDate = parseInt($("#select_date").val());
 	if($(obj).prop("disabled") == true){
 		return false;
 	}
@@ -108,6 +109,11 @@ function cartAdd(obj, webpath, linktype, linkurl){
 	if(isNaN(selectNum) || selectNum == 0){
 		alert("购买数量不能为零！");
 		return false;
+	}
+    //检查购买日期是否为空
+	if (isNaN(selectDate)) {
+	    alert("预定日期不能为空！");
+	    return false;
 	}
 	//检查库存数量
 	if(parseInt(selectNum) > parseInt($("#commodityStockNum").text())){
