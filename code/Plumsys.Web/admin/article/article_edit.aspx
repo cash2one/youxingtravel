@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <title>编辑内容</title>
 <link href="../../scripts/artdialog/ui-dialog.css" rel="stylesheet" type="text/css" />
 <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
