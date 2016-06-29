@@ -390,7 +390,15 @@
                         <img class="lazy_img" src="{dr[img_url]}" />
                         <span class="ContentWordBox">
                             <span class="Word">
-                                <span id="getStr">{dr[title]}</span>
+                                <span id="getStr">
+                                <script>
+                        var getStr='{dr[title]}';
+                         if (getStr.length>6) {
+                       getStr=getStr.toString().substring(0,6)+"...";
+                          }
+                        document.write(getStr);
+                     </script>
+                                </span>
                             </span><span class="Price">
                                 <span>￥{dr[sell_price]}</span>
                             </span>
@@ -413,7 +421,13 @@
                             <img class="lazy_img" src="{dr[img_url]}" />
                             <span class="ContentWordBox">
                                 <span class="Word">
-                                    <span id="getStr">{dr[title]}</span>
+                                    <span id="getStr"><script>
+    var getStr='{dr[title]}';
+    if (getStr.length>6) {
+        getStr=getStr.toString().substring(0,6)+"...";
+    }
+    document.write(getStr);
+</script></span>
                                 </span><span class="Price">
                                     <span>￥{dr[sell_price]}</span>
                                 </span>
@@ -460,15 +474,6 @@
     <script type="text/javascript" src="<%templateskin%>/js/indextab.js"></script>
     <script type="text/javascript" src="<%templateskin%>/js/JTimer_1.3.js"></script>
 
-    <script>
-        //添加的截取字符串长度的js，超过一定长度就用省略号替代
-        $(function()
-        {
-            var str=   document.getElementById("getStr").innerHTML;
-            if (str.length>10) {
-                document.getElementById("getStr").innerHTML=str.substring(0,10)+"...";
-            }
-        })
-    </script>
+
 </body>
 </html>
