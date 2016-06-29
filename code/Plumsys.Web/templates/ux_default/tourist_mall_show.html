@@ -106,13 +106,16 @@
                 
                     <div class="spec-box">
                         <script>
-                            var nowday = new Date();
+                            var start_date = '{model.fields[start_date]}';
+                            var startdate=start_date.toString("yyyy-MM-dd");
+                            var end_date= '{model.fields[end_date]}';
+                            var enddate=end_date.toString("yyyy-MM-dd");
                         </script>
                         <dl>
                             <dt>预定日期</dt>
                             <dd>
                                 <div class="stock-box2">
-                                    <input type="text" placeholder="请选择日期" onclick="JTC.setday({minDate:nowday, ranged: true})" />
+                                    <input type="text" placeholder="请选择日期" onclick="JTC.setday({minDate:startdate,maxDate:enddate , ranged: true})" />
                                 </div>                     
                             </dd>
                         </dl>
