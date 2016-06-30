@@ -22,6 +22,7 @@ namespace Plumsys.Model
         private decimal _real_price = 0M;
         private int _quantity = 0;
         private int _point = 0;
+        private DateTime _use_date;
         /// <summary>
         /// 自增ID
         /// </summary>
@@ -117,6 +118,14 @@ namespace Plumsys.Model
         {
             set { _point = value; }
             get { return _point; }
+        }
+        /// <summary>
+        /// 使用日期，也是预定日期及预定使用日期
+        /// </summary>
+        public DateTime use_date
+        {
+            set { _use_date = value; }
+            get { return _use_date; }
         }
         #endregion Model
 
