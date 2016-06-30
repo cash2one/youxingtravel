@@ -106,10 +106,21 @@
                 
                     <div class="spec-box">
                         <script>
+                            var year=new Date().getFullYear();
+                            var mon=new Date().getMonth()+1;
+                            var day=new  Date().getDate();
+                            var today=year+'/'+mon+'/'+day;
                             var start_date = '{model.fields[start_date]}';
                             var startdate=start_date.toString("yyyy-MM-dd");
                             var end_date= '{model.fields[end_date]}';
                             var enddate=end_date.toString("yyyy-MM-dd");
+                            if (today>startdate) {
+                                startdate=today;
+                            }
+                            if (today>enddate) {
+                                startdate='';
+                                enddate='';
+                            }
                         </script>
                         <dl>
                             <dt>预定日期</dt>
