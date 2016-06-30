@@ -74,7 +74,6 @@ namespace Plumsys.Web.admin.article
                     if (GetAdminInfo().role_type != 1)
                     {
                         rblStatus.Enabled = false;
-                        rblStatus.SelectedValue = "1";
                     }
                 }
             }
@@ -686,7 +685,15 @@ namespace Plumsys.Web.admin.article
             }
             model.sort_id = Utils.StrToInt(txtSortId.Text.Trim(), 99);
             model.click = int.Parse(txtClick.Text.Trim());
-            model.status = Utils.StrToInt(rblStatus.SelectedValue, 0);
+            //如果不是超级管理员提交为待审核
+            if (GetAdminInfo().role_type != 1)
+            {
+                model.status = 1;
+            }
+            else
+            {
+                model.status = Utils.StrToInt(rblStatus.SelectedValue, 0);
+            }
             model.is_msg = 0;
             model.is_top = 0;
             model.is_red = 0;
@@ -861,7 +868,15 @@ namespace Plumsys.Web.admin.article
             }
             model.sort_id = Utils.StrToInt(txtSortId.Text.Trim(), 99);
             model.click = int.Parse(txtClick.Text.Trim());
-            model.status = Utils.StrToInt(rblStatus.SelectedValue, 0);
+            //如果不是超级管理员提交为待审核
+            if (GetAdminInfo().role_type != 1)
+            {
+                model.status = 1;
+            }
+            else
+            {
+                model.status = Utils.StrToInt(rblStatus.SelectedValue, 0);
+            }
             model.is_msg = 0;
             model.is_top = 0;
             model.is_red = 0;
