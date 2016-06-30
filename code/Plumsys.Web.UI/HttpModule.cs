@@ -40,11 +40,16 @@ namespace Plumsys.Web.UI
         /// <param name="e">包含事件数据的 EventArgs</param>
         private void ReUrl_BeginRequest(object sender, EventArgs e)
         {
+
             HttpContext context = ((HttpApplication)sender).Context;
-            if (!Utils.CheckRequest(context.Request))
-            { context.Response.Redirect("~/error.html"); return; }
             Model.siteconfig siteConfig = new BLL.siteconfig().loadConfig(); //获得站点配置信息
             string requestPath = context.Request.Path.ToLower(); //获得当前页面(含目录)
+            //如果不是管理页面则进行字符串检测
+            if (!requestPath.StartsWith("/admin"))
+            {
+                if (!Utils.CheckRequest(context.Request))
+                { context.Response.Redirect("~/error.html"); return; }
+            }
 
             //如果虚拟目录(不含安装目录)与站点根目录名相同则不需要重写
             if (IsDirExist(PLKeys.CACHE_SITE_DIRECTORY, siteConfig.webpath, siteConfig.webpath, requestPath))
