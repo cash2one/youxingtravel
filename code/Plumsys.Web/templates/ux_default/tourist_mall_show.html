@@ -106,17 +106,23 @@
                 
                     <div class="spec-box">
                         <script>
+                            //年月日
                             var year=new Date().getFullYear();
                             var mon=new Date().getMonth()+1;
                             var day=new  Date().getDate();
+
                             var today=year+'/'+mon+'/'+day;
+                            //开始日期
                             var start_date = '{model.fields[start_date]}';
                             var startdate=start_date.toString("yyyy-MM-dd");
+                            //结束日期
                             var end_date= '{model.fields[end_date]}';
                             var enddate=end_date.toString("yyyy-MM-dd");
+                            //如果今天日期大于开始日期，开始日期失效
                             if (today>startdate) {
                                 startdate=today;
                             }
+                            //如果今天日期大于结束日期，开始日期和结束日期都失效
                             if (today>enddate) {
                                 startdate='';
                                 enddate='';
