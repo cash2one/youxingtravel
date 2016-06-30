@@ -49,7 +49,7 @@ namespace Plumsys.Web.admin.article {
         protected global::System.Web.UI.WebControls.DropDownList ddlProperty;
         
         /// <summary>
-        /// txtKeywords 控件。
+        ///   控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。

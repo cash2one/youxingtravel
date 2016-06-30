@@ -19,31 +19,37 @@ namespace Plumsys.Web.admin.article
         protected string channel_name = string.Empty; //频道名称
         protected string property = string.Empty;
         protected string keywords = string.Empty;
-
+        protected BLL.manage_auth_groups auths;
         protected void Page_Load(object sender, EventArgs e)
         {
             this.channel_id = PLRequest.GetQueryInt("channel_id");
             this.channel_name = new BLL.channel().GetChannelName(this.channel_id); //取得频道名称
             this.property = PLRequest.GetQueryString("property");
             this.keywords = PLRequest.GetQueryString("keywords");
-
+           
             if (channel_id == 0)
             {
                 JscriptMsg("频道参数不正确！", "back");
                 return;
             }
+            //获取页面所有操作权限by 赵成龙20160630
+            auths = GetAdminAuth("channel_" + this.channel_name + "_comment");
+            btnAudit.Visible = auths[PLEnums.ActionEnum.Audit];
+            btnDelete.Visible = auths[PLEnums.ActionEnum.Delete];
 
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {
                 ChkAdminLevel("channel_" + this.channel_name + "_comment", PLEnums.ActionEnum.View.ToString()); //检查权限
-                RptBind("channel_id=" + this.channel_id + CombSqlTxt(this.keywords, this.property), "add_time desc");
+                RptBind("pc.channel_id=" + this.channel_id + CombSqlTxt(this.keywords, this.property), " pc.add_time desc");
             }
         }
 
         #region 数据绑定=================================
         private void RptBind(string _strWhere, string _orderby)
         {
+            Model.manager manage = GetAdminInfo();
+            if (manage.role_type != 1) _strWhere += "and pa.user_id=" + manage.id;
             this.page = PLRequest.GetQueryInt("page", 1);
             this.ddlProperty.SelectedValue = this.property;
             this.txtKeywords.Text = this.keywords;
@@ -66,17 +72,17 @@ namespace Plumsys.Web.admin.article
             _keywords = _keywords.Replace("'", "");
             if (!string.IsNullOrEmpty(_keywords))
             {
-                strTemp.Append(" and (user_name like '%" + _keywords + "%' or content like '%" + _keywords + "%')");
+                strTemp.Append(" and (pc.user_name like '%" + _keywords + "%' or pc.content like '%" + _keywords + "%')");
             }
             if (!string.IsNullOrEmpty(_property))
             {
                 switch (_property)
                 {
                     case "isLock":
-                        strTemp.Append(" and is_lock=1");
+                        strTemp.Append(" and pc.is_lock=1");
                         break;
                     case "unLock":
-                        strTemp.Append(" and is_lock=0");
+                        strTemp.Append(" and pc.is_lock=0");
                         break;
                 }
             }
