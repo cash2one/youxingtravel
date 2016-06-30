@@ -146,9 +146,9 @@ namespace Plumsys.DAL
                 {
                     strSql2 = new StringBuilder();
                     strSql2.Append("insert into " + databaseprefix + "order_goods(");
-                    strSql2.Append("article_id,order_id,goods_id,goods_no,goods_title,img_url,spec_text,goods_price,real_price,quantity,point)");
+                    strSql2.Append("article_id,order_id,goods_id,goods_no,goods_title,img_url,spec_text,goods_price,real_price,quantity,point,use_date)");
                     strSql2.Append(" values (");
-                    strSql2.Append("@article_id,@order_id,@goods_id,@goods_no,@goods_title,@img_url,@spec_text,@goods_price,@real_price,@quantity,@point)");
+                    strSql2.Append("@article_id,@order_id,@goods_id,@goods_no,@goods_title,@img_url,@spec_text,@goods_price,@real_price,@quantity,@point,@use_date)");
                     SqlParameter[] parameters2 = {
 					        new SqlParameter("@article_id", SqlDbType.Int,4),
 					        new SqlParameter("@order_id", SqlDbType.Int,4),
@@ -160,7 +160,8 @@ namespace Plumsys.DAL
 					        new SqlParameter("@goods_price", SqlDbType.Decimal,5),
 					        new SqlParameter("@real_price", SqlDbType.Decimal,5),
 					        new SqlParameter("@quantity", SqlDbType.Int,4),
-					        new SqlParameter("@point", SqlDbType.Int,4)};
+					        new SqlParameter("@point", SqlDbType.Int,4),
+                            new SqlParameter("@use_date", SqlDbType.DateTime)};
                     parameters2[0].Value = modelt.article_id;
                     parameters2[1].Direction = ParameterDirection.InputOutput;
                     parameters2[2].Value = modelt.goods_id;
@@ -172,6 +173,7 @@ namespace Plumsys.DAL
                     parameters2[8].Value = modelt.real_price;
                     parameters2[9].Value = modelt.quantity;
                     parameters2[10].Value = modelt.point;
+                    parameters2[11].Value = modelt.use_date;
                     cmd = new CommandInfo(strSql2.ToString(), parameters2);
                     sqllist.Add(cmd);
                 }
@@ -631,7 +633,7 @@ namespace Plumsys.DAL
 
                 #region 子表信息
                 StringBuilder strSql2 = new StringBuilder();
-                strSql2.Append("select id,article_id,order_id,goods_id,goods_no,goods_title,img_url,spec_text,goods_price,real_price,quantity,point");
+                strSql2.Append("select id,article_id,order_id,goods_id,goods_no,goods_title,img_url,spec_text,goods_price,real_price,quantity,point,use_date");
                 strSql2.Append(" from " + databaseprefix + "order_goods ");
                 strSql2.Append(" where order_id=@id ");
                 SqlParameter[] parameters2 = {
@@ -692,6 +694,10 @@ namespace Plumsys.DAL
                         if (ds2.Tables[0].Rows[n]["point"] != null && ds2.Tables[0].Rows[n]["point"].ToString() != "")
                         {
                             modelt.point = int.Parse(ds2.Tables[0].Rows[n]["point"].ToString());
+                        }
+                        if (ds2.Tables[0].Rows[n]["use_date"] != null && ds2.Tables[0].Rows[n]["use_date"].ToString() != "")
+                        {
+                            modelt.use_date = Convert.ToDateTime(ds2.Tables[0].Rows[n]["use_date"].ToString());
                         }
                         ls.Add(modelt);
                     }
