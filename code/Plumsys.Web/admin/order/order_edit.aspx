@@ -464,7 +464,7 @@
             <th style="text-align:left;">商品信息</th>
             <th width="8%">销售价</th>
             <th width="8%">优惠价</th>
-            <th width="8%">积分</th>
+          <%--  <th width="8%">积分</th>--%>
             <th width="8%">数量</th>
             <th width="12%">金额合计</th>
             <th width="8%">预定时间</th>
@@ -480,10 +480,10 @@
             </td>
             <td><%#Eval("goods_price")%></td>
             <td><%#Eval("real_price")%></td>
-            <td><%#Eval("point")%></td>
+          <%--  <td><%#Eval("point")%></td>--%>
             <td><%#Eval("quantity")%></td>
             <td><%#Convert.ToDecimal(Eval("real_price"))*Convert.ToInt32(Eval("quantity"))%></td>
-            <td><%#Eval("use_date")%></td>
+            <td><%#Eval("quantity")%></td>
           </tr>
           </ItemTemplate>
           <FooterTemplate>
