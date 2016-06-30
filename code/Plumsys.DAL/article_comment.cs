@@ -306,7 +306,13 @@ namespace Plumsys.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * FROM " + databaseprefix + "article_comment");
+            //strSql.Append("select * FROM " + databaseprefix + "article_comment");
+            //if (strWhere.Trim() != "")
+            //{
+            //    strSql.Append(" where " + strWhere);
+            //}
+            //add by ’‘≥…¡˙20160630
+            strSql.Append("select pa.user_id  gjsid,pa.user_name  gysname,pc.* FROM " + databaseprefix + "article_comment  pc left join " + databaseprefix + "article pa on pc.article_id = pa.id");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
