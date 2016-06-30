@@ -176,7 +176,7 @@
             <th width="10%">积分</th>
             <th width="10%">数量</th>
             <th width="10%">金额</th>
-            <th width="10%">积分</th>
+            <th width="10%">预定日期</th>
           </tr>
           <%if(model.order_goods!=null)%>
           <%foreach(Plumsys.Model.order_goods modelt in model.order_goods)%>
@@ -202,7 +202,7 @@
             </td>
             <td align="center">{modelt.quantity}</td>
             <td align="center">￥<%=(modelt.real_price*modelt.quantity)%></td>
-            <td align="center"><%=(modelt.point*modelt.quantity)%></td>
+            <td align="center">{modelt.use_date}</td>
           </tr>
           <%/foreach%>
           <%else%>
