@@ -36,18 +36,19 @@ namespace Plumsys.Web.UI
         /// <summary>
         /// 添加到购物车
         /// </summary>
-        public static bool Add(int article_id, int goods_id, int quantity)
+        public static bool Add(int article_id, int goods_id, int quantity,DateTime use_date)
         {
             List<Model.cart_keys> ls = GetCart();
             if (ls != null)
             {
-                Model.cart_keys modelt = ls.Find(p => p.article_id == article_id && p.goods_id == goods_id);
+                Model.cart_keys modelt = ls.Find(p => p.article_id == article_id && p.goods_id == goods_id && p.use_date==use_date);
                 if (modelt != null)
                 {
-                    int i = ls.FindIndex(p => p.article_id == article_id && p.goods_id == goods_id);
+                    int i = ls.FindIndex(p => p.article_id == article_id && p.goods_id == goods_id&&p.use_date==use_date);
                     modelt.quantity += quantity; //更新数量
                     ls[i] = modelt;
-                    string jsonStr = JsonHelper.ObjectToJSON(ls); //转换为JSON字符串
+                   // string jsonStr = JsonHelper.ObjectToJSON(ls); //转换为JSON字符串
+                    string jsonStr = JsonHelper.JsonSerializer<List<Model.cart_keys>>(ls); //转换为JSON字符串
                     AddCookies(jsonStr); //重新加入Cookies
                     return true;
                 }
@@ -57,15 +58,15 @@ namespace Plumsys.Web.UI
                 ls = new List<Model.cart_keys>();
             }
             //不存在的则新增
-            ls.Add(new Model.cart_keys() { article_id = article_id, goods_id = goods_id, quantity = quantity });
-            AddCookies( JsonHelper.ObjectToJSON(ls)); //添加至Cookies
+            ls.Add(new Model.cart_keys() { article_id = article_id, goods_id = goods_id, quantity = quantity,use_date=use_date});
+            AddCookies(JsonHelper.JsonSerializer<List<Model.cart_keys>>(ls)); //添加至Cookies
             return true;
         }
 
         /// <summary>
         /// 更新购物车数量
         /// </summary>
-        public static Model.cart_keys Update(int article_id, int goods_id, int quantity)
+        public static Model.cart_keys Update(int article_id, int goods_id, int quantity,DateTime use_date)
         {
             //如果数量小于1则移除该项
             if (quantity < 1)
@@ -75,13 +76,13 @@ namespace Plumsys.Web.UI
             List<Model.cart_keys> ls = GetCart();
             if (ls != null)
             {
-                Model.cart_keys modelt = ls.Find(p => p.article_id == article_id && p.goods_id == goods_id);
+                Model.cart_keys modelt = ls.Find(p => p.article_id == article_id && p.goods_id == goods_id&&p.use_date==use_date);
                 if (modelt != null)
                 {
-                    int i = ls.FindIndex(p => p.article_id == article_id && p.goods_id == goods_id);
+                    int i = ls.FindIndex(p => p.article_id == article_id && p.goods_id == goods_id&&p.use_date==use_date);
                     modelt.quantity = quantity; //更新数量
                     ls[i] = modelt;
-                    string jsonStr = JsonHelper.ObjectToJSON(ls); //转换为JSON字符串
+                    string jsonStr = JsonHelper.JsonSerializer<List<Model.cart_keys>>(ls); //转换为JSON字符串
                     AddCookies(jsonStr); //重新加入Cookies
                     return modelt;
                 }
@@ -109,7 +110,7 @@ namespace Plumsys.Web.UI
                 if (modelt != null)
                 {
                     ls.Remove(modelt); //移除指定的项
-                    string jsonStr = JsonHelper.ObjectToJSON(ls);
+                    string jsonStr = JsonHelper.JsonSerializer<List<Model.cart_keys>>(ls);
                     AddCookies(jsonStr);
                 }
             }
@@ -125,13 +126,13 @@ namespace Plumsys.Web.UI
                 List<Model.cart_keys> cartList = GetCart();
                 foreach (Model.cart_keys modelt in ls)
                 {
-                    Model.cart_keys model = cartList.Find(p => p.article_id == modelt.article_id && p.goods_id == modelt.goods_id);
+                    Model.cart_keys model = cartList.Find(p => p.article_id == modelt.article_id && p.goods_id == modelt.goods_id&&p.use_date==modelt.use_date);
                     if (model!=null)
                     {
                         cartList.Remove(model);
                     }
                 }
-                string jsonStr = JsonHelper.ObjectToJSON(cartList);
+                string jsonStr = JsonHelper.JsonSerializer <List<Model.cart_keys>>(cartList);
                 AddCookies(jsonStr);
             }
         }
@@ -211,6 +212,7 @@ namespace Plumsys.Web.UI
                         }
                     }
                     modelt.quantity = item.quantity;
+                    modelt.use_date = item.use_date;//add by 赵成龙
                     
                     //添加入列表
                     iList.Add(modelt);
@@ -282,7 +284,7 @@ namespace Plumsys.Web.UI
             string jsonStr = GetCookies(); //获取Cookies值
             if (!string.IsNullOrEmpty(jsonStr))
             {
-                ls = (List<Model.cart_keys>)JsonHelper.JSONToObject<List<Model.cart_keys>>(jsonStr);
+                ls = (List<Model.cart_keys>)JsonHelper.JsonDeserialize<List<Model.cart_keys>>(jsonStr);
                 return ls;
             }
             else
