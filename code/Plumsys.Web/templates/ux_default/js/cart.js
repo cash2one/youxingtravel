@@ -91,7 +91,7 @@ function cartAdd(obj, webpath, linktype, linkurl){
 	var articleId = parseInt($("#commodityArticleId").val());
 	var goodsId = parseInt($("#commodityGoodsId").val());
 	var selectNum = parseInt($("#commoditySelectNum").val());
-	var selectDate = parseInt($("#select_date").val());
+	var selectDate = $("#select_date").val();
 	if($(obj).prop("disabled") == true){
 		return false;
 	}
@@ -111,7 +111,7 @@ function cartAdd(obj, webpath, linktype, linkurl){
 		return false;
 	}
     //检查购买日期是否为空
-	if (isNaN(selectDate)) {
+	if (selectDate=="") {
 	    alert("预定日期不能为空！");
 	    return false;
 	}
@@ -124,7 +124,7 @@ function cartAdd(obj, webpath, linktype, linkurl){
 	var buttonText = $(obj).text();
 	//如果是立即购买
 	if(linktype == 1){
-		var jsondata = '[{"article_id":'+articleId+', "goods_id":'+goodsId+', "quantity":'+selectNum+'}]'; //结合商品参数
+	    var jsondata = '[{"article_id":' + articleId + ', "goods_id":' + goodsId + ', "quantity":' + selectNum + ',"use_date":"\/Date(' + new Date(selectDate).getTime()+ '+0800)\/"}]'; //结合商品参数
 		$.ajax({
 			type: "post",
 			url: webpath + "tools/submit_ajax.ashx?action=cart_goods_buy",
@@ -157,7 +157,8 @@ function cartAdd(obj, webpath, linktype, linkurl){
 			data: {
 				"article_id" : articleId,
 				"goods_id" : goodsId,
-				"quantity" : selectNum
+				"quantity": selectNum,
+                "use_date": selectDate
 			},
 			dataType: "json",
 			beforeSend: function(XMLHttpRequest) {
@@ -209,6 +210,7 @@ function updateCart(obj, webpath, num){
 	var objInput;
 	var goodsQuantity; //购买数量
 	var stockQuantity = parseInt($(obj).parents("tr").find("input[name='hideStockQuantity']").val()); //库存数量
+	var use_date = parseInt($(obj).parents("tr").find("input[name='hideuse_date']").val()); //预定日期
 	var articleId = $(obj).parents("tr").find("input[name='hideArticleId']").val(); //文章ID
 	var goodsId = $(obj).parents("tr").find("input[name='hideGoodsId']").val(); //商品ID
 	var goodsPrice = $(obj).parents("tr").find("input[name='hideGoodsPrice']").val(); //商品单价
@@ -241,7 +243,8 @@ function updateCart(obj, webpath, num){
 		data: {
 			"article_id" : articleId,
 			"goods_id" : goodsId,
-			"quantity" : goodsQuantity
+			"quantity": goodsQuantity,
+            "use_date": use_date
 		},
 		dataType: "json",
 		beforeSend: function(XMLHttpRequest) {
@@ -337,9 +340,10 @@ function cartAmountTotal(){
 		var articleId = $(this).parents("tr").find("input[name='hideArticleId']").val(); //文章ID
 		var goodsId = $(this).parents("tr").find("input[name='hideGoodsId']").val(); //商品ID
         var goodsPrice = $(this).parents("tr").find("input[name='hideGoodsPrice']").val(); //商品单价
-		var goodsQuantity = $(this).parents("tr").find("input[name='goodsQuantity']").val(); //购买数量
+        var goodsQuantity = $(this).parents("tr").find("input[name='goodsQuantity']").val(); //购买数量
+        var use_date = $(this).parents("tr").find("input[name='hideuse_date']").val(); //预定日期
 		totalAmount += parseFloat(goodsPrice) * parseFloat(goodsQuantity);
-		jsondata += '{"article_id":"'+articleId+'", "goods_id":"'+goodsId+'", "quantity":"'+goodsQuantity+'"}';
+		jsondata += '{"article_id":' + articleId + ', "goods_id":' + goodsId + ', "quantity":' + goodsQuantity + ',"use_date":"\/Date(' + new Date(use_date).getTime() + '+0800)\/"}';
 		if(i < $(".checkall:checked").length-1){
 			jsondata += ',';
 		}

@@ -14,7 +14,7 @@ var JTC = (function () {
     config = {
         dayBgColor: ['#90E3F7', '#FFFFFF', '#FFDA44'], //鼠标移动的颜色
         dayColor: ['#0000FF', '#000000', '#888888'], //日期字体颜色:1.上月和下月的日期; 2.本月; 3.不可选时
-        format: 'yyyy-MM-dd',   //返回日期值的格式
+        format: 'yyyy/MM/dd',   //返回日期值的格式
         outObject: null,
         startDay: null,     
         minDate: 0,         //日期范围最小值(yyyyMMdd) 0.表示不设定

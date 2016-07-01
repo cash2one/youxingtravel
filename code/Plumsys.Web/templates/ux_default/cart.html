@@ -39,7 +39,7 @@
       <th width="84" align="left">单价</th>
       <th width="104" align="center">数量</th>
       <th width="104" align="left">金额(元)</th>
-      <th width="84" align="center">积分</th>
+      <th width="84" align="center">预定时间</th>
       <th width="54" align="center">操作</th>
     </tr>
     <%foreach(Plumsys.Model.cart_items modelt in goodsList)%>
@@ -49,6 +49,7 @@
         <input name="hideArticleId" type="hidden" value="{modelt.article_id}" />
         <input name="hideGoodsId" type="hidden" value="{modelt.goods_id}" />
         <input name="hideStockQuantity" type="hidden" value="{modelt.stock_quantity}" />
+        <input name="hideuse_date" type="hidden" value="{modelt.use_date}" />
         <input name="hideGoodsPrice" type="hidden" value="{modelt.user_price}" />
         <input name="hidePoint" type="hidden" value="{modelt.point}" />
       </td>
@@ -78,10 +79,7 @@
       </td>
       <td align="center">
         <label name="pointCount">
-          <%if(modelt.point>0)%>
-            +
-          <%/if%>
-          <%=(modelt.point*modelt.quantity)%>
+            {modelt.use_date}
         </label>
       </td>
       <td align="center">

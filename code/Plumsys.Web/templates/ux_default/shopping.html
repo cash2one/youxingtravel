@@ -177,7 +177,7 @@ $(function(){
       <th width="84" align="left">优惠(元)</th>
       <th width="84" align="center">数量</th>
       <th width="104" align="left">金额(元)</th>
-      <th width="84" align="left">积分</th>
+      <th width="84" align="left">预定日期</th>
       <th width="84" align="center">库存(件)</th>
     </tr>
     <%foreach(Plumsys.Model.cart_items modelt in goodsList)%>
@@ -208,10 +208,7 @@ $(function(){
         </span>
       </td>
       <td align="center">
-        <%if(modelt.point>0)%>
-          +
-        <%/if%>
-        <%=(modelt.point*modelt.quantity)%>
+          {modelt.use_date}
       </td>
       <td align="center">
         {modelt.stock_quantity}
