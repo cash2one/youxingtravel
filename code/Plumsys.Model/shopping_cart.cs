@@ -15,6 +15,7 @@ namespace Plumsys.Model
         private int _article_id;
         private int _goods_id = 0;
         private int _quantity = 0;
+        private DateTime? _use_date;
 
         /// <summary>
         /// 文章ID
@@ -40,6 +41,14 @@ namespace Plumsys.Model
             set { _quantity = value; }
             get { return _quantity; }
         }
+        /// <summary>
+        /// 使用日期，也是预定日期及预定使用日期
+        /// </summary>
+        public DateTime? use_date
+        {
+            set { _use_date = value; }
+            get { return _use_date; }
+        }
         #endregion
     }
 
@@ -64,6 +73,7 @@ namespace Plumsys.Model
         private int _point = 0;
         private int _quantity = 1;
         private int _stock_quantity = 0;
+        private DateTime? _use_date;
 
         /// <summary>
         /// 文章ID
@@ -168,6 +178,14 @@ namespace Plumsys.Model
         {
             set { _stock_quantity = value; }
             get { return _stock_quantity; }
+        }
+        /// <summary>
+        /// 使用日期，也是预定日期及预定使用日期
+        /// </summary>
+        public DateTime? use_date
+        {
+            set { _use_date = value; }
+            get { return _use_date; }
         }
         #endregion
     }
