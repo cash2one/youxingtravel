@@ -1811,6 +1811,7 @@ namespace Plumsys.Web.tools
             int article_id = PLRequest.GetFormInt("article_id", 0);
             int goods_id = PLRequest.GetFormInt("goods_id", 0);
             int quantity = PLRequest.GetFormInt("quantity", 1);
+            DateTime use_date =Convert.ToDateTime(PLRequest.GetFormString("use_date"));
             if (article_id == 0)
             {
                 context.Response.Write("{\"status\":0, \"msg\":\"您提交的商品参数有误！\"}");
@@ -1830,7 +1831,7 @@ namespace Plumsys.Web.tools
                 group_id = groupModel.group_id;
             }
             //统计购物车
-            Web.UI.ShopCart.Add(article_id, goods_id, quantity);
+            Web.UI.ShopCart.Add(article_id, goods_id, quantity,use_date);
             Model.cart_total cartModel = Web.UI.ShopCart.GetTotal(group_id);
             context.Response.Write("{\"status\":1, \"msg\":\"商品已成功添加到购物车！\", \"quantity\":" + cartModel.total_quantity + ", \"amount\":" + cartModel.real_amount + "}");
             return;
@@ -1847,6 +1848,7 @@ namespace Plumsys.Web.tools
                 return;
             }
             List<Model.cart_keys> ls = (List<Model.cart_keys>)JsonHelper.JSONToObject<List<Model.cart_keys>>(jsonData);
+           // List<Model.cart_keys> ls = (List<Model.cart_keys>)JsonHelper.JSONToObjectzcl<List<Model.cart_keys>>(jsonData);
             if (ls != null)
             {
                 Utils.WriteCookie(PLKeys.COOKIE_SHOPPING_BUY, jsonData); //暂放在清单
@@ -1864,6 +1866,7 @@ namespace Plumsys.Web.tools
             int article_id = PLRequest.GetFormInt("article_id", 0);
             int goods_id = PLRequest.GetFormInt("goods_id", 0);
             int quantity = PLRequest.GetFormInt("quantity", 0);
+            DateTime use_date = Convert.ToDateTime(PLRequest.GetFormString("use_date"));
             if (article_id == 0)
             {
                 context.Response.Write("{\"status\":0, \"msg\":\"您提交的商品参数有误！\"}");
@@ -1874,7 +1877,7 @@ namespace Plumsys.Web.tools
                 context.Response.Write("{\"status\":0, \"msg\":\"购买数量不能小于1！\"}");
                 return;
             }
-            Model.cart_keys model=Web.UI.ShopCart.Update(article_id, goods_id, quantity);
+            Model.cart_keys model=Web.UI.ShopCart.Update(article_id, goods_id, quantity,use_date);
             if (model != null)
             {
                 context.Response.Write("{\"status\":1, \"msg\":\"商品数量修改成功！\", \"article_id\":" + model.article_id + ", \"goods_id\":" + model.goods_id + ", \"quantity\":" + model.quantity + "}");
@@ -2108,7 +2111,8 @@ namespace Plumsys.Web.tools
                         goods_price = item.sell_price,
                         real_price = item.user_price,
                         quantity = item.quantity,
-                        point = item.point
+                        point = item.point,
+                        use_date = item.use_date
                     });
                 }
                 model.order_goods = gls;
