@@ -125,10 +125,18 @@ namespace Plumsys.Common
         }
         public static T JSONToObjectzcl<T>(string jsonText)
         {
-            JavaScriptSerializer jss = new JavaScriptSerializer();
+            //JavaScriptSerializer jss = new JavaScriptSerializer();
+            //try
+            //{
+            //    return jss.Deserialize<T>(jsonText);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception("JSONHelper.JSONToObject(): " + ex.Message);
+            //}
             try
             {
-                return jss.Deserialize<T>(jsonText);
+                return JsonConvert.DeserializeObject<T>(jsonText);
             }
             catch (Exception ex)
             {
