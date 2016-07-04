@@ -210,7 +210,7 @@ function updateCart(obj, webpath, num){
 	var objInput;
 	var goodsQuantity; //购买数量
 	var stockQuantity = parseInt($(obj).parents("tr").find("input[name='hideStockQuantity']").val()); //库存数量
-	var use_date = parseInt($(obj).parents("tr").find("input[name='hideuse_date']").val()); //预定日期
+	var use_date = $(obj).parents("tr").find("input[name='hideuse_date']").val(); //预定日期
 	var articleId = $(obj).parents("tr").find("input[name='hideArticleId']").val(); //文章ID
 	var goodsId = $(obj).parents("tr").find("input[name='hideGoodsId']").val(); //商品ID
 	var goodsPrice = $(obj).parents("tr").find("input[name='hideGoodsPrice']").val(); //商品单价
@@ -255,7 +255,9 @@ function updateCart(obj, webpath, num){
 				objInput.val(goodsQuantity);
 				var totalPrice = parseFloat(goodsPrice)*goodsQuantity; //金额
 				var totalPoint = parseFloat(goodsPoint)*goodsQuantity; //积分
+			
 				$(obj).parents("tr").find("label[name='amountCount']").text(totalPrice.toFixed(2));
+				$(obj).parents("tr").find("label[name='usedate']").text(use_date); //预定日期赋值
 				if(totalPoint > 0){
 					$(obj).parents("tr").find("label[name='pointCount']").text("+"+totalPoint);
 				}else{
@@ -350,6 +352,7 @@ function cartAmountTotal(){
     });
 	$("#totalQuantity").text($(".checkall:checked").length);
 	$("#totalAmount").text(totalAmount.toFixed(2));
+
 	if(jsondata.length > 0){
 		jsondata = '[' + jsondata + ']';
 	}
