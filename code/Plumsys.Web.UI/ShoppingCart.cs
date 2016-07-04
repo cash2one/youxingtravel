@@ -261,7 +261,7 @@ namespace Plumsys.Web.UI
             int count = 0;
             if (!string.IsNullOrEmpty(jsonStr))
             {
-                List<Model.cart_keys> ls = (List<Model.cart_keys>)JsonHelper.JSONToObject<List<Model.cart_keys>>(jsonStr);
+                List<Model.cart_keys> ls = (List<Model.cart_keys>)JsonHelper.JsonDeserialize<List<Model.cart_keys>>(jsonStr);
                 if (ls != null)
                 {
                     foreach (Model.cart_keys modelt in ls)
