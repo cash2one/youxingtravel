@@ -47,8 +47,8 @@ namespace Plumsys.Web.UI
             //如果不是管理页面则进行字符串检测
             if (!requestPath.StartsWith("/admin"))
             {
-                if (!Utils.CheckRequest(context.Request))
-                { context.Response.Redirect("~/error.html"); return; }
+                //if (!Utils.CheckRequest(context.Request))
+                //{ context.Response.Redirect("~/error.html"); return; }
             }
 
             //如果虚拟目录(不含安装目录)与站点根目录名相同则不需要重写
