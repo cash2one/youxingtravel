@@ -483,7 +483,7 @@
           <%--  <td><%#Eval("point")%></td>--%>
             <td><%#Eval("quantity")%></td>
             <td><%#Convert.ToDecimal(Eval("real_price"))*Convert.ToInt32(Eval("quantity"))%></td>
-            <td><%#Eval("use_date")%></td>
+            <td><%#Eval("use_date","{0:yyyy-MM-dd}")%></td>
           </tr>
           </ItemTemplate>
           <FooterTemplate>
