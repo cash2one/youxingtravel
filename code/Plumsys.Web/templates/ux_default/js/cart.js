@@ -257,7 +257,7 @@ function updateCart(obj, webpath, num){
 				var totalPoint = parseFloat(goodsPoint)*goodsQuantity; //积分
 			
 				$(obj).parents("tr").find("label[name='amountCount']").text(totalPrice.toFixed(2));
-				$(obj).parents("tr").find("label[name='usedate']").text(use_date); //预定日期赋值
+				$(obj).parents("tr").find("label[name='usedate']").text(use_date.replace("0:00:00", "")); //预定日期赋值
 				if(totalPoint > 0){
 					$(obj).parents("tr").find("label[name='pointCount']").text("+"+totalPoint);
 				}else{

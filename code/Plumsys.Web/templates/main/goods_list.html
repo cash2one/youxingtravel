@@ -80,7 +80,7 @@
       
     <div class="img-list2">
       <ul>
-        <%set DataTable goodsList=get_article_list(channel, category_id, pagesize, page, "status=0", out totalcount, out pagelist, "goods_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+        <%set DataTable goodsList=get_article_list(channel, category_id,pagesize, page, "status=0", out totalcount, out pagelist, "goods_list", category_id, "__id__")%><!--取得一个分页DataTable-->
         <%foreach(DataRow dr in goodsList.Rows)%>
         <li>
           <div class="wrap-box">

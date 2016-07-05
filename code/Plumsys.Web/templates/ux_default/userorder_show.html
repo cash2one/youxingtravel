@@ -173,7 +173,6 @@
           <tr>
             <th align="left" colspan="2">商品信息</th>
             <th width="10%">单价</td>
-            <th width="10%">积分</th>
             <th width="10%">数量</th>
             <th width="10%">金额</th>
             <th width="10%">预定日期</th>
@@ -194,15 +193,9 @@
               <s>￥{modelt.goods_price}</s>
               <p>￥{modelt.real_price}</p>
             </td>
-            <td align="center">
-              <%if(modelt.point>0)%>
-              +
-              <%/if%>
-              {modelt.point}
-            </td>
             <td align="center">{modelt.quantity}</td>
             <td align="center">￥<%=(modelt.real_price*modelt.quantity)%></td>
-            <td align="center">{modelt.use_date}</td>
+            <td align="center"><%datetostr({modelt.use_date},yyyy-MM-dd)%></td>
           </tr>
           <%/foreach%>
           <%else%>
