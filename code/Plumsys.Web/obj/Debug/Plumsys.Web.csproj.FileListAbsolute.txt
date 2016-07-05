@@ -78,3 +78,5 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.DBUt
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.csprojResolveAssemblyReference.cache
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\bin\Newtonsoft.Json.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\bin\Newtonsoft.Json.xml

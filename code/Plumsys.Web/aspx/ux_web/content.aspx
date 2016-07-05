@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-29 0:12:34.
-		本页面代码由Plumsys模板引擎生成于 2016-06-29 0:12:34. 
+		This page was created by Plumsys Template Engine at 2016-07-04 20:19:56.
+		本页面代码由Plumsys模板引擎生成于 2016-07-04 20:19:56. 
 	*/
 
 	base.OnInit(e);
@@ -74,7 +74,8 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append(linkurl("usercenter","exit"));
 
 	templateBuilder.Append("\">退出</a>');\r\n                            //$(\"#menu\").append(' <a href=\"");
-	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append(linkurl("cart"));
+
 	templateBuilder.Append("\">购物车<span id=\"shoppingCartCount\"> ');\r\n                            //$(\"#menu\").append('<script type=\"text/javascript\" src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></span>件</a>');\r\n          \r\n                            $(\"#menu\").append('</span>');\r\n                        } else {\r\n                            $(\"#menu\").append('<span id=\"un_login\">');\r\n                            $(\"#menu\").append('<a class=\"singin\" href=\"");
@@ -85,7 +86,8 @@ override protected void OnInit(EventArgs e)
 
 	templateBuilder.Append("\">注册</a>');\r\n                            $(\"#menu\").append('</span>');\r\n                        }\r\n                    }\r\n                });\r\n            </");
 	templateBuilder.Append("script>\r\n            <div id=\"menu\" class=\"RightNavi\">\r\n              <a href='");
-	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append(linkurl("cart"));
+
 	templateBuilder.Append("'>购物车<span id=\"shoppingCartCount\">\r\n                <script type=\"text/javascript\" src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></");

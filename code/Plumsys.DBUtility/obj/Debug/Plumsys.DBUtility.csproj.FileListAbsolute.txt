@@ -26,3 +26,5 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.csprojResolveAssemblyReference.cache
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.pdb
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Newtonsoft.Json.dll
+E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Newtonsoft.Json.xml

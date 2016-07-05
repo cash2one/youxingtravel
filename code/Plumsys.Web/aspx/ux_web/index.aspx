@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-29 0:12:34.
-		本页面代码由Plumsys模板引擎生成于 2016-06-29 0:12:34. 
+		This page was created by Plumsys Template Engine at 2016-07-04 20:19:55.
+		本页面代码由Plumsys模板引擎生成于 2016-07-04 20:19:55. 
 	*/
 
 	base.OnInit(e);
@@ -106,7 +106,8 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("\r\n                <div class=\"Content2\">\r\n                    <a title=\"" + Utils.ObjectToStr(dr["title"]) + "\" href=\"");
 	templateBuilder.Append(linkurl("tourist_mall_show",Utils.ObjectToStr(dr["id"])));
 
-	templateBuilder.Append("\" target=\"_blank\">\r\n                        <img class=\"lazy_img\" src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\" />\r\n                        <span class=\"ContentWordBox\">\r\n                            <span class=\"Word\">\r\n                                <span>" + Utils.ObjectToStr(dr["title"]) + "</span>\r\n                            </span><span class=\"Price\">\r\n                                <span>￥" + Utils.ObjectToStr(dr["sell_price"]) + "</span>\r\n                            </span>\r\n                        </span>\r\n                    </a>\r\n                </div>\r\n                ");
+	templateBuilder.Append("\" target=\"_blank\">\r\n                        <img class=\"lazy_img\" src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\" />\r\n                        <span class=\"ContentWordBox\">\r\n                            <span class=\"Word\">\r\n                                <span id=\"getStr\">\r\n                                <script>\r\n                        var getStr='" + Utils.ObjectToStr(dr["title"]) + "';\r\n                         if (getStr.length>6) {\r\n                       getStr=getStr.toString().substring(0,6)+\"...\";\r\n                          }\r\n                        document.write(getStr);\r\n                     </");
+	templateBuilder.Append("script>\r\n                                </span>\r\n                            </span><span class=\"Price\">\r\n                                <span>￥" + Utils.ObjectToStr(dr["sell_price"]) + "</span>\r\n                            </span>\r\n                        </span>\r\n                    </a>\r\n                </div>\r\n                ");
 	}	//end for if
 
 	templateBuilder.Append("\r\n                <div style=\"clear: both;\"></div>\r\n            </div>\r\n        </div>\r\n        ");
@@ -126,7 +127,8 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("\r\n                    <div class=\"Content2\">\r\n                        <a title=\"" + Utils.ObjectToStr(dr["title"]) + "\" href=\"");
 	templateBuilder.Append(linkurl("tourist_mall_show",Utils.ObjectToStr(dr["id"])));
 
-	templateBuilder.Append("\" target=\"_blank\">\r\n                            <img class=\"lazy_img\" src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\" />\r\n                            <span class=\"ContentWordBox\">\r\n                                <span class=\"Word\">\r\n                                    <span>" + Utils.ObjectToStr(dr["title"]) + "</span>\r\n                                </span><span class=\"Price\">\r\n                                    <span>￥" + Utils.ObjectToStr(dr["sell_price"]) + "</span>\r\n                                </span>\r\n                            </span>\r\n                        </a>\r\n                    </div>\r\n                    ");
+	templateBuilder.Append("\" target=\"_blank\">\r\n                            <img class=\"lazy_img\" src=\"" + Utils.ObjectToStr(dr["img_url"]) + "\" />\r\n                            <span class=\"ContentWordBox\">\r\n                                <span class=\"Word\">\r\n                                    <span id=\"getStr\"><script>\r\n    var getStr='" + Utils.ObjectToStr(dr["title"]) + "';\r\n    if (getStr.length>6) {\r\n        getStr=getStr.toString().substring(0,6)+\"...\";\r\n    }\r\n    document.write(getStr);\r\n</");
+	templateBuilder.Append("script></span>\r\n                                </span><span class=\"Price\">\r\n                                    <span>￥" + Utils.ObjectToStr(dr["sell_price"]) + "</span>\r\n                                </span>\r\n                            </span>\r\n                        </a>\r\n                    </div>\r\n                    ");
 	}	//end for if
 
 	templateBuilder.Append("\r\n                    <div style=\"clear: both;\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        ");
@@ -211,7 +213,7 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" src=\"");
 	templateBuilder.Append("/templates/ux_default");
 	templateBuilder.Append("/js/JTimer_1.3.js\"></");
-	templateBuilder.Append("script>\r\n</body>\r\n</html>\r\n");
+	templateBuilder.Append("script>\r\n\r\n\r\n</body>\r\n</html>\r\n");
 	Response.Write(templateBuilder.ToString());
 }
 </script>

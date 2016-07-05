@@ -28,19 +28,6 @@
                     <div class="c-wrapper">
                         <!-- 筛选列表 begin -->
                         <div class="searchlist">
-                            <!-- 排序方式 begin -->
-                            <div class="sort">
-                                <ul>
-                                    <li><b class="sort_click" id="sort_default">综合</b></li>
-                                    <li><b class="sort_click" id="sale_amount">销量优先</b></li>
-                                    <li>
-                                        <b class="sort_click" id="soldprice_yuan">
-                                            价格<i class="PriceHigh"></i><i class="PriceLow"></i>
-                                        </b>
-                                    </li>
-
-                                </ul>
-                            </div>
                             <!-- 筛选结果 begin -->
                             <div class="lists">
                                 <%set DataTable goodsList=get_search_list(15, out totalcount)%>
@@ -56,22 +43,7 @@
                                         <dt class="model1">
                                             <div class="img" style="background: rgb(204, 204, 204); width: 280px; height: 146px;">
                                                 <a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'> <img width="280" height="146" class="lazy_img" alt="" src="{dr[img_url]}" /></a>
-                                                </a>
                                             </div>
-
-                                            <!--<div class="add"><b></b> 西班牙 - 马德里</div>
-                                            <div class="Love"><span>加入购物车</span><i></i></div>
-                                            <div class="infos" style="display: none;">
-                                                <a class="SearchLinker" href="#"
-                                                   target="_blank">
-                                                    <p>
-
-                                                        马德里必去景点NO.1，免排队快速进入			；海玩网购票比您在当地购买门票更便宜
-                                                        ；超长有效期，可在景点开放任意时间进入...
-
-                                                    </p>
-                                                </a>
-                                            </div>-->
                                         </dt>
                                         <dd>
                                             <div class="name"><a title="{dr[title]}" href='<%linkurl("tourist_mall_show",{dr[id]})%>'>{dr[title]}</a></div>

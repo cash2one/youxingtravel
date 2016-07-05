@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-29 0:12:34.
-		本页面代码由Plumsys模板引擎生成于 2016-06-29 0:12:34. 
+		This page was created by Plumsys Template Engine at 2016-07-04 20:19:56.
+		本页面代码由Plumsys模板引擎生成于 2016-07-04 20:19:56. 
 	*/
 
 	base.OnInit(e);
@@ -83,7 +83,8 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append(linkurl("usercenter","exit"));
 
 	templateBuilder.Append("\">退出</a>');\r\n                            //$(\"#menu\").append(' <a href=\"");
-	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append(linkurl("cart"));
+
 	templateBuilder.Append("\">购物车<span id=\"shoppingCartCount\"> ');\r\n                            //$(\"#menu\").append('<script type=\"text/javascript\" src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></span>件</a>');\r\n          \r\n                            $(\"#menu\").append('</span>');\r\n                        } else {\r\n                            $(\"#menu\").append('<span id=\"un_login\">');\r\n                            $(\"#menu\").append('<a class=\"singin\" href=\"");
@@ -94,7 +95,8 @@ override protected void OnInit(EventArgs e)
 
 	templateBuilder.Append("\">注册</a>');\r\n                            $(\"#menu\").append('</span>');\r\n                        }\r\n                    }\r\n                });\r\n            </");
 	templateBuilder.Append("script>\r\n            <div id=\"menu\" class=\"RightNavi\">\r\n              <a href='");
-	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append(linkurl("cart"));
+
 	templateBuilder.Append("'>购物车<span id=\"shoppingCartCount\">\r\n                <script type=\"text/javascript\" src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></");
@@ -293,7 +295,7 @@ override protected void OnInit(EventArgs e)
 	{
 
 	templateBuilder.Append("\r\n                                            <a href='");
-	templateBuilder.Append(linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=max"+get_article_spec_param(dicSpecIds,"")));
+	templateBuilder.Append(linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time="+str_start_time+"&end_time="+str_end_time+"&orderby=min"+get_article_spec_param(dicSpecIds,"")));
 
 	templateBuilder.Append("'><i class=\"PriceLow\"></i></a>\r\n                                            ");
 	}	//end for if
@@ -317,7 +319,7 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append(" '\r\n                                                   target=\"_blank\">\r\n                                                    <p>\r\n\r\n                                                        " + Utils.ObjectToStr(dr["zhaiyao"]) + "\r\n\r\n                                                    </p>\r\n                                                </a>\r\n                                            </div>\r\n                                        </dt>\r\n                                        <dd>\r\n                                            <div class=\"name\"><a title=\"" + Utils.ObjectToStr(dr["title"]) + "\" href='");
 	templateBuilder.Append(linkurl("tourist_mall_show",Utils.ObjectToStr(dr["id"])));
 
-	templateBuilder.Append("'>" + Utils.ObjectToStr(dr["title"]) + "</a></div>\r\n                                            <div class=\"price\" id=\"price_7921\">\r\n                                                <div class=\"vip\">\r\n                                                    <b>¥<em id=\"7921\">" + Utils.ObjectToStr(dr["sell_price"]) + "</em></b>起\r\n\r\n                                                </div>\r\n                                                <div class=\"payment\">门市价：" + Utils.ObjectToStr(dr["market_price"]) + "</div>\r\n                                            </div>\r\n                                        </dd>\r\n                                    </dl>\r\n                                </span>\r\n                                ");
+	templateBuilder.Append("' target=\"_blank\">" + Utils.ObjectToStr(dr["title"]) + "</a></div>\r\n                                            <div class=\"price\" id=\"price_7921\">\r\n                                                <div class=\"vip\">\r\n                                                    <b>¥<em id=\"7921\">" + Utils.ObjectToStr(dr["sell_price"]) + "</em></b>起\r\n\r\n                                                </div>\r\n                                                <div class=\"payment\">门市价：" + Utils.ObjectToStr(dr["market_price"]) + "</div>\r\n                                            </div>\r\n                                        </dd>\r\n                                    </dl>\r\n                                </span>\r\n                                ");
 	}	//end for if
 
 	if (goodsList.Rows.Count==0)
@@ -372,7 +374,10 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append(" | 旅行社业务经营许可证 L-BJ-CJ00104\r\n                    </span>\r\n                    <div style=\"clear: both;\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n      <!--footer end-->\r\n   \r\n   \r\n");
 
 
-	templateBuilder.Append("\r\n    <!--footer end-->\r\n    <script type=\"text/javascript\" charset=\"utf-8\">\r\n        $(function () {\r\n            var req_sdate = getUrlParam('start_time');\r\n            var req_edate = getUrlParam('end_time');\r\n            $(\"#StartDate\").val(req_sdate);\r\n            $(\"#EndDate\").val(req_edate);\r\n        })\r\n        function date_click() {\r\n            var s_date = $(\"#StartDate\").val();\r\n            var e_date = $(\"#EndDate\").val();\r\n            var url = '");
+	templateBuilder.Append("\r\n    <!--footer end-->\r\n    <script type=\"text/javascript\" charset=\"utf-8\" src=\"");
+	templateBuilder.Append("/templates/ux_default");
+	templateBuilder.Append("/js/CategoryInfo.js\"></");
+	templateBuilder.Append("script>\r\n    <script type=\"text/javascript\" charset=\"utf-8\">\r\n        $(function () {\r\n            var req_sdate = getUrlParam('start_time');\r\n            var req_edate = getUrlParam('end_time');\r\n            $(\"#StartDate\").val(req_sdate);\r\n            $(\"#EndDate\").val(req_edate);\r\n        })\r\n        function date_click() {\r\n            var s_date = $(\"#StartDate\").val();\r\n            var e_date = $(\"#EndDate\").val();\r\n            var url = '");
 	templateBuilder.Append(linkurl("tsearch","?category_id="+category_id+"&min_price="+minPrice+"&max_price="+maxPrice+"&start_time=#sdate#&end_time=#edate#&orderby="+strBy+get_article_spec_param(dicSpecIds,"")));
 
 	templateBuilder.Append("';\r\n            url = url.replace('#sdate#', s_date);\r\n            url = url.replace('#edate#', e_date);\r\n            location.href = url;\r\n        }\r\n    </");

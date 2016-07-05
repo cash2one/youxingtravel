@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Plumsys Template Engine at 2016-06-29 0:12:34.
-		本页面代码由Plumsys模板引擎生成于 2016-06-29 0:12:34. 
+		This page was created by Plumsys Template Engine at 2016-07-04 20:19:56.
+		本页面代码由Plumsys模板引擎生成于 2016-07-04 20:19:56. 
 	*/
 
 	base.OnInit(e);
@@ -73,7 +73,8 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append(linkurl("usercenter","exit"));
 
 	templateBuilder.Append("\">退出</a>');\r\n                            //$(\"#menu\").append(' <a href=\"");
-	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append(linkurl("cart"));
+
 	templateBuilder.Append("\">购物车<span id=\"shoppingCartCount\"> ');\r\n                            //$(\"#menu\").append('<script type=\"text/javascript\" src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></span>件</a>');\r\n          \r\n                            $(\"#menu\").append('</span>');\r\n                        } else {\r\n                            $(\"#menu\").append('<span id=\"un_login\">');\r\n                            $(\"#menu\").append('<a class=\"singin\" href=\"");
@@ -84,7 +85,8 @@ override protected void OnInit(EventArgs e)
 
 	templateBuilder.Append("\">注册</a>');\r\n                            $(\"#menu\").append('</span>');\r\n                        }\r\n                    }\r\n                });\r\n            </");
 	templateBuilder.Append("script>\r\n            <div id=\"menu\" class=\"RightNavi\">\r\n              <a href='");
-	templateBuilder.Append("<%linkurl(\" cart\")%>");
+	templateBuilder.Append(linkurl("cart"));
+
 	templateBuilder.Append("'>购物车<span id=\"shoppingCartCount\">\r\n                <script type=\"text/javascript\" src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=view_cart_count\"></");
@@ -125,8 +127,8 @@ override protected void OnInit(EventArgs e)
 
 	templateBuilder.Append("\r\n                        </ul>\r\n                    </div>\r\n                </div>-->\r\n                <div class=\"show-right tour-buy\" id=\"showBuyHtml\">\r\n                    <h3>");
 	templateBuilder.Append(Utils.ObjectToStr(model.title));
-	templateBuilder.Append("</h3>\r\n                    <div class=\"price-unit\">\r\n                        <div class=\"floatL price-cur-wrap\">\r\n                            <p>\r\n                                <span class=\"buy-price\"><b>¥" + Utils.ObjectToStr(model.fields["sell_price"]) + "</b>起</span>\r\n                            </p>\r\n                            <p>门市价 <s>¥" + Utils.ObjectToStr(model.fields["market_price"]) + "</s></p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"TourDetailGroup\">\r\n                        <!--<div class=\"BuyNumBox\">\r\n                            <span class=\"BuyNum\">已有<font>1</font>人购买</span>\r\n                        </div>\r\n                        <div class=\"NewTourStarBox\">\r\n                            <span class=\"CommentNum\">加载中...</span>\r\n                        </div>-->\r\n                      \r\n                    </div>\r\n                    <div class=\"TagList\">\r\n                        <!--<span title=\"普吉经典跳岛路线，行程安排舒适\"\r\n                              class=\"Tag\">普吉经典跳岛路线，行程安排舒适</span>\r\n                        <span title=\"避开拥挤人群，携老带幼优先选择\"\r\n                              class=\"Tag\">避开拥挤人群，携老带幼优先选择</span>\r\n                        <span title=\"普吉最大最豪华船公司，保障安全\"\r\n                              class=\"Tag\">普吉最大最豪华船公司，保障安全</span>-->\r\n\r\n                    </div>\r\n                  \r\n                \r\n                    <div class=\"spec-box\">\r\n                        <script>\r\n                            var nowday = new Date();\r\n                        </");
-	templateBuilder.Append("script>\r\n                        <dl>\r\n                            <dt>预定日期</dt>\r\n                            <dd>\r\n                                <div class=\"stock-box2\">\r\n                                    <input type=\"text\" placeholder=\"请选择日期\" onclick=\"JTC.setday({minDate:nowday, ranged: true})\" />\r\n                                </div>                     \r\n                            </dd>\r\n                        </dl>\r\n                        <dl>\r\n                            <dt>购买数量</dt>\r\n                            <dd>\r\n                                <div class=\"stock-box\">\r\n                                    <input id=\"commodityArticleId\" type=\"hidden\" value=\"");
+	templateBuilder.Append("</h3>\r\n                    <div class=\"price-unit\">\r\n                        <div class=\"floatL price-cur-wrap\">\r\n                            <p>\r\n                                <span class=\"buy-price\"><b>¥" + Utils.ObjectToStr(model.fields["sell_price"]) + "</b>起</span>\r\n                            </p>\r\n                            <p>门市价 <s>¥" + Utils.ObjectToStr(model.fields["market_price"]) + "</s></p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"TourDetailGroup\">\r\n                        <!--<div class=\"BuyNumBox\">\r\n                            <span class=\"BuyNum\">已有<font>1</font>人购买</span>\r\n                        </div>\r\n                        <div class=\"NewTourStarBox\">\r\n                            <span class=\"CommentNum\">加载中...</span>\r\n                        </div>-->\r\n                      \r\n                    </div>\r\n                    <div class=\"TagList\">\r\n                        <!--<span title=\"普吉经典跳岛路线，行程安排舒适\"\r\n                              class=\"Tag\">普吉经典跳岛路线，行程安排舒适</span>\r\n                        <span title=\"避开拥挤人群，携老带幼优先选择\"\r\n                              class=\"Tag\">避开拥挤人群，携老带幼优先选择</span>\r\n                        <span title=\"普吉最大最豪华船公司，保障安全\"\r\n                              class=\"Tag\">普吉最大最豪华船公司，保障安全</span>-->\r\n\r\n                    </div>\r\n                  \r\n                \r\n                    <div class=\"spec-box\">\r\n                        <script>\r\n                            //年月日\r\n                            var year=new Date().getFullYear();\r\n                            var mon=new Date().getMonth()+1;\r\n                            var day=new  Date().getDate();\r\n\r\n                            var today=year+'/'+mon+'/'+day;\r\n                            //开始日期\r\n                            var start_date = '" + Utils.ObjectToStr(model.fields["start_date"]) + "';\r\n                            var startdate=start_date.toString(\"yyyy-MM-dd\");\r\n                            //结束日期\r\n                            var end_date= '" + Utils.ObjectToStr(model.fields["end_date"]) + "';\r\n                            var enddate=end_date.toString(\"yyyy-MM-dd\");\r\n                            //如果今天日期大于开始日期，开始日期失效\r\n                            if (today>startdate) {\r\n                                startdate=today;\r\n                            }\r\n                            //如果今天日期大于结束日期，开始日期和结束日期都失效\r\n                            if (today>enddate) {\r\n                                startdate='';\r\n                                enddate='';\r\n                            }\r\n                        </");
+	templateBuilder.Append("script>\r\n                        <dl>\r\n                            <dt>预定日期</dt>\r\n                            <dd>\r\n                                <div class=\"stock-box2\">\r\n                                    <input type=\"text\" placeholder=\"请选择日期\" onclick=\"JTC.setday({minDate:startdate,maxDate:enddate , ranged: true})\"  id=\"select_date\" />\r\n                                </div>                     \r\n                            </dd>\r\n                        </dl>\r\n                        <dl>\r\n                            <dt>购买数量</dt>\r\n                            <dd>\r\n                                <div class=\"stock-box\">\r\n                                    <input id=\"commodityArticleId\" type=\"hidden\" value=\"");
 	templateBuilder.Append(Utils.ObjectToStr(model.id));
 	templateBuilder.Append("\" />\r\n                                    <input id=\"commodityGoodsId\" type=\"hidden\" value=\"0\" />\r\n                                    <input id=\"commoditySelectNum\" type=\"text\" maxlength=\"9\" value=\"1\" maxvalue=\"" + Utils.ObjectToStr(model.fields["stock_quantity"]) + "\" onkeydown=\"return checkNumber(event);\" />\r\n                                    <a class=\"add\" onclick=\"addCartNum(1);\">+</a>\r\n                                    <a class=\"remove\" onclick=\"addCartNum(-1);\">-</a>\r\n                                </div>\r\n                                <span class=\"stock-txt\">\r\n                                    库存<em id=\"commodityStockNum\">" + Utils.ObjectToStr(model.fields["stock_quantity"]) + "</em>件\r\n                                </span>\r\n                            </dd>\r\n                        </dl>\r\n                        <dl>\r\n                            <dd>\r\n                                <div id=\"buyButton\" class=\"btn-buy\">\r\n                                    <button class=\"buy over\" onclick=\"cartAdd(this,'");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
@@ -205,7 +207,7 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("', '");
 	templateBuilder.Append("/templates/ux_default");
 	templateBuilder.Append("/images/user_avatar.png');\r\n      }\r\n    </");
-	templateBuilder.Append("script>\r\n    <div class=\"comment-add\">\r\n      <form id=\"comment_form\" name=\"comment_form\" url=\"");
+	templateBuilder.Append("script>\r\n    <!--<div class=\"comment-add\">\r\n      <form id=\"comment_form\" name=\"comment_form\" url=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/submit_ajax.ashx?action=comment_add&article_id=");
 	templateBuilder.Append(Utils.ObjectToStr(model.id));
@@ -213,7 +215,7 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
 	templateBuilder.Append("tools/verify_code.ashx');return false;\"><img src=\"");
 	templateBuilder.Append(Utils.ObjectToStr(config.webpath));
-	templateBuilder.Append("tools/verify_code.ashx\" width=\"80\" height=\"22\" style=\"vertical-align:middle;\" /> 看不清楚？</a>\r\n        </div>\r\n      </form>\r\n    </div>\r\n    \r\n    <div class=\"comment-box\">\r\n      <ol id=\"comment_list\" class=\"comment-list\"></ol>\r\n    </div>\r\n    <!--放置页码-->\r\n    <div class=\"page-box\" style=\"margin-left:-8px;\">\r\n      <div id=\"pagination\" class=\"digg\"></div>\r\n    </div>\r\n    <div class=\"line10\"></div>\r\n    <!--/放置页码-->");
+	templateBuilder.Append("tools/verify_code.ashx\" width=\"80\" height=\"22\" style=\"vertical-align:middle;\" /> 看不清楚？</a>\r\n        </div>\r\n      </form>\r\n    </div>-->\r\n    \r\n    <div class=\"comment-box\">\r\n      <ol id=\"comment_list\" class=\"comment-list\"></ol>\r\n    </div>\r\n    <!--放置页码-->\r\n    <div class=\"page-box\" style=\"margin-left:-8px;\">\r\n      <div id=\"pagination\" class=\"digg\"></div>\r\n    </div>\r\n    <div class=\"line10\"></div>\r\n    <!--/放置页码-->");
 
 
 	}	//end for if
