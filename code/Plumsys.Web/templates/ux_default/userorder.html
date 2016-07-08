@@ -60,12 +60,23 @@
             <td>
               <%set List<Plumsys.Model.article> ls=get_order_goods_list({strtoint({dr[id]})})%>
               <%if(ls!=null)%>
+			  <table>
+			  <tr>
               <%foreach(Plumsys.Model.article modelt in ls)%>
-              <a target="_blank" title="{modelt.title}" href="<%linkurl("tourist_mall_show",{modelt.id})%>">
-                <img width="60" height="60" alt="{modelt.title}" src="{modelt.img_url}" class="img">
-              </a>
+               <td style="border-bottom:0px;">
+			   <dl>
+                    <dt><a target="_blank" title="{modelt.title}" href="<%linkurl("tourist_mall_show",{modelt.id})%>"><img width="60" height="60" alt="{modelt.title}" src="{modelt.img_url}" class="img"></a>
+			        </dt>
+					  <%if({strtoint({dr[status]})}==3)%>
+                    <dd style="text-align:center"> <a href="<%linkurl("tourist_mall_show",{modelt.id})%><%="#tour_ljpj"%>" target="_blank"><font style="font-size:12px">商品评价</font></a></dd>
+					 <%/if%>
+                </dl>
+				</td>
               <%/foreach%>
+			  </tr>
+			  </table>
               <%/if%>
+
             </td>
             <td align="center">{dr[accept_name]}</td>
             <td align="center"><strong>￥{dr[order_amount]}</strong><br /><%=get_payment_title({strtoint({dr[payment_id]})})%></td>

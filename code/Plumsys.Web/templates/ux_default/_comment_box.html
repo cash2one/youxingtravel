@@ -19,7 +19,7 @@
 	AjaxPageList('#comment_list', '#pagination', 10, {comment_count}, '{config.webpath}tools/submit_ajax.ashx?action=comment_list&article_id={model.id}', '<%templateskin%>/images/user_avatar.png');
       }
     </script>
-    <!--<div class="comment-add">
+    <div class="comment-add">
       <form id="comment_form" name="comment_form" url="{config.webpath}tools/submit_ajax.ashx?action=comment_add&article_id={model.id}">
         <div class="editor">
           <textarea id="txtContent" name="txtContent" class="input" datatype="*" sucmsg=" "></textarea>
@@ -31,7 +31,7 @@
           <a href="javascript:;" onclick="ToggleCode(this, '{config.webpath}tools/verify_code.ashx');return false;"><img src="{config.webpath}tools/verify_code.ashx" width="80" height="22" style="vertical-align:middle;" /> 看不清楚？</a>
         </div>
       </form>
-    </div>-->
+    </div>
     
     <div class="comment-box">
       <ol id="comment_list" class="comment-list"></ol>
