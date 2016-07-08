@@ -19,6 +19,7 @@
 	AjaxPageList('#comment_list', '#pagination', 10, {comment_count}, '{config.webpath}tools/submit_ajax.ashx?action=comment_list&article_id={model.id}', '<%templateskin%>/images/user_avatar.png');
       }
     </script>
+<!--判断是购买次产品-->
     <div class="comment-add">
       <form id="comment_form" name="comment_form" url="{config.webpath}tools/submit_ajax.ashx?action=comment_add&article_id={model.id}">
         <div class="editor">

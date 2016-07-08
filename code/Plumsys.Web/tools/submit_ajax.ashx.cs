@@ -216,7 +216,7 @@ namespace Plumsys.Web.tools
             }
 
             BLL.article_comment bll = new BLL.article_comment();
-            DataSet ds = bll.GetList(page_size, page_index, string.Format("is_lock=0 and article_id={0}", article_id.ToString()), "add_time asc", out totalcount);
+            DataSet ds = bll.GetList(page_size, page_index, string.Format("is_lock=0 and article_id={0}", article_id.ToString()), "pc.add_time asc", out totalcount);
             //如果记录存在
             if (ds.Tables[0].Rows.Count > 0)
             {
