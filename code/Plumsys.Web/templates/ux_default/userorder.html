@@ -68,7 +68,7 @@
                     <dt><a target="_blank" title="{modelt.title}" href="<%linkurl("tourist_mall_show",{modelt.id})%>"><img width="60" height="60" alt="{modelt.title}" src="{modelt.img_url}" class="img"></a>
 			        </dt>
 					  <%if({strtoint({dr[status]})}==3)%>
-                    <dd style="text-align:center"> <a href="<%linkurl("tourist_mall_show",{modelt.id})%><%="#tour_ljpj"%>" target="_blank"><font style="font-size:12px">商品评价</font></a></dd>
+                    <dd style="text-align:center"> <a href="<%linkurl("tourist_mall_show",{modelt.id})%>&ud={userModel.id}<%="#tour_ljpj"%>" target="_blank"><font style="font-size:12px">商品评价</font></a></dd>
 					 <%/if%>
                 </dl>
 				</td>

@@ -1,4 +1,5 @@
 ﻿    <%set int comment_count=get_comment_count(model.id, "is_lock=0")%><!--取得评论总数-->
+    <%set int isbuy=get_comment_count(model.id, "is_lock=0")%><!--获取此用户是否购买-->
     <link rel="stylesheet" type="text/css" href="{config.webpath}css/validate.css" />
     <link rel="stylesheet" type="text/css" href="{config.webpath}css/pagination.css" />
     <link rel="stylesheet" type="text/css" href="{config.webpath}scripts/artdialog/ui-dialog.css" />
@@ -19,7 +20,9 @@
 	AjaxPageList('#comment_list', '#pagination', 10, {comment_count}, '{config.webpath}tools/submit_ajax.ashx?action=comment_list&article_id={model.id}', '<%templateskin%>/images/user_avatar.png');
       }
     </script>
-<!--判断是购买次产品-->
+<!--判断是否购买此产品-->
+   <%set int a=get_isallowdisplay(ud)%>
+    <%if(a==1)%>
     <div class="comment-add">
       <form id="comment_form" name="comment_form" url="{config.webpath}tools/submit_ajax.ashx?action=comment_add&article_id={model.id}">
         <div class="editor">
@@ -33,7 +36,8 @@
         </div>
       </form>
     </div>
-    
+ <%/if%>
+  <!--判断是否购买此产品-->
     <div class="comment-box">
       <ol id="comment_list" class="comment-list"></ol>
     </div>
