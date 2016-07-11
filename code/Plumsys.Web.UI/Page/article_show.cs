@@ -11,6 +11,7 @@ namespace Plumsys.Web.UI.Page
     {
         protected int id;
         protected string page = string.Empty;
+        protected string ud = string.Empty;
         protected Model.article model = new Model.article();
         
         /// <summary>
@@ -20,6 +21,7 @@ namespace Plumsys.Web.UI.Page
         {
             id = PLRequest.GetQueryInt("id");
             page = PLRequest.GetQueryString("page");
+            ud = PLRequest.GetQueryString("ud");
             BLL.article bll = new BLL.article();
 
             if (id > 0) //如果ID获取到，将使用ID
