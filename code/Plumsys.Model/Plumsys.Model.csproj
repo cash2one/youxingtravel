@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ali_api_request_base.cs" />
+    <Compile Include="ali_api_response_base.cs" />
+    <Compile Include="ali_api_sms_request.cs" />
+    <Compile Include="ali_api_sms_response.cs" />
     <Compile Include="article.cs" />
     <Compile Include="article_albums.cs" />
     <Compile Include="article_attach.cs" />

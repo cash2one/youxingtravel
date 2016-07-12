@@ -4,6 +4,10 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Collections.Generic;
 using Plumsys.Common;
+using Plumsys.Model;
+using Top.Api;
+using Top.Api.Request;
+using Top.Api.Response;
 
 namespace Plumsys.BLL
 {
@@ -39,12 +43,15 @@ namespace Plumsys.BLL
         /// <returns>bool</returns>
         public bool Send(string mobiles, string content, int pass, out string msg)
         {
+            #region 注视以前的代码 此处用阿里大鱼
             //检查是否设置好短信账号
-            if (!Exists())
-            {
-                msg = "短信配置参数有误，请完善后再提交！";
-                return false;
-            }
+            //if (!Exists())
+            //{
+            //    msg = "短信配置参数有误，请完善后再提交！";
+            //    return false;
+            //}
+
+           #endregion 
             //检查手机号码，如果超过2000则分批发送
             int sucCount = 0; //成功提交数量
             string errorMsg = string.Empty; //错误消息
@@ -77,12 +84,40 @@ namespace Plumsys.BLL
                 {
                     try
                     {
-                        string result = Utils.HttpPost(siteConfig.smsapiurl,
-                            "cmd=tx&pass=" + pass + "&uid=" + siteConfig.smsusername + "&pwd=" + siteConfig.smspassword + "&mobile=" + Utils.DelLastComma(sb.ToString()) + "&encode=utf8&content=" + Utils.UrlEncode(content));
-                        string[] strArr = result.Split(new string[] { "||" }, StringSplitOptions.None);
-                        if (strArr[0] != "100")
+                        ali_api_sms_request ali_sms = new ali_api_sms_request();
+                        ali_sms.app_key = "23401454";
+                        ali_sms.target_app_key = "0b3c42771e7e5223441a8e41080bba9f";
+                        ali_sms.extend = "";
+                        ali_sms.format = "json";
+                        ali_sms.method = "alibaba.aliqin.fc.sms.num.send";
+                        ali_sms.partner_id = string.Empty;
+                        ali_sms.rec_num = "18652023049";
+                        ali_sms.session = string.Empty;
+                        ali_sms.sign = string.Empty;
+                        ali_sms.sign_method = "md5";
+                        ali_sms.simplify = false;
+                        ali_sms.sms_free_sign_name = "大鱼测试";
+                        ali_sms.sms_param = "{\"webname\":\"优行网\",\"username\":\"代剑\"}";
+                        ali_sms.sms_template_code = "SMS_11670262";
+                        ali_sms.sms_type = "normal";
+                        ali_sms.timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        ali_sms.v = "2.0";
+                        //string result = Utils.HttpPost(siteConfig.smsapiurl,
+                        //    "cmd=tx&pass=" + pass + "&uid=" + siteConfig.smsusername + "&pwd=" + siteConfig.smspassword + "&mobile=" + Utils.DelLastComma(sb.ToString()) + "&encode=utf8&content=" + Utils.UrlEncode(content));
+                        //string result = Utils.HttpPost(siteConfig.smsapiurl,
+                        //   "app_key=" + ali_sms.app_key + "&method=" + ali_sms.method + "&session=" + ali_sms.session + "&timestamp=" + ali_sms.timestamp + "&format=" + ali_sms.format + "&v=" + ali_sms.v + "&partner_id=" + ali_sms.partner_id + "&target_app_key=" + ali_sms.target_app_key + "&simplify=" + ali_sms.simplify + "&sign_method=" + ali_sms.sign_method + "&extend=" + ali_sms.extend + "&sms_type =" + ali_sms.sms_type + "&sms_free_sign_name =" + ali_sms.sms_free_sign_name + "&sms_param =" + ali_sms.sms_param + "&rec_num  =" + ali_sms.rec_num + "&sms_template_code =" + ali_sms.sms_template_code);
+                        ITopClient client = new DefaultTopClient(siteConfig.smsapiurl, ali_sms.app_key, ali_sms.target_app_key);
+                        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+                        req.Extend = ali_sms.extend;
+                        req.SmsType = ali_sms.sms_type ;
+                        req.SmsFreeSignName = ali_sms.sms_free_sign_name;
+                        req.SmsParam = ali_sms.sms_param;
+                        req.RecNum = ali_sms.rec_num ;
+                        req.SmsTemplateCode = ali_sms.sms_template_code ;
+                        AlibabaAliqinFcSmsNumSendResponse rsp = client.Execute(req);
+                        if (!rsp.Result.Success)
                         {
-                            errorMsg = "提交失败，错误提示：" + strArr[1];
+                            errorMsg = "提交失败，错误提示：" + rsp.Result.Msg;
                             continue;
                         }
                         sucCount += sendCount; //成功数量
