@@ -261,5 +261,30 @@ namespace Plumsys.Web.UI
         }
         #endregion
 
+        protected int get_isallowdisplay(string ud)
+        {
+            //判断用户是否登录
+            //检查用户是否登录
+            Model.users model = new BasePage().GetUserInfo();
+            if (model == null)
+            {
+                //未登录
+                return 0;
+            }
+            else
+            {
+                //已登录，判断是否是她的订单
+                if (model.id.ToString()==ud)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;   
+                }
+            }
+           
+        }
+
     }
 }
