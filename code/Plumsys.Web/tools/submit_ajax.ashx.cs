@@ -567,7 +567,7 @@ namespace Plumsys.Web.tools
             }
             else if (userConfig.regmsgstatus == 3 && mobile != "") //发送短信
             {
-                Model.sms_template smsModel = new BLL.sms_template().GetModel("welcomemsg"); //取得短信内容
+                Model.sms_template smsModel = new BLL.sms_template().GetModel("SMS_11670262"); //取得短信内容欢迎短信
                 if (smsModel != null)
                 {
                     //替换标签
@@ -578,7 +578,7 @@ namespace Plumsys.Web.tools
                     msgContent = msgContent.Replace("{username}", model.user_name);
                     //发送短信
                     string tipMsg = string.Empty;
-                    new BLL.sms_message().Send(model.mobile, msgContent, 2, out tipMsg);
+                    new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
                 }
             }
             //绑定到对应的授权类型
@@ -789,7 +789,7 @@ namespace Plumsys.Web.tools
             }
             else if (userConfig.regmsgstatus == 3 && !string.IsNullOrEmpty(mobile)) //发送短信
             {
-                Model.sms_template smsModel = new BLL.sms_template().GetModel("welcomemsg"); //取得短信内容
+                Model.sms_template smsModel = new BLL.sms_template().GetModel("SMS_11670262"); //取得短信内容 欢迎短信
                 if (smsModel != null)
                 {
                     //替换标签
@@ -800,7 +800,7 @@ namespace Plumsys.Web.tools
                     msgContent = msgContent.Replace("{username}", model.user_name);
                     //发送短信
                     string tipMsg = string.Empty;
-                    new BLL.sms_message().Send(model.mobile, msgContent, 2, out tipMsg);
+                    new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
                 }
             }
             #endregion
@@ -1120,7 +1120,7 @@ namespace Plumsys.Web.tools
                     context.Response.Write("{\"status\":0, \"msg\":\"您尚未绑定手机号码，无法取回密码！\"}");
                     return;
                 }
-                Model.sms_template smsModel = new BLL.sms_template().GetModel("usercode"); //取得短信内容
+                Model.sms_template smsModel = new BLL.sms_template().GetModel("SMS_11710201"); //取得短信内容 用户注册
                 if (smsModel == null)
                 {
                     context.Response.Write("{\"status\":0, \"msg\":\"发送失败，短信模板不存在，请联系管理员！\"}");
@@ -1145,13 +1145,14 @@ namespace Plumsys.Web.tools
                 //替换标签
                 string msgContent = smsModel.content;
                 msgContent = msgContent.Replace("{webname}", siteConfig.webname);
+                msgContent = msgContent.Replace("{product}", siteConfig.webname);
                 msgContent = msgContent.Replace("{weburl}", siteConfig.weburl);
                 msgContent = msgContent.Replace("{webtel}", siteConfig.webtel);
                 msgContent = msgContent.Replace("{code}", codeModel.str_code);
                 msgContent = msgContent.Replace("{valid}", userConfig.regsmsexpired.ToString());
                 //发送短信
                 string tipMsg = string.Empty;
-                bool result1 = new BLL.sms_message().Send(model.mobile, msgContent, 1, out tipMsg);
+                bool result1 = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
                 if (!result1)
                 {
                     context.Response.Write("{\"status\":0, \"msg\":\"发送失败，" + tipMsg + "\"}");
@@ -2338,7 +2339,7 @@ namespace Plumsys.Web.tools
             {
                 return "{\"status\":1, \"time\":\"" + userConfig.regsmsexpired + "\", \"msg\":\"已发送短信，" + userConfig.regsmsexpired + "分钟后再试！\"}";
             }
-            Model.sms_template smsModel = new BLL.sms_template().GetModel("usercode"); //取得短信内容
+            Model.sms_template smsModel = new BLL.sms_template().GetModel("SMS_11710201"); //取得短信内容
             if (smsModel == null)
             {
                 return "{\"status\":0, \"msg\":\"发送失败，短信模板不存在，请联系管理员！\"}";
@@ -2349,11 +2350,12 @@ namespace Plumsys.Web.tools
             msgContent = msgContent.Replace("{webname}", siteConfig.webname);
             msgContent = msgContent.Replace("{weburl}", siteConfig.weburl);
             msgContent = msgContent.Replace("{webtel}", siteConfig.webtel);
+            msgContent = msgContent.Replace("{product}", siteConfig.webname); 
             msgContent = msgContent.Replace("{code}", strcode);
             msgContent = msgContent.Replace("{valid}", userConfig.regsmsexpired.ToString());
             //发送短信
             string tipMsg = string.Empty;
-            bool result = new BLL.sms_message().Send(mobile, msgContent, 1, out tipMsg);
+            bool result = new BLL.sms_message().Send(mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
             if (!result)
             {
                 return "{\"status\":0, \"msg\":\"发送失败，" + tipMsg + "\"}";

@@ -113,7 +113,7 @@ namespace Plumsys.Web.admin.users
                 }
                 //开始发送短信
                 string msg = string.Empty;
-                bool result = new BLL.sms_message().Send(txtMobileNumbers.Text.Trim(), txtSmsContent.Text.Trim(), 2, out msg);
+                bool result = new BLL.sms_message().Send(txtMobileNumbers.Text.Trim(), txtSmsContent.Text.Trim(),string.Empty,string.Empty, out msg);
                 if (result)
                 {
                     AddAdminLog(PLEnums.ActionEnum.Add.ToString(), "发送手机短信"); //记录日志
@@ -141,7 +141,7 @@ namespace Plumsys.Web.admin.users
                 string _mobiles = GetGroupMobile(al);
                 //开始发送短信
                 string msg = string.Empty;
-                bool result = new BLL.sms_message().Send(_mobiles, txtSmsContent.Text.Trim(), 2, out msg);
+                bool result = new BLL.sms_message().Send(_mobiles, txtSmsContent.Text.Trim(),string.Empty,string.Empty, out msg);
                 if (result)
                 {
                     AddAdminLog(PLEnums.ActionEnum.Add.ToString(), "发送手机短信"); //记录日志

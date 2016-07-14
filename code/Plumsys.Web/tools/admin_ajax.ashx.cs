@@ -416,7 +416,7 @@ namespace Plumsys.Web.tools
             }
             //开始发送
             string msg = string.Empty;
-            bool result = new BLL.sms_message().Send(mobiles, content, 2, out msg);
+            bool result = new BLL.sms_message().Send(mobiles, content,string.Empty,string.Empty,out msg);
             if (result)
             {
                 context.Response.Write("{\"status\": 1, \"msg\": \"" + msg + "\"}");
@@ -507,7 +507,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, 2, out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -594,7 +594,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, 2, out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -688,7 +688,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, 2, out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -778,7 +778,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, 2, out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
