@@ -126,7 +126,7 @@ namespace Plumsys.Web.admin.channel
                 if (cb.Checked)
                 {
                     //检查该分类下是否还有频道
-                    int channelCount = new BLL.channel().GetCount("category_id=" + id);
+                    int channelCount = new BLL.channel().GetCount("site_id=" + id);
                     if (channelCount > 0)
                     {
                         errorCount += 1;
