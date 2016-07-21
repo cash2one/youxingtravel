@@ -720,11 +720,11 @@ namespace Plumsys.DAL
         {
             StringBuilder strSql = new StringBuilder();
            #region 注释：修改获取数据的方法，从视图中获取到商品的日期范围
-            //strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time");
-            //strSql.Append(" from " + databaseprefix + "article");
-#endregion
-            strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time,start_date,end_date");
-            strSql.Append(" from view_channel_date_select");
+            strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time");
+            strSql.Append(" from " + databaseprefix + "article");
+          #endregion
+            //strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time,start_date,end_date");
+            //strSql.Append(" from view_channel_date_select");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)};
