@@ -30,9 +30,9 @@ namespace Plumsys.Web.tools
                 case "comment_list": //评论列表
                     comment_list(context);
                     break;
-                case "validate_username": //验证用户名
-                    validate_username(context);
-                    break;
+                //case "validate_username": //验证用户名
+                //    validate_username(context);
+                //    break;
                 case "user_login": //用户登录
                     user_login(context);
                     break;
@@ -632,12 +632,12 @@ namespace Plumsys.Web.tools
                 context.Response.Write("{\"status\":0, \"msg\":\"对不起，系统暂不允许注册新用户！\"}");
                 return;
             }
-            //检查用户输入信息是否为空
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            {
-                context.Response.Write("{\"status\":0, \"msg\":\"对不起，用户名和密码不能为空！\"}");
-                return;
-            }
+            ////检查用户输入信息是否为空
+            //if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            //{
+            //    context.Response.Write("{\"status\":0, \"msg\":\"对不起，用户名和密码不能为空！\"}");
+            //    return;
+            //}
             //如果开启手机注册则要验证手机
             if (userConfig.regstatus == 2 && string.IsNullOrEmpty(mobile))
             {
