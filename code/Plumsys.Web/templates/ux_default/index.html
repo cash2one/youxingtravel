@@ -23,7 +23,7 @@
                     <div class="LeftNavi">
                         <div class="nav">
                             <div class="c-wrapper">
-                                <div class="serchbox" style="display:none">
+                                <div class="serchbox" >
                                     <div class="tab-view">
                                         <div class="searchtype" data-role="head">
                                             <ul>
@@ -37,18 +37,15 @@
                                         </div>
                                         <div class="searchtypeconnent" data-role="body">
                                             <div data-role="tab-content" data-id="tab-a">
-                                                <div class="ml20 fsize14"><div class="chufa">出发地：</div><div class="mudi">目的地：</div></div>
                                                 <div class="ml20 fsize14">
-                                                    <div class="chufa">
-                                                        <input type="text" class="inputchufa" placeholder="请输入出发地" value="" />
-                                                    </div>
-                                                    <div class="mudi">
-                                                        <input type="text" class="inputmudi" placeholder="请输入目的地" value="" />
+                                                    <div class="searchbox mt10">
+                                                        <input type="text" class="inputsearchbox" placeholder="请输入目的地关键词"  id="gty"/>
                                                     </div>
                                                 </div>
                                                 <div class="clear"></div>
                                                 <div class="searchbotton ml20 mt10 fsize14">
-                                                    <div class="searchbottondetail floatR"> <input type="button" value="搜索" /></div>
+                                                    <div class="searchbottondetail floatR"> <input type="button" value="搜索" onclick="SiteSearch('<%linkurl("search")%>','#gty')" /></div>
+                                                
                                                 </div>
                                                 <div class="clear"></div>
                                                 <div class="bordorline ml20 mt10 fsize14">
@@ -58,8 +55,6 @@
                                                     <div class="resoucity floatL">热搜城市：</div>
                                                     <div class="resoucitylist floatL">
                                                         <ul>
-                                                            <li>测试城市</li>
-                                                            <li>测试城市</li>
                                                             <li>测试城市</li>
                                                             <li>测试城市</li>
                                                             <li>测试城市</li>

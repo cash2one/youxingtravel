@@ -181,12 +181,12 @@
           <%foreach(Plumsys.Model.order_goods modelt in model.order_goods)%>
           <tr>
             <td width="60">
-              <a target="_blank" href="<%linkurl("goods_show",{modelt.article_id})%>">
+              <a target="_blank" href="<%linkurl("tourist_mall_show",{modelt.article_id})%>">
                 <img src="<%=get_article_img_url(modelt.article_id)%>" class="img" />
               </a>
             </td>
             <td align="left">
-              <a target="_blank" href="<%linkurl("goods_show",{modelt.article_id})%>">{modelt.goods_title}</a>
+              <a target="_blank" href="<%linkurl("tourist_mall_show",{modelt.article_id})%>">{modelt.goods_title}</a>
               <p>{modelt.spec_text}</p>
             </td>
             <td align="center">
