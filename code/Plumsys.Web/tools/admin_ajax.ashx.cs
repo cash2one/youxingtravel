@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.SessionState;
 using Plumsys.Web.UI;
 using Plumsys.Common;
+using Plumsys.Model;
 
 namespace Plumsys.Web.tools
 {
@@ -416,7 +417,7 @@ namespace Plumsys.Web.tools
             }
             //开始发送
             string msg = string.Empty;
-            bool result = new BLL.sms_message().Send(mobiles, content,string.Empty,string.Empty,out msg);
+            bool result = new BLL.sms_message().Send(mobiles, content, string.Empty, string.Empty, out msg);
             if (result)
             {
                 context.Response.Write("{\"status\": 1, \"msg\": \"" + msg + "\"}");
@@ -507,7 +508,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -594,7 +595,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -688,7 +689,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -778,7 +779,7 @@ namespace Plumsys.Web.tools
                                 msgContent = msgContent.Replace("{amount}", model.order_amount.ToString());
                                 //发送短信
                                 string tipMsg = string.Empty;
-                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title,  out tipMsg);
+                                bool sendStatus = new BLL.sms_message().Send(model.mobile, msgContent, smsModel.call_index, smsModel.title, out tipMsg);
                                 if (!sendStatus)
                                 {
                                     context.Response.Write("{\"status\": 1, \"msg\": \"订单确认成功，但无法发送短信<br/ >" + tipMsg + "\"}");
@@ -1078,7 +1079,55 @@ namespace Plumsys.Web.tools
 
         }
         #endregion
-
+        #region 根据开始日期和结束日期以及article_id查询规格价格
+        /// <summary>
+        ///获取产品规格
+        /// </summary>
+        /// <param name="context"></param>
+        private void get_article_goods(HttpContext context)
+        {
+            web_response result = new web_response();
+            try
+            {
+                int id = PLRequest.GetQueryInt("id");
+                DateTime start_time = PLRequest.GetQueryDateTime("st");
+                DateTime end_time = PLRequest.GetQueryDateTime("st");
+                IList<Model.article_goods> goods = new BLL.article_goods().GetList(id, start_time, end_time);
+                result.msg = "商品参数获取成功";
+                result.status = 1;
+                result.data = goods;
+            }
+            catch (Exception ex)
+            {
+                result.msg = "error";
+                result.status = 0;
+            }
+            context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+        }
+        /// <summary>
+        /// 获取当个商品参数
+        /// </summary>
+        /// <param name="context"></param>
+        private void get_article_good(HttpContext context)
+        {
+            web_response result = new web_response();
+            try
+            {
+                int id = PLRequest.GetQueryInt("id");
+                string spec_ids = PLRequest.GetString("spec_ids");
+                Model.article_goods good = new BLL.article_goods().GetModel(id, spec_ids);
+                result.msg = "商品参数获取成功";
+                result.status = 1;
+                result.data = good;
+            }
+            catch (Exception ex)
+            {
+                result.msg = "error";
+                result.status = 0;
+            }
+            context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+        }
+        #endregion
         #region 判断是否登陆以及是否开启静态====================
         private int get_builder_status()
         {
@@ -1094,6 +1143,7 @@ namespace Plumsys.Web.tools
                 return 1;
         }
         #endregion
+
 
         public bool IsReusable
         {

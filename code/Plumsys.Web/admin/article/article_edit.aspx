@@ -306,6 +306,7 @@
     <dt>商品规格</dt>
     <dd>
       <a class="icon-btn add spec-btn"><span>设置规格</span></a>
+       <div></div>
       <div class="table-container" style="padding-top:10px;">
         <asp:HiddenField ID="hide_goods_spec_list" runat="server" />
         <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="82%">

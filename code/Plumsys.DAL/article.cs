@@ -716,15 +716,11 @@ namespace Plumsys.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-        public Model.article GetModel(int id)
+        public Model.article GetModel(int id,DateTime? start_time=null,DateTime? end_time=null)
         {
             StringBuilder strSql = new StringBuilder();
-           #region 注释：修改获取数据的方法，从视图中获取到商品的日期范围
             strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time");
             strSql.Append(" from " + databaseprefix + "article");
-          #endregion
-            //strSql.Append("select top 1 id,channel_id,area_id,category_id,call_index,title,link_url,img_url,seo_title,seo_keywords,seo_description,tags,zhaiyao,content,sort_id,click,status,is_msg,is_top,is_red,is_hot,is_slide,is_sys,user_name,user_id,add_time,update_time,start_date,end_date");
-            //strSql.Append(" from view_channel_date_select");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)};
@@ -745,7 +741,7 @@ namespace Plumsys.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Model.article GetModel(string call_index)
+        public Model.article GetModel(string call_index,DateTime? start_time=null,DateTime? end_time=null)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select id from " + databaseprefix + "article");
@@ -757,7 +753,7 @@ namespace Plumsys.DAL
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj != null)
             {
-                return GetModel(Convert.ToInt32(obj));
+                return GetModel(Convert.ToInt32(obj),start_time,end_time);
             }
             return null;
         }
@@ -962,7 +958,7 @@ namespace Plumsys.DAL
         /// <summary>
         /// 将对象转换为实体
         /// </summary>
-        private Model.article DataRowToModel(DataRow row)
+        private Model.article DataRowToModel(DataRow row,DateTime? start_time=null,DateTime? end_time=null)
         {
             Model.article model = new Model.article();
             if (row != null)
@@ -1085,7 +1081,7 @@ namespace Plumsys.DAL
                 //附件信息
                 model.attach = new article_attach(databaseprefix).GetList(model.id);
                 //商品价格
-                model.goods = new article_goods(databaseprefix).GetList(model.id);
+                model.goods = new article_goods(databaseprefix).GetList(model.id,start_time,end_time);
             }
             return model;
         }

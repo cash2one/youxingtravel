@@ -20,6 +20,8 @@ namespace Plumsys.Model
         private int _stock_quantity = 0;
         private decimal _market_price = 0M;
         private decimal _sell_price = 0M;
+        private DateTime _sell_date;
+
         /// <summary>
         /// 自增ID
         /// </summary>
@@ -85,6 +87,14 @@ namespace Plumsys.Model
             get { return _sell_price; }
         }
 
+        /// <summary>
+        /// 销售日期
+        /// </summary>
+        public DateTime sell_date
+        {
+            get { return _sell_date; }
+            set { _sell_date = value; }
+        }
         private List<user_group_price> _group_prices;
         /// <summary>
         /// 会员组价格

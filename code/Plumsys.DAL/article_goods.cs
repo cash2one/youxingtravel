@@ -8,14 +8,14 @@ using Plumsys.Common;
 
 namespace Plumsys.DAL
 {
-	/// <summary>
-	/// 数据访问类:商品价格
-	/// </summary>
-	public partial class article_goods
-	{
+    /// <summary>
+    /// 数据访问类:商品价格
+    /// </summary>
+    public partial class article_goods
+    {
         private string databaseprefix; //数据库表名前缀
         public article_goods(string _databaseprefix)
-		{
+        {
             databaseprefix = _databaseprefix;
         }
 
@@ -43,7 +43,7 @@ namespace Plumsys.DAL
         public Model.article_goods GetModel(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price from " + databaseprefix + "article_goods");
+            strSql.Append("select top 1 id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date from " + databaseprefix + "article_goods");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)};
@@ -67,7 +67,7 @@ namespace Plumsys.DAL
         public Model.article_goods GetModel(int article_id, string spec_ids)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price from " + databaseprefix + "article_goods");
+            strSql.Append("select top 1 id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date from " + databaseprefix + "article_goods");
             strSql.Append(" where article_id=@article_id and spec_ids=@spec_ids");
             SqlParameter[] parameters = {
                     new SqlParameter("@article_id", SqlDbType.Int,4),
@@ -90,13 +90,15 @@ namespace Plumsys.DAL
         /// <summary>
         /// 得到一个商品价格列表
         /// </summary>
-        public List<Model.article_goods> GetList(int article_id)
+        public List<Model.article_goods> GetList(int article_id,DateTime? start_time=null,DateTime? end_time=null)
         {
             List<Model.article_goods> modelList = new List<Model.article_goods>();
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price");
+            strSql.Append("select id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date");
             strSql.Append(" FROM " + databaseprefix + "article_goods");
             strSql.Append(" where article_id=" + article_id);
+            if (start_time != null) strSql.Append(" and sell_date=>" +Convert.ToDateTime(start_time).ToString("yyyy-MM-dd"));
+            if (end_time != null) strSql.Append(" and sell_date<=" + Convert.ToDateTime(end_time).ToString("yyyy-MM-dd"));
             DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
 
             if (dt.Rows.Count > 0)
@@ -137,6 +139,10 @@ namespace Plumsys.DAL
                     if (dt.Rows[i]["sell_price"] != null && dt.Rows[i]["sell_price"].ToString() != "")
                     {
                         model.sell_price = decimal.Parse(dt.Rows[i]["sell_price"].ToString());
+                    }
+                    if (dt.Rows[i]["sell_date"] != null && dt.Rows[i]["sell_date"].ToString() != "")
+                    {
+                        model.sell_date = DateTime.Parse(dt.Rows[i]["sell_date"].ToString());
                     }
                     #endregion
 
@@ -226,6 +232,10 @@ namespace Plumsys.DAL
                 {
                     model.sell_price = decimal.Parse(row["sell_price"].ToString());
                 }
+                if (row["sell_date"] != null && row["sell_date"].ToString() != "")
+                {
+                    model.sell_date = DateTime.Parse(row["sell_price"].ToString());
+                }
             }
             return model;
         }
@@ -237,9 +247,9 @@ namespace Plumsys.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into " + databaseprefix + "article_goods(");
-            strSql.Append("article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price)");
+            strSql.Append("article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date)");
             strSql.Append(" values (");
-            strSql.Append("@article_id,@goods_no,@spec_ids,@spec_text,@stock_quantity,@market_price,@sell_price)");
+            strSql.Append("@article_id,@goods_no,@spec_ids,@spec_text,@stock_quantity,@market_price,@sell_price,@sell_date)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@article_id", SqlDbType.Int,4),
@@ -249,6 +259,7 @@ namespace Plumsys.DAL
 					new SqlParameter("@stock_quantity", SqlDbType.Int,4),
 					new SqlParameter("@market_price", SqlDbType.Decimal,5),
 					new SqlParameter("@sell_price", SqlDbType.Decimal,5)};
+                    new SqlParameter("@sell_date", SqlDbType.DateTime);
             parameters[0].Value = article_id;
             parameters[1].Value = model.goods_no;
             parameters[2].Value = model.spec_ids;
@@ -256,6 +267,7 @@ namespace Plumsys.DAL
             parameters[4].Value = model.stock_quantity;
             parameters[5].Value = model.market_price;
             parameters[6].Value = model.sell_price;
+            parameters[7].Value = model.sell_date;
             object goodsId = DbHelperSQL.GetSingle(conn, trans, strSql.ToString(), parameters); //带事务
             model.id = Convert.ToInt32(goodsId);
             //自定义会员组价格
@@ -352,7 +364,7 @@ namespace Plumsys.DAL
             }
             return modelList;
         }
-		#endregion
-	}
+        #endregion
+    }
 }
 

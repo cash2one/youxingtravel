@@ -68,17 +68,17 @@ namespace Plumsys.BLL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Model.article GetModel(int id)
+        public Model.article GetModel(int id,DateTime? start_time=null,DateTime? end_time=null)
         {
-            return dal.GetModel(id);
+            return dal.GetModel(id,start_time,end_time);
         }
 
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Model.article GetModel(string call_index)
+        public Model.article GetModel(string call_index,DateTime? start_time=null,DateTime? end_time=null)
         {
-            return dal.GetModel(call_index);
+            return dal.GetModel(call_index,start_time,end_time);
         }
 
         /// <summary>

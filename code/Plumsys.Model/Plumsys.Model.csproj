@@ -97,6 +97,7 @@
     <Compile Include="user_oauth_app.cs" />
     <Compile Include="user_point_log.cs" />
     <Compile Include="user_recharge.cs" />
+    <Compile Include="web_response.cs" />
     <Compile Include="weixin_access_token.cs" />
     <Compile Include="weixin_account.cs" />
     <Compile Include="weixin_request_rule.cs" />
