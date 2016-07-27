@@ -122,8 +122,6 @@ namespace Plumsys.Web.admin.dialog
                 JscriptMsg("保存过程中发生错误啦！", string.Empty);
                 return;
             }
-            JscriptMsg("修改信息成功！", "../article/article_edit.aspx?channel_id=" + article_model.channel_id + "&action=" + PLEnums.ActionEnum.Edit.ToString() + "&id=" + article_model.id);
-
         }
     }
 

@@ -34,6 +34,8 @@
                 value: '确定',
                 callback: function () {
                     document.getElementById('<%=btnSubmit.ClientID%>').click();
+                    $(api.data).click();
+                    parent.jsprint("规格设置成功！", "");
                 },
                 autofocus: true
             }, {
