@@ -101,7 +101,7 @@
                 var spec_goods_no = defaultProductNo + '-' + i;
                 var spec_market_price = '0';
                 var spec_sell_price = '0';
-                var spec_sell_date = $.request("selldate");
+                var spec_sell_date = $.request("date");
                 var spec_stock_quantity = '0';
                 var hide_group_price = '';
                 //有元素存在卡迪尔积中则不需要重新建立
