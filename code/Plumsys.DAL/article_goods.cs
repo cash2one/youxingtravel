@@ -90,15 +90,15 @@ namespace Plumsys.DAL
         /// <summary>
         /// 得到一个商品价格列表
         /// </summary>
-        public List<Model.article_goods> GetList(int article_id,DateTime? start_time=null,DateTime? end_time=null)
+        public List<Model.article_goods> GetList(int article_id, DateTime? start_time = null, DateTime? end_time = null)
         {
             List<Model.article_goods> modelList = new List<Model.article_goods>();
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date");
             strSql.Append(" FROM " + databaseprefix + "article_goods");
             strSql.Append(" where article_id=" + article_id);
-            if (start_time != null) strSql.Append(" and sell_date=>" +Convert.ToDateTime(start_time).ToString("yyyy-MM-dd"));
-            if (end_time != null) strSql.Append(" and sell_date<=" + Convert.ToDateTime(end_time).ToString("yyyy-MM-dd"));
+            if (start_time != null) strSql.Append(" and sell_date>='" + Convert.ToDateTime(start_time).ToString("yyyy-MM-dd")+"'");
+            if (end_time != null) strSql.Append(" and sell_date<='"+ Convert.ToDateTime(end_time).ToString("yyyy-MM-dd")+"'");
             DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
 
             if (dt.Rows.Count > 0)
@@ -239,7 +239,138 @@ namespace Plumsys.DAL
             }
             return model;
         }
+        /// <summary>
+        /// 根据goods模型新建数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="article_id"></param>
+        /// <returns></returns>
+        public bool Update(Model.article_goods model, int article_id)
+        {
+            using (SqlConnection conn = new SqlConnection(DbHelperSQL.connectionString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        Delete(conn,trans,model,article_id);
+                        Add(conn, trans, model, article_id);
+                        trans.Commit();
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="models">goods模型列表</param>
+        /// <param name="article_id">文章id</param>
+        /// <param name="date">yyyy-MM-dd日期格式</param>
+        /// <returns></returns>
+        public bool Update(List<Model.article_goods> models, int article_id,string date)
+        {
+            using (SqlConnection conn = new SqlConnection(DbHelperSQL.connectionString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        Delete(conn, trans, date, article_id);
+                        foreach (Model.article_goods model in models)
+                        {
+                            Add(conn, trans, model, article_id);
+                        }
+                        trans.Commit();
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        /// <summary>
+        /// 添加一条记录
+        /// </summary>
+        public bool Add(Model.article_goods model, int article_id)
+        {
+            using (SqlConnection conn = new SqlConnection(DbHelperSQL.connectionString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        StringBuilder strSql = new StringBuilder();
+                        strSql.Append("insert into " + databaseprefix + "article_goods(");
+                        strSql.Append("article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date)");
+                        strSql.Append(" values (");
+                        strSql.Append("@article_id,@goods_no,@spec_ids,@spec_text,@stock_quantity,@market_price,@sell_price,@sell_date)");
+                        strSql.Append(";select @@IDENTITY");
+                        SqlParameter[] parameters = {
+					    new SqlParameter("@article_id", SqlDbType.Int,4),
+					    new SqlParameter("@goods_no", SqlDbType.NVarChar,50),
+					    new SqlParameter("@spec_ids", SqlDbType.NVarChar,500),
+					    new SqlParameter("@spec_text", SqlDbType.NText),
+					    new SqlParameter("@stock_quantity", SqlDbType.Int,4),
+					    new SqlParameter("@market_price", SqlDbType.Decimal,5),
+					    new SqlParameter("@sell_price", SqlDbType.Decimal,5),
+                        new SqlParameter("@sell_date", SqlDbType.DateTime)};
+                        parameters[0].Value = article_id;
+                        parameters[1].Value = model.goods_no;
+                        parameters[2].Value = model.spec_ids;
+                        parameters[3].Value = model.spec_text;
+                        parameters[4].Value = model.stock_quantity;
+                        parameters[5].Value = model.market_price;
+                        parameters[6].Value = model.sell_price;
+                        parameters[7].Value = model.sell_date;
+                        object goodsId = DbHelperSQL.GetSingle(conn, trans, strSql.ToString(), parameters); //带事务
+                        model.id = Convert.ToInt32(goodsId);
+                        //自定义会员组价格
+                        if (model.group_prices != null)
+                        {
+                            StringBuilder strSql1;
+                            foreach (Model.user_group_price gp in model.group_prices)
+                            {
+                                strSql1 = new StringBuilder();
+                                strSql1.Append("insert into " + databaseprefix + "user_group_price(");
+                                strSql1.Append("article_id,goods_id,group_id,price)");
+                                strSql1.Append(" values (");
+                                strSql1.Append("@article_id,@goods_id,@group_id,@price)");
+                                SqlParameter[] parameters1 = {
+					        new SqlParameter("@article_id", SqlDbType.Int,4),
+					        new SqlParameter("@goods_id", SqlDbType.Int,4),
+					        new SqlParameter("@group_id", SqlDbType.Int,4),
+					        new SqlParameter("@price", SqlDbType.Decimal,5)};
+                                parameters1[0].Value = article_id; //内容ID
+                                parameters1[1].Value = model.id; //商品ID
+                                parameters1[2].Value = gp.group_id;
+                                parameters1[3].Value = gp.price;
+                                DbHelperSQL.GetSingle(conn, trans, strSql1.ToString(), parameters1); //带事务
+                            }
+                        }
+                        trans.Commit();
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         /// <summary>
         /// 添加一条记录，带事务
         /// </summary>
@@ -258,8 +389,8 @@ namespace Plumsys.DAL
 					new SqlParameter("@spec_text", SqlDbType.NText),
 					new SqlParameter("@stock_quantity", SqlDbType.Int,4),
 					new SqlParameter("@market_price", SqlDbType.Decimal,5),
-					new SqlParameter("@sell_price", SqlDbType.Decimal,5)};
-                    new SqlParameter("@sell_date", SqlDbType.DateTime);
+					new SqlParameter("@sell_price", SqlDbType.Decimal,5),
+                    new SqlParameter("@sell_date", SqlDbType.DateTime)};
             parameters[0].Value = article_id;
             parameters[1].Value = model.goods_no;
             parameters[2].Value = model.spec_ids;
@@ -295,17 +426,66 @@ namespace Plumsys.DAL
             }
         }
 
+
         /// <summary>
-        /// 删除一条数据，带事务
+        /// 根据日期删除价格
         /// </summary>
-        public void Delete(SqlConnection conn, SqlTransaction trans, int article_id)
+        public void Delete(SqlConnection conn, SqlTransaction trans, string date,int article_id)
         {
             //删除用户组价格
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from " + databaseprefix + "user_group_price");
+            strSql.Append("delete from " + databaseprefix + "user_group_price ");
             strSql.Append(" where article_id=@article_id");
-            SqlParameter[] parameters = {
-					new SqlParameter("@article_id", SqlDbType.Int,4)};
+            strSql.Append(" and  exists(select 1 from " + databaseprefix + "article_goods  a where " + databaseprefix + "user_group_price.goods_id=a.id and convert(varchar(10), sell_date, 23)=@date)");
+            SqlParameter[] parameters = { new SqlParameter("@article_id", SqlDbType.Int, 4), new SqlParameter("@date", SqlDbType.NVarChar, 10) };
+            parameters[0].Value = article_id;
+            parameters[1].Value = date;
+            DbHelperSQL.ExecuteSql(conn, trans, strSql.ToString(), parameters);
+
+            //删除主表
+            StringBuilder strSql2 = new StringBuilder();
+            strSql2.Append("delete from " + databaseprefix + "article_goods");
+            strSql2.Append(" where article_id=@article_id and convert(varchar(10), sell_date, 23)=@date");
+            SqlParameter[] parameters2 = { new SqlParameter("@article_id", SqlDbType.Int, 4), new SqlParameter("@date", SqlDbType.NVarChar, 10) };
+            parameters2[0].Value = article_id;
+            parameters2[1].Value = date;
+            DbHelperSQL.ExecuteSql(conn, trans, strSql2.ToString(), parameters2);
+        }
+        /// <summary>
+        /// 删除一条数据 根据数据模型
+        /// </summary>
+        public void Delete(SqlConnection conn, SqlTransaction trans,  Model.article_goods model,int article_id)
+        {
+            //删除用户组价格
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from " + databaseprefix + "user_group_price ");
+            strSql.Append(" where article_id=@article_id");
+            strSql.Append(" and  exists(select 1 from " + databaseprefix + "article_goods  a where " + databaseprefix + "user_group_price.goods_id=a.id and id=@id)");
+            SqlParameter[] parameters = { new SqlParameter("@article_id", SqlDbType.Int, 4), new SqlParameter("@id", SqlDbType.Int, 4) };
+            parameters[0].Value = article_id;
+            parameters[1].Value = model.id;
+            DbHelperSQL.ExecuteSql(conn, trans, strSql.ToString(), parameters);
+
+            //删除主表
+            StringBuilder strSql2 = new StringBuilder();
+            strSql2.Append("delete from " + databaseprefix + "article_goods");
+            strSql2.Append(" where article_id=@article_id and id=@id");
+            SqlParameter[] parameters2 = { new SqlParameter("@article_id", SqlDbType.Int, 4), new SqlParameter("@id", SqlDbType.Int, 4) };
+            parameters2[0].Value = article_id;
+            parameters2[1].Value = model.id;
+            DbHelperSQL.ExecuteSql(conn, trans, strSql2.ToString(), parameters2);
+        }
+        /// <summary>
+        /// 删除一条数据，带事务
+        /// </summary>
+        public void Delete(SqlConnection conn, SqlTransaction trans, int article_id, string spec_ids = "")
+        {
+            //删除用户组价格
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from " + databaseprefix + "user_group_price ");
+            strSql.Append(" where article_id=@article_id");
+            if (!string.IsNullOrEmpty(spec_ids)) strSql.Append(" and not exists(select 1 from " + databaseprefix + "article_goods  a where " + databaseprefix + "user_group_price.goods_id=a.id and spec_ids in(" + spec_ids + "))");
+            SqlParameter[] parameters = { new SqlParameter("@article_id", SqlDbType.Int, 4) };
             parameters[0].Value = article_id;
             DbHelperSQL.ExecuteSql(conn, trans, strSql.ToString(), parameters);
 
@@ -313,11 +493,14 @@ namespace Plumsys.DAL
             StringBuilder strSql2 = new StringBuilder();
             strSql2.Append("delete from " + databaseprefix + "article_goods");
             strSql2.Append(" where article_id=@article_id");
-            SqlParameter[] parameters2 = {
-					new SqlParameter("@article_id", SqlDbType.Int,4)};
+            if (!string.IsNullOrEmpty(spec_ids)) strSql2.Append(" and spec_ids not in(" + spec_ids + ")");
+            SqlParameter[] parameters2 = { new SqlParameter("@article_id", SqlDbType.Int, 4) };
             parameters2[0].Value = article_id;
             DbHelperSQL.ExecuteSql(conn, trans, strSql2.ToString(), parameters2);
         }
+
+
+
 
         /// <summary>
         /// 得到一个商品规格列表

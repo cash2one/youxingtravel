@@ -529,16 +529,39 @@ namespace Plumsys.DAL
                         #endregion
 
                         #region 修改商品价格==========================
-                        //删除旧商品价格
-                        new article_goods(databaseprefix).Delete(conn, trans, model.id);
-                        //添加商品价格
-                        if (model.goods != null)
+                        //商品价格单独修改
+                        //根据新规格形成笛卡儿积 删除不需要的商品
+                        string spec_ids = "";
+                        List<string> descarts = new List<string>();
+                        List<List<string>> lss = new List<List<string>>();
+                        IList<Model.article_goods_spec> specGroups = model.specs.FindAll(p => p.parent_id == 0);
+                        foreach (Model.article_goods_spec spec in specGroups)
                         {
-                            foreach (Model.article_goods modelt in model.goods)
-                            {
-                                new article_goods(databaseprefix).Add(conn, trans, modelt, model.id);
-                            }
+                            List<string> ls = new List<string>();
+                            IList<Model.article_goods_spec> ms = model.specs.FindAll(p => p.parent_id == spec.spec_id);
+                            foreach (Model.article_goods_spec m in ms)
+                            { ls.Add(m.spec_id.ToString()); }
+                            lss.Add(ls);
                         }
+                        Common.Descartes.run(lss, descarts);
+                        foreach (string s in descarts)
+                        {
+                            spec_ids += string.Format("'{0}',", s);
+                        }
+                        spec_ids = spec_ids.TrimEnd(',');
+                        new article_goods(databaseprefix).Delete(conn, trans, model.id, spec_ids);
+                        //删除旧商品价格
+                        //new article_goods(databaseprefix).Delete(conn, trans, model.id);
+                        //添加商品价格
+                        //if (model.goods != null)
+                        //{
+                        //    foreach (Model.article_goods modelt in model.goods)
+                        //    {
+                        //        new article_goods(databaseprefix).Add(conn, trans, modelt, model.id);
+                        //    }
+                        //}
+                        
+
                         #endregion
 
                         #region 修改商品规格==========================
@@ -730,7 +753,7 @@ namespace Plumsys.DAL
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
             {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
+                return DataRowToModel(ds.Tables[0].Rows[0],start_time,end_time);
             }
             else
             {

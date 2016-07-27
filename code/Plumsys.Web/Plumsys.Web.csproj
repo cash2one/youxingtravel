@@ -106,11 +106,11 @@
     <Content Include="admin\dialog\dialog_print.aspx" />
     <Content Include="admin\dialog\dialog_rewrite.aspx" />
     <Content Include="admin\dialog\dialog_spec.aspx" />
+    <Content Include="admin\dialog\dialog_spec_pirce_item.aspx" />
     <Content Include="admin\dialog\dialog_spec_item.aspx" />
     <Content Include="admin\ie6update.html" />
     <Content Include="admin\index.aspx" />
     <Content Include="admin\js\common.js" />
-    <Content Include="admin\js\pirce_picker.js" />
     <Content Include="admin\js\uploader.js" />
     <Content Include="admin\js\layindex.js" />
     <Content Include="admin\js\laymain.js" />
@@ -552,6 +552,9 @@
     <Content Include="scripts\jquery\jquery.pagination.js" />
     <Content Include="scripts\jquery\PCASClass.js" />
     <Content Include="scripts\jquery\Validform_v5.3.2_min.js" />
+    <Content Include="scripts\pricepicker\css\pricePicker.css" />
+    <Content Include="scripts\pricepicker\images\bg_calendar.png" />
+    <Content Include="scripts\pricepicker\js\pricePicker.js" />
     <Content Include="scripts\webuploader\uploader.swf" />
     <Content Include="scripts\webuploader\webuploader.min.js" />
     <Content Include="templates\main\about.png" />
@@ -1277,6 +1280,13 @@
       <DependentUpon>dialog_spec.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="admin\dialog\dialog_spec_pirce_item.aspx.cs">
+      <DependentUpon>dialog_spec_pirce_item.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\dialog\dialog_spec_pirce_item.aspx.designer.cs">
+      <DependentUpon>dialog_spec_pirce_item.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\dialog\dialog_spec_item.aspx.cs">
       <DependentUpon>dialog_spec_item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1872,7 +1882,6 @@
     <Folder Include="html\" />
     <Folder Include="merchant\" />
     <Folder Include="plugins\" />
-    <Folder Include="scripts\pricepicker\" />
     <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>
@@ -1894,6 +1903,7 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Develop.pubxml" />
     <Content Include="scripts\jquery\juqery.responsiveslides.min.js" />
+    <Content Include="scripts\jquery\jquery.extend.js" />
     <None Include="templates\mobile\jqmobi\css\src\afui.less" />
     <None Include="templates\mobile\jqmobi\plugins\README.md" />
     <None Include="templates\mobile\jqmobi\ui\README.md" />

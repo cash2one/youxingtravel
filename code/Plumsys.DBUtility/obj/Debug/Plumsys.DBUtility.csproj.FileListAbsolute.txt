@@ -28,3 +28,12 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.pdb
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Newtonsoft.Json.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.DBUtility.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.DBUtility.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.Common.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Newtonsoft.Json.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Plumsys.Common.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.csprojResolveAssemblyReference.cache
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.DBUtility\obj\Debug\Plumsys.DBUtility.pdb

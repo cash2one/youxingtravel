@@ -37,7 +37,17 @@ namespace Plumsys.BLL
         {
             return dal.GetModel(article_id, spec_ids);
         }
-
+        /// <summary>
+        /// 根据日期去更新数据
+        /// </summary>
+        /// <param name="models"></param>
+        /// <param name="article_id"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public bool Update(List<Model.article_goods> models,int article_id,string date)
+        {
+            return dal.Update(models, article_id, date);
+        }
         /// <summary>
         /// 得到一个商品价格列表
         /// </summary>

@@ -18,3 +18,9 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plu
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.pdb
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\bin\Debug\Newtonsoft.Json.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Common\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.Common\bin\Debug\Plumsys.Common.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Common\bin\Debug\Plumsys.Common.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Common\bin\Debug\Newtonsoft.Json.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Common\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Common\obj\Debug\Plumsys.Common.pdb

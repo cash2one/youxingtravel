@@ -72,6 +72,12 @@ namespace Plumsys.Web.tools
                 case "get_builder_html": //生成静态页面
                     get_builder_html(context);
                     break;
+                case "get_article_goods"://查询商品日期规格
+                    get_article_goods(context);
+                    break;
+                case "get_article_good"://查询一个商品规格
+                    get_article_good(context);
+                    break;
             }
         }
 
@@ -1089,9 +1095,15 @@ namespace Plumsys.Web.tools
             web_response result = new web_response();
             try
             {
-                int id = PLRequest.GetQueryInt("id");
-                DateTime start_time = PLRequest.GetQueryDateTime("st");
-                DateTime end_time = PLRequest.GetQueryDateTime("st");
+                int id = PLRequest.GetInt("id",0);
+                string s_start_time = PLRequest.GetQueryString("st");
+                string s_end_time = PLRequest.GetQueryString("et");
+                DateTime? start_time = null;
+                DateTime? end_time = null;
+                if (!string.IsNullOrEmpty(s_start_time))
+                    start_time = PLRequest.GetQueryDateTime("st");
+                if (!string.IsNullOrEmpty(s_end_time))
+                    end_time = PLRequest.GetQueryDateTime("et");
                 IList<Model.article_goods> goods = new BLL.article_goods().GetList(id, start_time, end_time);
                 result.msg = "商品参数获取成功";
                 result.status = 1;

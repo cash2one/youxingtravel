@@ -80,3 +80,26 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsy
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.pdb
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\bin\Newtonsoft.Json.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Web\bin\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.csprojResolveAssemblyReference.cache
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Web.dll.config
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Web.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Web.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Newtonsoft.Json.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.API.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.BLL.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Common.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Model.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Web.UI.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.DAL.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\TopSdk.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.DBUtility.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.API.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.BLL.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Common.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Web.UI.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.Model.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.DAL.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\bin\Plumsys.DBUtility.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Web\obj\Debug\Plumsys.Web.pdb

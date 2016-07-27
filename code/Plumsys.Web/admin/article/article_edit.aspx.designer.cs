@@ -328,6 +328,15 @@ namespace Plumsys.Web.admin.article {
         protected global::System.Web.UI.WebControls.HiddenField hide_goods_spec_list;
         
         /// <summary>
+        /// rptList 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptList;
+        
+        /// <summary>
         /// rptGroupPrice 控件。
         /// </summary>
         /// <remarks>

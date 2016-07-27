@@ -64,6 +64,7 @@ namespace Plumsys.Web.admin.article
                 ShowSysField(this.channel_id); //显示相应的默认控件
                 TreeBind(this.channel_id); //绑定类别
                 TreeBindArea();//绑定地区
+                RptBind("parent_id=0", "sort_id asc,id desc");//绑定规格
                 if (action == PLEnums.ActionEnum.Edit.ToString() || action == PLEnums.ActionEnum.Copy.ToString()) //修改
                 {
                     ShowInfo(this.id);
@@ -397,6 +398,32 @@ namespace Plumsys.Web.admin.article
             }
         }
         #endregion
+        #region 绑定商品规格=================================
+        private void RptBind(string _strWhere, string _orderby)
+        {
+            BLL.article_spec bll = new BLL.article_spec();
+            this.rptList.DataSource = bll.GetList(0, _strWhere, _orderby);
+            this.rptList.DataBind();
+        }
+
+        //嵌套绑定
+        protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            BLL.article_spec bll = new BLL.article_spec();
+            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
+            {
+                Repeater rptSpecItem = (Repeater)e.Item.FindControl("rptSpecItem");
+                //找到关联的数据项 
+                DataRowView drv = (DataRowView)e.Item.DataItem;
+                //提取父ID 
+                int parentId = Convert.ToInt32(drv["id"]);
+                //根据父ID查询并绑定
+                rptSpecItem.DataSource = bll.GetList(0, "parent_id=" + parentId, "sort_id asc,id desc");
+                rptSpecItem.DataBind();
+            }
+        }
+        #endregion
+
 
         #region 赋值操作=================================
         private void ShowInfo(int _id)
@@ -529,8 +556,6 @@ namespace Plumsys.Web.admin.article
             //绑定商品规格
             List<Model.article_goods_spec> goodsSpecList = new BLL.article_goods_spec().GetList(model.id, "");
             hide_goods_spec_list.Value = JsonHelper.ObjectToJSON(goodsSpecList);
-            rptGroupPrice.DataSource = model.goods;
-            rptGroupPrice.DataBind();
             //绑定图片相册
             if (filename.StartsWith("thumb_"))
             {
@@ -738,11 +763,12 @@ namespace Plumsys.Web.admin.article
             string[] specGoodsNoArr = Request.Form.GetValues("spec_goods_no");
             string[] specMarketPriceArr = Request.Form.GetValues("spec_market_price");
             string[] specSellPriceArr = Request.Form.GetValues("spec_sell_price");
+            string[] specSellDateArr = Request.Form.GetValues("hide_spec_sell_date");
             string[] specStockQuantityArr = Request.Form.GetValues("spec_stock_quantity");
             string[] specSpecIdsArr = Request.Form.GetValues("hide_spec_ids");
             string[] specTextArr = Request.Form.GetValues("hide_spec_text");
             string[] specGroupPriceArr = Request.Form.GetValues("hide_group_price");
-            if (specGoodsIdArr != null && specGoodsNoArr != null && specMarketPriceArr != null && specSellPriceArr != null && specStockQuantityArr != null
+            if (specGoodsIdArr != null && specGoodsNoArr != null && specMarketPriceArr != null && specSellPriceArr != null && specSellDateArr != null && specStockQuantityArr != null
                 && specSpecIdsArr != null && specTextArr != null && specGroupPriceArr != null
                 && specGoodsIdArr.Length > 0 && specGoodsNoArr.Length > 0 && specMarketPriceArr.Length > 0 && specSellPriceArr.Length > 0
                 && specStockQuantityArr.Length > 0 && specSpecIdsArr.Length > 0 && specTextArr.Length > 0 && specGroupPriceArr.Length > 0)
@@ -763,6 +789,7 @@ namespace Plumsys.Web.admin.article
                         stock_quantity = Utils.StrToInt(specStockQuantityArr[i], 0),
                         market_price = Utils.StrToDecimal(specMarketPriceArr[i], 0),
                         sell_price = Utils.StrToDecimal(specSellPriceArr[i], 0),
+                        sell_date = Utils.StrToDateTime(specSellDateArr[i], DateTime.Now),
                         group_prices = groupList
                     });
                 }
@@ -916,42 +943,7 @@ namespace Plumsys.Web.admin.article
                 model.goods = new List<Model.article_goods>();
             }
             //保存商品信息
-            string[] specGoodsIdArr = Request.Form.GetValues("hide_goods_id");
-            string[] specGoodsNoArr = Request.Form.GetValues("spec_goods_no");
-            string[] specMarketPriceArr = Request.Form.GetValues("spec_market_price");
-            string[] specSellPriceArr = Request.Form.GetValues("spec_sell_price");
-            string[] specStockQuantityArr = Request.Form.GetValues("spec_stock_quantity");
-            string[] specSpecIdsArr = Request.Form.GetValues("hide_spec_ids");
-            string[] specTextArr = Request.Form.GetValues("hide_spec_text");
-            string[] specGroupPriceArr = Request.Form.GetValues("hide_group_price");
-            if (specGoodsIdArr != null && specGoodsNoArr != null && specMarketPriceArr != null && specSellPriceArr != null && specStockQuantityArr != null
-                && specSpecIdsArr != null && specTextArr != null && specGroupPriceArr != null
-                && specGoodsIdArr.Length > 0 && specGoodsNoArr.Length > 0 && specMarketPriceArr.Length > 0 && specSellPriceArr.Length > 0
-                && specStockQuantityArr.Length > 0 && specSpecIdsArr.Length > 0 && specTextArr.Length > 0 && specGroupPriceArr.Length > 0)
-            {
-                List<Model.article_goods> goodsList = new List<Model.article_goods>();
-                for (int i = 0; i < specGoodsNoArr.Length; i++)
-                {
-                    List<Model.user_group_price> groupList = new List<Model.user_group_price>();
-                    if (!string.IsNullOrEmpty(specGroupPriceArr[i]))
-                    {
-                        groupList = (List<Model.user_group_price>)JsonHelper.JSONToObject<List<Model.user_group_price>>(specGroupPriceArr[i]);
-                    }
-                    goodsList.Add(new Model.article_goods
-                    {
-                        id = Utils.StrToInt(specGoodsIdArr[i], 0),
-                        article_id = model.id,
-                        goods_no = specGoodsNoArr[i],
-                        spec_ids = specSpecIdsArr[i],
-                        spec_text = specTextArr[i],
-                        stock_quantity = Utils.StrToInt(specStockQuantityArr[i], 0),
-                        market_price = Utils.StrToDecimal(specMarketPriceArr[i], 0),
-                        sell_price = Utils.StrToDecimal(specSellPriceArr[i], 0),
-                        group_prices = groupList
-                    });
-                }
-                model.goods = goodsList;
-            }
+            //todo 在子页面保存
             #endregion
 
             #region 保存相册====================

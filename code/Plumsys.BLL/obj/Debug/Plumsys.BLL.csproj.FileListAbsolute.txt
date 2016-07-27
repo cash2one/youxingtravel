@@ -52,3 +52,19 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.BLL\obj\Debug\Plumsy
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.BLL\obj\Debug\Plumsys.BLL.pdb
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Newtonsoft.Json.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\obj\Debug\Plumsys.BLL.csprojResolveAssemblyReference.cache
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.Common.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.DAL.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.Model.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\TopSdk.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Newtonsoft.Json.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.DBUtility.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.Common.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.DAL.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.Model.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.DBUtility.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\obj\Debug\Plumsys.BLL.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\obj\Debug\Plumsys.BLL.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.BLL.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.BLL\bin\Debug\Plumsys.BLL.pdb

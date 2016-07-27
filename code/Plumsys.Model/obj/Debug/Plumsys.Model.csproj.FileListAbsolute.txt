@@ -28,3 +28,12 @@ E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Model\obj\Debug\Plum
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Model\obj\Debug\Plumsys.Model.pdb
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Model\bin\Debug\Newtonsoft.Json.dll
 E:\我的项目\优行网络\youxing_web\trunk\code\Plumsys.Model\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\bin\Debug\Plumsys.Model.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\bin\Debug\Plumsys.Model.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\bin\Debug\Plumsys.Common.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\bin\Debug\Newtonsoft.Json.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\bin\Debug\Plumsys.Common.pdb
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\bin\Debug\Newtonsoft.Json.xml
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\obj\Debug\Plumsys.Model.csprojResolveAssemblyReference.cache
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\obj\Debug\Plumsys.Model.dll
+D:\My Project\Youxing_web\trunk\code\Plumsys.Model\obj\Debug\Plumsys.Model.pdb
