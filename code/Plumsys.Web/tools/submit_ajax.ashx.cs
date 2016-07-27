@@ -30,9 +30,9 @@ namespace Plumsys.Web.tools
                 case "comment_list": //评论列表
                     comment_list(context);
                     break;
-                //case "validate_username": //验证用户名
-                //    validate_username(context);
-                //    break;
+                case "validate_username": //验证用户名
+                    validate_username(context);
+                    break;
                 case "user_login": //用户登录
                     user_login(context);
                     break;

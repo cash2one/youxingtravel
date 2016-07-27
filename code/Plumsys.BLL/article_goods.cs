@@ -51,7 +51,7 @@ namespace Plumsys.BLL
         /// <summary>
         /// 得到一个商品价格列表
         /// </summary>
-        public List<Model.article_goods> GetList(int article_id,DateTime? start_time,DateTime? end_time)
+        public List<Model.article_goods> GetList(int article_id,DateTime? start_time=null,DateTime? end_time=null)
         {
             return dal.GetList(article_id,start_time,end_time);
         }

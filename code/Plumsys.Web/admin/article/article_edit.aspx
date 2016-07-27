@@ -102,8 +102,22 @@
                     pickerEvent.Init("calendar");
                 }, "json");
             });
+            //初始计算库存函数
+            set_article_goods_info();
+            
+            
         });
         //新增的时候初始化规格元素
+        function set_article_goods_info() {
+            if ($.request("action") != "Add") {
+                $.post("../../tools/admin_ajax.ashx?action=get_article_goods_info", { "id": $.request("id") }, function (data) {
+                    $("#field_control_market_price").val(data.min_mark_price);
+                    $("#field_control_sell_price").val(data.min_sell_price);
+                    $("#field_control_stock_quantity").val(data.stock_quantity);
+                }, "json");
+               
+            }
+        }
         function showToday()
         {
             if ($.request("action") != "Add") {

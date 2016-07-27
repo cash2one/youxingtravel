@@ -78,6 +78,10 @@ namespace Plumsys.Web.tools
                 case "get_article_good"://查询一个商品规格
                     get_article_good(context);
                     break;
+                case "get_article_goods_info"://查询一个商品库存信息
+                    get_article_goods_info(context);
+                    break;
+
             }
         }
 
@@ -406,6 +410,25 @@ namespace Plumsys.Web.tools
         }
         #endregion
 
+        #region 获得某个商品的库存信息==============================
+        private void get_article_goods_info(HttpContext context)
+        {
+            int id = PLRequest.GetInt("id", 0);
+            List<Model.article_goods> goods = new BLL.article_goods().GetList(id);
+            int stock_quantity = 0;
+            decimal min_sell_price = 0;
+            decimal min_mark_price = 0;
+            foreach (Model.article_goods good in goods)
+            {
+                if (min_sell_price == 0) min_sell_price = good.sell_price;
+                if (min_mark_price == 0) min_mark_price = good.market_price;
+                stock_quantity += good.stock_quantity;
+                if (min_sell_price > good.sell_price) min_sell_price = good.sell_price;
+                if (min_mark_price > good.market_price) min_mark_price = good.market_price;
+            }
+            context.Response.Write("{\"status\": 1, \"msg\": \"获取库存信息成功！\", \"stock_quantity\": \"" + stock_quantity + "\", \"min_sell_price\": \"" + min_sell_price + "\", \"min_mark_price\": " + min_mark_price + "}");
+        }
+        #endregion
         #region 发送手机短信====================================
         private void sms_message_post(HttpContext context)
         {
@@ -1095,7 +1118,7 @@ namespace Plumsys.Web.tools
             web_response result = new web_response();
             try
             {
-                int id = PLRequest.GetInt("id",0);
+                int id = PLRequest.GetInt("id", 0);
                 string s_start_time = PLRequest.GetQueryString("st");
                 string s_end_time = PLRequest.GetQueryString("et");
                 DateTime? start_time = null;
