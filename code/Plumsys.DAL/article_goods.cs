@@ -234,7 +234,7 @@ namespace Plumsys.DAL
                 }
                 if (row["sell_date"] != null && row["sell_date"].ToString() != "")
                 {
-                    model.sell_date = DateTime.Parse(row["sell_price"].ToString());
+                    model.sell_date = DateTime.Parse(row["sell_date"].ToString());
                 }
             }
             return model;
