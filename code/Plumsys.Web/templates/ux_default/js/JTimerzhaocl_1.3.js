@@ -6,9 +6,13 @@
 * @explain http://freshflower.iteye.com/blog/1606222
 * @version 2.0
 *********************************************/
-
+//var oHead = document.getElementsByTagName('HEAD').item(0);
+//var oScript = document.createElement("script");
+//oScript.type = "text/javascript";
+//oScript.src = "jquery-1.11.2.min.js";
+//oHead.appendChild(oScript);
 var JTC = (function () {
-
+    
     var JTC = function () { },
 
     config = {
@@ -252,6 +256,53 @@ var JTC = (function () {
             } else {
                 obj.innerHTML = str;
             }
+            //add by 赵成龙 zhaocl
+            //if (str != "") {
+                
+                //  /tools/submit_ajax.ashx?action=get_article_goods_info
+            //    if ($("#goodsSpecBox dl dd ul li a.selected").length == $("#goodsSpecBox dl").length - 1) {
+            //        var specIds = '';
+            //        $("#goodsSpecBox dl dd ul li a.selected").each(function (i) {
+            //            if (i == 0) {
+            //                specIds = ",";
+            //            }
+            //            specIds += $(this).attr("specid") + ',';
+            //        });
+            //        //发送异步请求
+            //        $.ajax({
+            //            type: "POST",
+            //            url: "/tools/submit_ajax.ashx?action=get_article_goods_info",
+            //            dataType: "json",
+            //            data: {
+            //                "article_id": $("#commodityArticleId").val(),
+            //                "ids": specIds
+            //            },
+            //            timeout: 20000,
+            //            success: function (data, textStatus) {
+            //                if (data.status == 1) {
+            //                    $("#commodityGoodsId").val(data.goods_id);
+            //                    $("#commodityGoodsNo").text(data.goods_no);
+            //                    $("#commodityMarketPrice").text('¥' + data.market_price);
+            //                    $("#commoditySellPrice").text('¥' + data.sell_price);
+            //                    $("#commodityStockNum").text(data.stock_quantity);
+            //                    $("#commoditySelectNum").attr("maxValue", data.stock_quantity);
+            //                    //检查是否足够库存
+            //                    if (parseInt(data.stock_quantity) > 0) {
+            //                        $("#buyButton button").prop("disabled", false).removeClass("over");
+            //                    } else {
+            //                        $("#buyButton button").prop("disabled", false).removeClass("over");
+            //                    }
+            //                } else {
+            //                    alert(data.msg);
+            //                }
+            //            },
+            //            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //                alert("查询出错：" + textStatus + ",提示：" + errorThrown);
+            //            }
+            //        });
+            //    }
+
+            //}
         }
     },
 
@@ -359,6 +410,7 @@ var JTC = (function () {
                 obj.innerHTML = i + 1;
                 this.dayRangeEv(obj, util.getIntegerOfDay(next.YY, next.MM, i + 1), 1);
             }
+        
         },
 
         dayOnMouseMove: function () {
@@ -385,6 +437,7 @@ var JTC = (function () {
             var date = new Date(year + '/' + month + '/' + day);
             util.outObjectValue(date);
             events.hideLayout();
+            initPrice();//赵成龙
         },
 
         emptyFunc: function () { },
@@ -762,3 +815,55 @@ var JTC = (function () {
     }
     return JTC;
 })();
+
+function initPrice() {
+    var selectDate = $("#select_date").val();
+    //add by 赵成龙 zhaocl
+    if (selectDate != "") {
+
+     // /tools/submit_ajax.ashx?action=get_article_goods_info
+        if ($("#goodsSpecBox dl dd ul li a.selected").length == $("#goodsSpecBox dl").length - 1) {
+            var specIds = '';
+            $("#goodsSpecBox dl dd ul li a.selected").each(function (i) {
+                if (i == 0) {
+                    specIds = ",";
+                }
+                specIds += $(this).attr("specid") + ',';
+            });
+            //发送异步请求
+            $.ajax({
+                type: "POST",
+                url: "/tools/submit_ajax.ashx?action=get_article_goods_info",
+                dataType: "json",
+                data: {
+                    "article_id": $("#commodityArticleId").val(),
+                    "ids": specIds,
+                    "selectDate":selectDate
+                },
+                timeout: 20000,
+                success: function (data, textStatus) {
+                    if (data.status == 1) {
+                        $("#commodityGoodsId").val(data.goods_id);
+                        $("#commodityGoodsNo").text(data.goods_no);
+                        $("#commodityMarketPrice").text('¥' + data.market_price);
+                        $("#commoditySellPrice").text('¥' + data.sell_price);
+                        $("#commodityStockNum").text(data.stock_quantity);
+                        $("#commoditySelectNum").attr("maxValue", data.stock_quantity);
+                        //检查是否足够库存
+                        if (parseInt(data.stock_quantity) > 0) {
+                            $("#buyButton button").prop("disabled", false).removeClass("over");
+                        } else {
+                            $("#buyButton button").prop("disabled", false).removeClass("over");
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("查询出错：" + textStatus + ",提示：" + errorThrown);
+                }
+            });
+        }
+
+    }
+}

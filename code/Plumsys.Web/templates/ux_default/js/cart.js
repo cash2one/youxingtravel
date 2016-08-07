@@ -21,21 +21,57 @@ function addCartNum(num){
 	}
 	numObj.val(selectNum);
 }
+function addCartNum1(num) {
+    var numObj = $("#chengrenno");
+    var selectNum = 0;
+    if (numObj.val().length > 0) {
+        selectNum = parseInt(numObj.val());
+    }
+    selectNum += num;
+    //最小值
+    if (selectNum < 1) {
+        selectNum = 1;
+    }
+    //最大值
+    if (selectNum > parseInt(numObj.attr("maxValue"))) {
+        selectNum = parseInt(numObj.attr("maxValue"));
+    }
+    numObj.val(selectNum);
+}
+function addCartNum2(num) {
+    var numObj = $("#ertongno");
+    var selectNum = 0;
+    if (numObj.val().length > 0) {
+        selectNum = parseInt(numObj.val());
+    }
+    selectNum += num;
+    //最小值
+    if (selectNum < 1) {
+        selectNum = 1;
+    }
+    //最大值
+    if (selectNum > parseInt(numObj.attr("maxValue"))) {
+        selectNum = parseInt(numObj.attr("maxValue"));
+    }
+    numObj.val(selectNum);
+}
 //初始化商品规格事件
-function initGoodsSpec(sendUrl){
+function initGoodsSpec(sendUrl) {
 	//检查是否有规格
 	if($("#goodsSpecBox dl").length == 0){
 		$("#buyButton button").prop("disabled",false).removeClass("over");
 	}
+
 	//遍历规格属性
-	$("#goodsSpecBox dl dd ul li a").each(function(){
-		$(this).click(function(){
+	$("#goodsSpecBox dl dd ul li a").each(function () {
+	    $(this).click(function () {
 			if(!$(this).hasClass("selected")){
 				//标签选中状态
 				$(this).parent().siblings("li").children("a").removeClass("selected");
 				$(this).addClass("selected");
-				//获取商品价格
-				if($("#goodsSpecBox dl dd ul li a.selected").length == $("#goodsSpecBox dl").length){
+			    //获取商品价格并且日期不为空	
+				var selectDate = $("#select_date").val();
+				if ($("#goodsSpecBox dl dd ul li a.selected").length == $("#goodsSpecBox dl").length-1 && selectDate!="") {
 					var specIds = '';
 					$("#goodsSpecBox dl dd ul li a.selected").each(function(i) {
 						if(i == 0){
@@ -50,7 +86,8 @@ function initGoodsSpec(sendUrl){
 						dataType: "json",
 						data: {
 							"article_id": $("#commodityArticleId").val(),
-							"ids": specIds
+							"ids": specIds,
+							"selectDate": selectDate
 						},
 						timeout: 20000,
 						success: function(data, textStatus) {

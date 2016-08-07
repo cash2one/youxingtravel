@@ -21,8 +21,32 @@ $(".FixedBuyBtn").click(function () {
         scrollTop: 0
     },
     800)
-    
+
 }),
+$("#submbuy,#submbuy01").click(function () {
+    var e = $(window).width(),
+    t = $("#paymentDiv").width(),
+    i = (e - t) / 2 + "px",
+    n = $(window).height(),
+    s = $("#paymentDiv").height(),
+    a = (n - s) / 2 + "px";
+    $.blockUI({
+        message: $("#paymentDiv"),
+        css: {
+            cursor: "",
+            left: i,
+            width: t + "px",
+            top: a,
+            position: "fixed"
+        },
+        overlayCSS: {
+            cursor: "default"
+        }
+    });
+});
+$(".paymentDiv_close").click(function () {
+    $.unblockUI();
+});
 $(window).scroll(function () {
     $(window).scrollTop() < 300 ? $(".RightBox").hide() : $(".RightBox").show()
 }),
