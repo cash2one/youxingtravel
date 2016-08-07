@@ -86,7 +86,33 @@ namespace Plumsys.DAL
                 return null;
             }
         }
+        /// <summary>
+        /// 根据规格列表查询商品实体
+        /// </summary>
+        public Model.article_goods GetModel(int article_id, string spec_ids,DateTime date)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select top 1 id,article_id,goods_no,spec_ids,spec_text,stock_quantity,market_price,sell_price,sell_date from " + databaseprefix + "article_goods");
+            strSql.Append(" where article_id=@article_id and spec_ids=@spec_ids and sell_date=@sell_date");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@article_id", SqlDbType.Int,4),
+					new SqlParameter("@spec_ids", SqlDbType.NVarChar,500),
+                    new SqlParameter("@sell_date", SqlDbType.DateTime)};
+            parameters[0].Value = article_id;
+            parameters[1].Value = spec_ids;
+            parameters[1].Value = date;
 
+            Model.article_goods model = new Model.article_goods();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 得到一个商品价格列表
         /// </summary>
