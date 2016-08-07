@@ -38,6 +38,13 @@ namespace Plumsys.BLL
             return dal.GetModel(article_id, spec_ids);
         }
         /// <summary>
+        /// 根据规格列表查询商品实体
+        /// </summary>
+        public Model.article_goods GetModel(int article_id, string spec_ids,DateTime date)
+        {
+            return dal.GetModel(article_id, spec_ids,date);
+        }
+        /// <summary>
         /// 根据日期去更新数据
         /// </summary>
         /// <param name="models"></param>
