@@ -1,9 +1,6 @@
 
 
 
-#myDateTime table {
-    border-collapse: collapse;
-}
 
 .Zebra_DatePicker table {
     border-collapse: collapse;
@@ -4706,6 +4703,7 @@ a.hwlayout_box_close {
     .hwlayout_box_lft .datetime .title {
         height: 23px;
         font-size: 18px;
+        float:left;
     }
 
         .hwlayout_box_lft .datetime .title b {
@@ -4929,7 +4927,6 @@ a.hwlayout_box_close {
 }
 
 #myDateTime {
-    background: rgb(255, 99, 177);
     margin-top: 10px;
 }
 
@@ -5001,42 +4998,7 @@ a.hwlayout_box_close {
         background-color: rgb(252, 58, 154);
     }
 
-#myDateTime table {
-    width: 100%;
-}
-
-    #myDateTime table tr:first-child td {
-        background: rgb(222, 222, 222);
-        border: 1px solid rgb(194, 194, 194);
-        border-image: none;
-        color: rgb(51, 51, 51);
-    }
-
-#myDateTime td {
-    border: 1px solid rgb(210, 210, 210);
-    border-image: none;
-    text-align: center;
-    cursor: pointer;
-}
-
-#myDateTime table td.usable {
-    color: rgb(0, 0, 0);
-}
-
-    #myDateTime table td.usable:hover {
-        background: rgb(255, 99, 177);
-        color: rgb(255, 255, 255);
-    }
-
-#myDateTime table td.nousable {
-    background: rgb(241, 241, 241);
-    color: rgb(153, 153, 153);
-}
-
-#myDateTime table td.selected {
-    background: rgb(250, 20, 155);
-    color: rgb(255, 255, 255);
-}
+ 
 
 .sku-sel {
     padding: 15px 0px 0px;
