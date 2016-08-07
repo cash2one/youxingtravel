@@ -1762,6 +1762,8 @@ namespace Plumsys.Web.tools
         {
             int article_id = PLRequest.GetInt("article_id", 0);
             string spec_ids = PLRequest.GetString("ids");
+            string select_Date = PLRequest.GetString("selectDate");
+           
             if (article_id == 0)
             {
                 context.Response.Write("{\"status\": 0, \"msg\": \"对不起，传输参数不正确！\"}");
@@ -1772,8 +1774,14 @@ namespace Plumsys.Web.tools
                 context.Response.Write("{\"status\": 0, \"msg\": \"对不起，传输参数不正确！\"}");
                 return;
             }
+            if (string.IsNullOrEmpty(select_Date))
+            {
+                context.Response.Write("{\"status\": 0, \"msg\": \"对不起，传输参数不正确！\"}");
+                return;
+            }
+            DateTime selectDate = Convert.ToDateTime(select_Date);
             //查询商品信息
-            Model.article_goods goodsModel = new BLL.article_goods().GetModel(article_id, spec_ids);
+            Model.article_goods goodsModel = new BLL.article_goods().GetModel(article_id, spec_ids,selectDate);
             if (goodsModel == null)
             {
                 context.Response.Write("{\"status\": 0, \"msg\": \"对不起，暂无查到商品信息！\"}");
