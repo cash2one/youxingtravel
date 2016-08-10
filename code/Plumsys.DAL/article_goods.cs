@@ -100,7 +100,7 @@ namespace Plumsys.DAL
                     new SqlParameter("@sell_date", SqlDbType.DateTime)};
             parameters[0].Value = article_id;
             parameters[1].Value = spec_ids;
-            parameters[1].Value = date;
+            parameters[2].Value = date;
 
             Model.article_goods model = new Model.article_goods();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
