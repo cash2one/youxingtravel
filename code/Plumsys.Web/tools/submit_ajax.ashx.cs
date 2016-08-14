@@ -1955,22 +1955,23 @@ namespace Plumsys.Web.tools
                 context.Response.Write("{\"status\": 0, \"msg\": \"错误提示：站点传输参数不正确！\"}");
                 return;
             }
-            if (express_id == 0)
-            {
-                context.Response.Write("{\"status\":0, \"msg\":\"对不起，请选择配送方式！\"}");
-                return;
-            }
+            //if (express_id == 0)
+            //{
+            //    context.Response.Write("{\"status\":0, \"msg\":\"对不起，请选择配送方式！\"}");
+            //    return;
+            //}
             if (payment_id == 0)
             {
                 context.Response.Write("{\"status\":0, \"msg\":\"对不起，请选择支付方式！\"}");
                 return;
             }
-            Model.express expModel = new BLL.express().GetModel(express_id);
-            if (expModel == null)
-            {
-                context.Response.Write("{\"status\":0, \"msg\":\"对不起，配送方式不存在或已删除！\"}");
-                return;
-            }
+            //注释赵成龙
+            //Model.express expModel = new BLL.express().GetModel(express_id);
+            //if (expModel == null)
+            //{
+            //    context.Response.Write("{\"status\":0, \"msg\":\"对不起，配送方式不存在或已删除！\"}");
+            //    return;
+            //}
             //检查支付方式
             Model.payment payModel = new BLL.payment().GetModel(payment_id);
             if (payModel == null)
@@ -2072,7 +2073,7 @@ namespace Plumsys.Web.tools
                 model.payable_amount = group_goodsTotal.payable_amount;
                 model.real_amount = group_goodsTotal.real_amount;
                 model.express_status = 1;
-                model.express_fee = expModel.express_fee; //物流费用
+                model.express_fee = 0; //物流费用
                 order_nos += model.order_no + ",";
                 //是否先款后货
                 if (payModel.type == 1)
